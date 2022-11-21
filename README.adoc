@@ -55,8 +55,8 @@ Projet est réalisé par::
 - https://github.com/AurelienSP[Aurelien Sanchez-Porro]
 - https://github.com/Hugo-Vacquier[Hugo Vacquier]
 - https://github.com/andrew-phakeovilay[Andrew Phakeovilay]
+- https://github.com/quentin-beaufort[Quentin Beaufort]
 
-...
 
 Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.fr[JMB]
 
