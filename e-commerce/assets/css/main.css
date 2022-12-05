@@ -1,0 +1,23 @@
+.masthead {
+    height: 90vh;
+    min-height: 500px;
+    background-image: url('https://contents.mediadecathlon.com/s862295/k$7f1de21aeee82c19ac7c164ad2894872/dbi_b91bb9b8+c037+4c16+a722+b9789d13adb9.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.btn-white {
+    background-color: #fff;
+    padding: 8px 20px;
+    border-radius: 0;
+    text-transform: uppercase;
+}
+
+.btn-white:hover{
+    background-color: rgb(241, 241, 241);
+}
+.overlay{
+    background-color: red;
+}
