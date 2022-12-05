@@ -8,6 +8,7 @@
     <title>BlueGym - dev</title>
 
     <link rel="stylesheet" href="includes/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
 
 </head>
 
@@ -24,9 +25,19 @@
     <?php include('includes/header.php'); ?>
 
 
-    <div class="container-fluid">
-
-    </div>
+    <!-- Full Page Image Header with Vertically Centered Content -->
+    <header class="masthead">
+        <div class="overlay"></div>
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 text-left">
+                    <h1 class="fw-bold text-white">Nouveaux produits dans votre catégorie <br> appareils de musculation</h1>
+                    <p class="lead text-primary">Découvrez les novuelles barres de traction</p>
+                    <a href="" class="btn btn-white">Découvrir</a>
+                </div>
+            </div>
+        </div>
+    </header>
 
 
     <?php include('includes/footer.php'); ?>
