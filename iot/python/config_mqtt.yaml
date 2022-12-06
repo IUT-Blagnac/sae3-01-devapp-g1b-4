@@ -1,0 +1,27 @@
+# Fichier de configuration
+servers: chirpstack.iut-blagnac.fr
+port: 1883
+object: {
+    "activity": true,
+    "co2": true,
+    "humidity": true,
+    "illumination": true,
+    "infrared": true,
+    "infrared_and_visible": true,
+    "pressure": true,
+    "temperature": true,
+    "tvoc": true
+    }
+seuils: {
+    "activity": null,
+    "co2": null,
+    "humidity": null,
+    "illumination": null,
+    "infrared": null,
+    "infrared_and_visible": null,
+    "pressure": null,
+    "temperature": null,
+    "tvoc": null,
+}
+frequency: 2
+files : false
