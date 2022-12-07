@@ -41,7 +41,7 @@ function displayDropdown(categorieID) {
             }
             lastDropdownID = categorieID;
             // Affiche le dropdown
-            occurence.style.display = 'block';
+            occurence.style.display = 'flex';
         }
     })
 }
