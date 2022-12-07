@@ -225,6 +225,7 @@ nav {
     color: rgb(54, 54, 54);
     font-weight: semi-bold;
     transition: all ease 0.3s;
+    cursor: pointer;
 }
 
 .categorie-navigation-links ul li a:hover{
@@ -250,11 +251,6 @@ nav {
     z-index: 1;
     padding: 40px 50px;
     min-height: 70vh;
-}
-
-/* Dropdown displayer */
-.categorie-header:hover .navigation-dropdown{
-    display: flex;
 }
 
 /* Right side section */
