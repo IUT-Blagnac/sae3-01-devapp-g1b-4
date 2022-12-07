@@ -87,4 +87,31 @@ session_start();
 					</svg></a></li>
 		</ul>
 	</div>
+
+	<div class="navigation-dropdown">
+		<div class="dropdown-content">
+			<div class="dropdown-header">
+				<h3 class="dropdown-title">
+					Barres de traction
+				</h3>
+				<h5 class="dropdown-subtitle text-muted">
+					Sous-titre
+				</h5>
+			</div>
+			<div class="dropdown-links">
+				<ul class="page-links">
+					<li><a href="" class="link">Barres fixation murale</a></li>
+					<li><a href="" class="link">Barres fixation porte</a></li>
+					<li><a href="" class="link">Barres libre autoporteuse</a></li>
+				</ul>
+				<ul class="more-action-link">
+					<li><a href="" class="link link-seemore">Voir plus</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="dropdown-image-section">
+			<img src="https://contents.mediadecathlon.com/p2097129/k$c130138d84f6488e09328728825735a5/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="Barre de traction fixation murale" class="dropdown-image">
+		</div>
+	</div>
+
 </nav>
