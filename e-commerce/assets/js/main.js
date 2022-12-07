@@ -1,8 +1,14 @@
+/*
+*   Fichier JS principal
+*   Contient les fonctions JS utilisées sur toutes les pages
+*/
 
+
+// Variables
 var categorieID; // ID de la catégorie cliquée
 var lastDropdownID = null; // ID du dernier dropdown affiché
 
-// Create event listener for all link clicks
+// On ajoute un event listener sur chaque lien de catégorie
 document.querySelectorAll('#categorie-link').forEach(occurence => {
     occurence.addEventListener('click', (e) => {
         var categorieID = occurence.getAttribute('catID');
