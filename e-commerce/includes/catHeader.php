@@ -1,3 +1,6 @@
+
+<!-- Menu de catégories -->
+
 <nav class="categorie-header">
 	<div class="categorie-navigation-links">
 		<ul id="test">
