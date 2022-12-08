@@ -103,6 +103,11 @@
     font-weight: 600;
 }
 
+.product-title a {
+    color: #333;
+    text-decoration: none;
+}
+
 .product-price {
     display: flex;
     flex: 1;

@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div class="product-infos">
-                    <h5 class="product-title">Barre de traction murale compacte</h5>
+                    <h5 class="product-title"><a href="">Barre de traction murale compacte</a></h5>
                     <h5 class="product-price">25.50 €</h5>
                 </div>
             </div>
@@ -87,7 +87,23 @@
                     </div>
                 </div>
                 <div class="product-infos">
-                    <h5 class="product-title">Barre de traction murale compacte</h5>
+                    <h5 class="product-title"><a href="">Barre de traction murale compacte</a></h5>
+                    <h5 class="product-price">25.50 €</h5>
+                </div>
+            </div>
+            
+            <!-- Carte produit -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
+                    <div class="product-image-overlay">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill favorite-btn" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="product-infos">
+                    <h5 class="product-title"><a href="">Barre de traction murale compacte</a></h5>
                     <h5 class="product-price">25.50 €</h5>
                 </div>
             </div>
@@ -103,26 +119,11 @@
                     </div>
                 </div>
                 <div class="product-infos">
-                    <h5 class="product-title">Barre de traction murale compacte</h5>
+                    <h5 class="product-title"><a href="">Barre de traction murale compacte</a></h5>
                     <h5 class="product-price">25.50 €</h5>
                 </div>
             </div>
-
-            <!-- Carte produit -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
-                    <div class="product-image-overlay">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill favorite-btn" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="product-infos">
-                    <h5 class="product-title">Barre de traction murale compacte</h5>
-                    <h5 class="product-price">25.50 €</h5>
-                </div>
-            </div>
+            
         </div>
     </div>
 
