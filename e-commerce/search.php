@@ -56,6 +56,24 @@
         </div>
     </nav>
 
+    <!-- Trier -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-right">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Trier par
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#">Prix croissant</a></li>
+                        <li><a class="dropdown-item" href="#">Prix décroissant</a></li>
+                        <li><a class="dropdown-item" href="#">Popularité</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Main search content -->
     <div class="container-fluid">
         <div class="product-grid">
@@ -91,7 +109,7 @@
                     <h5 class="product-price">25.50 €</h5>
                 </div>
             </div>
-            
+
             <!-- Carte produit -->
             <div class="product-card">
                 <div class="product-image">
@@ -131,6 +149,12 @@
 
 
     <?php include('includes/footer.php'); ?>
+
+    <!-- Javascript -->
+    <script src="includes/bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="./assets/js/main.js"></script>
+
 </body>
 
 </html>
