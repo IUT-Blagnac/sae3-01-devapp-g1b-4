@@ -15,6 +15,7 @@
 
 <body>
 
+    <!-- event banner -->
     <div class="container-fluid bg-secondary">
         <div class="row">
             <div class="col-12 text-dark fw-bold text-center">
@@ -25,10 +26,10 @@
 
     <?php include('includes/header.php'); ?>
 
-
-    <div class="demo-wrap">
-        <img class="demo-bg" src="https://contents.mediadecathlon.com/s862295/k$7f1de21aeee82c19ac7c164ad2894872/dbi_b91bb9b8+c037+4c16+a722+b9789d13adb9.jpg" alt="">
-        <div class="demo-content">
+    <!-- Bannière principale -->
+    <div class="main-wrap">
+        <img class="main-bg" src="https://contents.mediadecathlon.com/s862295/k$7f1de21aeee82c19ac7c164ad2894872/dbi_b91bb9b8+c037+4c16+a722+b9789d13adb9.jpg" alt="">
+        <div class="main-content">
             <div class="container h-100">
                 <div class="row h-100 d-flex align-content-center">
                     <div class="col-7">

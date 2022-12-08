@@ -1,12 +1,23 @@
-/* Header image slide call to action main section */
-.demo-wrap {
+/* 
+*   Main CSS file
+*   Fichier principal CSS
+*   Mettre tous les styles partagés par chaque page ici
+*/
+
+
+
+/* =================== */
+/* Bannière principale */
+/* =================== */
+
+.main-wrap {
     overflow: hidden;
     position: relative;
     height: 90vh;
     background-color: #333;
 }
 
-.demo-bg {
+.main-bg {
     opacity: 0.5;
     position: absolute;
     left: 0;
@@ -15,7 +26,7 @@
     height: auto;
 }
 
-.demo-content {
+.main-content {
     position: relative;
     height: 100%;
 }
