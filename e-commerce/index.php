@@ -44,77 +44,42 @@
         </div>
     </div>
 
+    <!-- Product card displayer section -->
     <div class="card-displayer">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="card-product">
-                        <img class="card-bg" src="https://contents.mediadecathlon.com/p2245402/k$574d8028322fb08ceb56dbb5b6e27094/sq/maillot-de-bain-1-piece-natation-femme-speedo-muscleback-navy-pink.jpg?format=auto&f=646x646" alt="">
-                        <div class="card-content d-flex">
-                            <div class="d-flex align-items-center flex-row">
-                                <div class="p-3 mt-5">
-                                    <h4 class="card-product-title text-white fw-bold">
-                                        Maillot trop sexy
-                                    </h4>
-                                    <h5 class="card-product-price text-white">
-                                        32.99€
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card-product">
-                        <img class="card-bg" src="https://contents.mediadecathlon.com/p2245402/k$574d8028322fb08ceb56dbb5b6e27094/sq/maillot-de-bain-1-piece-natation-femme-speedo-muscleback-navy-pink.jpg?format=auto&f=646x646" alt="">
-                        <div class="card-content d-flex">
-                            <div class="d-flex align-items-center flex-row">
-                                <div class="p-3 mt-5">
-                                    <h4 class="card-product-title text-white fw-bold">
-                                        Maillot trop sexy
-                                    </h4>
-                                    <h5 class="card-product-price text-white">
-                                        32.99€
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card-product">
-                        <img class="card-bg" src="https://contents.mediadecathlon.com/p2245402/k$574d8028322fb08ceb56dbb5b6e27094/sq/maillot-de-bain-1-piece-natation-femme-speedo-muscleback-navy-pink.jpg?format=auto&f=646x646" alt="">
-                        <div class="card-content d-flex">
-                            <div class="d-flex align-items-center flex-row">
-                                <div class="p-3 mt-5">
-                                    <h4 class="card-product-title text-white fw-bold">
-                                        Maillot trop sexy
-                                    </h4>
-                                    <h5 class="card-product-price text-white">
-                                        32.99€
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card-product">
-                        <img class="card-bg" src="https://contents.mediadecathlon.com/p2245402/k$574d8028322fb08ceb56dbb5b6e27094/sq/maillot-de-bain-1-piece-natation-femme-speedo-muscleback-navy-pink.jpg?format=auto&f=646x646" alt="">
-                        <div class="card-content d-flex">
-                            <div class="d-flex align-items-center flex-row">
-                                <div class="p-3 mt-5">
-                                    <h4 class="card-product-title text-white fw-bold">
-                                        Maillot trop sexy
-                                    </h4>
-                                    <h5 class="card-product-price text-white">
-                                        32.99€
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="homepage-product-card">
+            <div class="homepage-product-card-img">
+                <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
+            </div>
+            <div class="homepage-product-card-content">
+                <h4 class="title">Barre trop sexy</h4>
+                <h5 class="price">25.50 €</h5>
+            </div>
+        </div>
+        <div class="homepage-product-card">
+            <div class="homepage-product-card-img">
+                <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
+            </div>
+            <div class="homepage-product-card-content">
+                <h4 class="title">Barre trop sexy</h4>
+                <h5 class="price">25.50 €</h5>
+            </div>
+        </div>
+        <div class="homepage-product-card">
+            <div class="homepage-product-card-img">
+                <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
+            </div>
+            <div class="homepage-product-card-content">
+                <h4 class="title">Barre trop sexy</h4>
+                <h5 class="price">25.50 €</h5>
+            </div>
+        </div>
+        <div class="homepage-product-card">
+            <div class="homepage-product-card-img">
+                <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
+            </div>
+            <div class="homepage-product-card-content">
+                <h4 class="title">Barre trop sexy</h4>
+                <h5 class="price">25.50 €</h5>
             </div>
         </div>
     </div>
