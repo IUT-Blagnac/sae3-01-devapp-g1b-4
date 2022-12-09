@@ -74,7 +74,18 @@
                 </div>
 
                 <div class="row mt-5">
-                    <div class="col-12 d-flex justify-content-center">
+                    <div class="col-12">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Trier par
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">Prix croissant</a></li>
+                                <li><a class="dropdown-item" href="#">Prix décroissant</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center mt-3">
                         <button class="btn ajouter-panier">
                             Ajouter au panier
                         </button>
@@ -196,6 +207,12 @@
     </div>
 
     <?php include('includes/footer.php'); ?>
+
+    <!-- Javascript -->
+    <!-- <script src="includes/bootstrap/js/bootstrap.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="./assets/js/main.js"></script>
 </body>
 
 </html>

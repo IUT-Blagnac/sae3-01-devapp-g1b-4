@@ -108,7 +108,9 @@
     color: #b6b6b6;
 }
 
+/* ============= */
 /* Buttons style */
+/* ============= */
 
 .btn-white {
     background-color: #fff;
@@ -121,8 +123,19 @@
     background-color: rgb(241, 241, 241);
 }
 
-.overlay {
-    background-color: red;
+/* dropdown button */
+.dropdown button {
+    border: 1px solid #333;
+    border-radius: 0;
+    background-color: #fff;
+    color: #333;
+}
+
+.dropdown button:hover {
+    background-color: #333;
+    color: #fff;
+    outline: none;
+    border: 1px solid #333;
 }
 
 /* ====== */

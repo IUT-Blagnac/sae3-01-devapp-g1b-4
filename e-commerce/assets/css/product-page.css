@@ -42,6 +42,11 @@
     border: 1px solid #333;
 }
 
+.dropdown button {
+    padding: 10px 20px;
+    width: 100%;
+}
+
 
 .btn,
 .btn-primary {
