@@ -47,6 +47,10 @@ try:
     os.remove(config["name"] + "_tvoc_donnees.txt")
 except OSError:
     pass
+try:
+    os.remove("log.txt")
+except OSError:
+    pass
 
 
 def get_data(mqtt, obj, msg):
@@ -63,7 +67,7 @@ def get_data(mqtt, obj, msg):
         with open(config["name"] + "_activity_donnees.txt", "a", encoding="utf-8") as file:
             file.write(str(jsonMsg["object"]["activity"]) + " PIR\n")
             file.close()
-
+            
     if config["object"]["co2"]:
         if config["seuils"]["co2"][0] is not None and config["seuils"]["co2"][1] is not None and (
                 config["seuils"]["co2"][1] < jsonMsg["object"]["co2"] or config["seuils"]["co2"][0] > jsonMsg["object"]["co2"]):
@@ -124,18 +128,25 @@ def get_data(mqtt, obj, msg):
         with open(config["name"] + "_tvoc_donnees.txt", "a", encoding="utf-8") as file:
             file.write(str(jsonMsg["object"]["tvoc"]) + " ppb\n")
             file.close()
-
+            
     lines_in_file = open("log.txt", 'r').readlines()
     if len(lines_in_file) == config["frequency"]:
         os.remove("log.txt")
         client.disconnect()
-    sleep(10)
+    else:
+        sleep(10)
 
 
 print("Connexion aux locaux de Blue Gym...")
 
 client = mqtt.Client()
 client.connect(config["servers"], config["port"], 600)
+
+if(config["frequency"] < 1):
+    client.disconnect()
+
+if(config["object"]["temperature"] == False and config["object"]["tvoc"] == False and config["object"]["pressure"] == False and config["object"]["infrared_and_visible"] == False and config["object"]["infrared"] == False and config["object"]["illumination"] == False and config["object"]["humidity"] == False and config["object"]["co2"] == False and config["object"]["activity"] == False):
+    client.disconnect()
 
 client.subscribe("application/1/device/+/event/up")
 

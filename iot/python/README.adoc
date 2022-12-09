@@ -84,18 +84,19 @@ Une fois les données collectées, nous stockons les valeurs dans des fichiers d
 
 . Afin de pouvoir exécuter le code Python, nous devons installer Python et PIP, il est recommandé d'installer Python 3.4+, car PIP est inclus par défaut.
 
-. Une fois installé, nous devons télécharger des librarie, ppyaml pour pourvoir lire un fichier .YAML et paho.mqtt pour pouvoir se connecter au capteur.
+. Une fois installé, nous devons télécharger des librairie, ppyaml pour pourvoir lire un fichier .YAML et paho.mqtt pour pouvoir se connecter au capteur.
 
 TIP: Dans un terminal, exécutez `pip install pyyaml` et `pip install paho.mqtt`
 
-Une fois les libraries installés, vous pouvez exécutez le fichier sur un IDE (PyCharm, Visual Studio Code)
+Une fois les librairies installés, vous pouvez exécutez le fichier sur un IDE (PyCharm, Visual Studio Code)
 
 == Documentation de tests et fichiers
 
 - https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/9a6faaf6a7e2e75a01278da9ddfc62c0015c5fb2/iot/python/config_mqtt.yaml[Le modèle de fichier de configuration YAML]
 - https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/9a6faaf6a7e2e75a01278da9ddfc62c0015c5fb2/iot/python/Python_SAE_IoT_1G4.py[Le fichier Python]
-- Documentations de tests :
-* Extraction des valeurs
-* Fréquence de lecture
-* Ecriture dans les fichiers
-* Dépassements de seuils
+- Documentations de tests (il est préférable de lire les documents dans cette ordre afin d'avoir une suite logique du code) :
+. https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/eac9e98aef689814f16cb814a818d7a4e7eb7c5e/iot/python/test/DocTest_1.pdf[Lire le fichier de configuration]
+. https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/eac9e98aef689814f16cb814a818d7a4e7eb7c5e/iot/python/test/DocTest_2.pdf[Extraction des valeurs]
+. https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/eac9e98aef689814f16cb814a818d7a4e7eb7c5e/iot/python/test/DocTest_3.pdf[Fréquence de lecture]
+. https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/eac9e98aef689814f16cb814a818d7a4e7eb7c5e/iot/python/test/DocTest_4.pdf[Ecriture dans les fichiers]
+. https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/eac9e98aef689814f16cb814a818d7a4e7eb7c5e/iot/python/test/DocTest_5.pdf[Dépassements de seuils]
