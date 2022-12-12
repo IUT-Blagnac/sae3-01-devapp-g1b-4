@@ -14,7 +14,14 @@
 <body>
     <?php include('includes/header.php'); ?>
 
-
+    <form method="POST" action="traitRegister.php">
+    	Votre email :<input type="email" name="mailUtil"><br>
+    	Votre nom :<input type="text" name="nomUtil"><br>
+    	Votre prénom :<input type="text" name="prenomUtil"><br>
+    	Mot de passe :<input type="password" name="mdpUtil"><br>
+    	Confirmer mot de passe :<input type="password" name="mdpUtilAconfirmer"><br>
+    	<input type="submit" name="sub">
+    </form>
 
     <?php include('includes/footer.php'); ?>
 </body>

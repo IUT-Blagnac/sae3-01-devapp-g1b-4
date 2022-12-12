@@ -13,7 +13,11 @@
     <body>
         <?php include('includes/header.php'); ?>
 
-
+        <form method='POST' action="traitLogin.php">
+            Votre email :<input type="email" name="mailUtil"><br>
+            Votre mot de passe :<input type="password" name="mdpUtil"><br>
+            <input type="submit" name="sub">
+        </form>
 
         <?php include('includes/footer.php'); ?>
     </body>
