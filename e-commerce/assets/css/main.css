@@ -184,7 +184,6 @@ nav {
     padding: 0 5%;
 }
 
-
 .logo {
     flex: 2;
 }
@@ -262,6 +261,25 @@ nav {
     color: #333;
 }
 
+/* Cart badge */
+.cart-badge {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #3389DA;
+    color: #fff;
+    font-size: 12px;
+    transform: translate(15px, -27px); /* On décale de la taille de l'icone */
+}
+
+.dropdown-menu {
+    min-width: 10px;
+}
+
 /* User dropdown */
 
 .dropdown-toggle {
@@ -270,7 +288,9 @@ nav {
     padding: 0;
 }
 
-.dropdown-toggle:hover, .dropdown-toggle:focus, .dropdown-toggle:active {
+.dropdown-toggle:hover,
+.dropdown-toggle:focus,
+.dropdown-toggle:active {
     background: none;
     border: none;
 }
