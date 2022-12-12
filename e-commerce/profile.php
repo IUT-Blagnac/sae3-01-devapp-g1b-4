@@ -17,28 +17,52 @@ session_start();
     <link rel="stylesheet" href="includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
 
+    <link rel="stylesheet" href="./assets/css/profile-page.css">
+
 </head>
 
 <body>
     <?php include('includes/header.php'); ?>
 
     <div class="container p-5">
+
+        <!-- Message d'accueil -->
         <div class="row">
             <div class="col-12 text-center">
                 <h1>Bonjour, Gabin</h1>
             </div>
         </div>
-        <div class="row">
-            <div class="col-4 text-center">
-                <a href="">Se déconnecter</a>
-            </div>
-            <div class="col-4 text-center">
-                <a href="">Mes commandes</a>
-            </div>
-            <div class="col-4">
-                <a href="">Paramètres</a>
+
+        <!-- Onglets -->
+        <div class="row mt-3">
+            <div class="profile-tabs">
+                <ul>
+                    <li><a href="">Se déconnecter</a></li>
+                    <li><a href="" class="active">Mes commandes</a></li>
+                    <li><a href="">Paramètres</a></li>
+                </ul>
             </div>
         </div>
+
+        <!-- Contenu -->
+        <!-- Sélection du contenu en fonction du paramètre d'URL -->
+        <?php 
+            // if the current GET request is for the "orders" tab
+            if($_GET['tab'] == "orders"){
+                // include the orders tab
+                include('./includes/profile-includes/profile-orders.php');
+            }
+            else if ($_GET['tab'] == "settings"){
+                // include the settings tab
+                include('./includes/profile-includes/profile-settings.php');
+            }
+            else{
+                // include the default tab
+                include('./includes/profile-includes/profile-default.php');
+            }
+        ?>
+
+        
     </div>
 
 
