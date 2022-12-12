@@ -5,7 +5,7 @@ if(!isset($_POST['isSubbed'])){
 /**
  *⚠ ATTENTION ⚠
  *
- *	LES NOMS DE COLONNES DE LA
+ *	LES NOMS DE COLONNES ET DE TABLES DE LA
  *	BD SONT THEORIQUES
  *	CE CODE NE MARCHE PAS EN 
  *	TANT QUE TEL
@@ -13,7 +13,7 @@ if(!isset($_POST['isSubbed'])){
  *⚠⚠⚠⚠⚠⚠⚠
 */
 else {
-    require_once("include/connect.inc.php");
+    require_once("includes/connect.inc.php");
 
 	$mdp_client_a_verifier = $_POST['mdpUtil'];
     $emailClient = $_POST['mailUtil'];

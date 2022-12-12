@@ -1,11 +1,11 @@
 <?php
 if(!isset($_POST['isSubbed'])){
-    header('location:formLogin.php');
+    header('location:formRegister.php');
 }
 /**
  *⚠ ATTENTION ⚠
  *
- *	LES NOMS DE COLONNES DE LA
+ *	LES NOMS DE COLONNES ET DE TABLES DE LA
  *	BD SONT THEORIQUES
  *	CE CODE NE MARCHE PAS EN 
  *	TANT QUE TEL
@@ -13,7 +13,7 @@ if(!isset($_POST['isSubbed'])){
  *⚠⚠⚠⚠⚠⚠⚠
 */
 else {
-	require_once("include/connect.inc.php");
+	require_once("includes/connect.inc.php");
 
 
 	$mdp_client_hashed = password_hash($_POST['mdpUtil'], PASSWORD_DEFAULT);

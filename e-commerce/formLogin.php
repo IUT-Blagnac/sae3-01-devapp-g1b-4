@@ -8,7 +8,6 @@
     <title>BlueGym - dev</title>
     <link rel="stylesheet" href="includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
-
 </head>
 
 <body>
