@@ -89,11 +89,6 @@
     <?php include('includes/footer.php'); ?>
 
 
-    <!-- Javascript -->
-    <script src="includes/bootstrap/js/bootstrap.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="./assets/js/main.js"></script>
-
 
 </body>
 
