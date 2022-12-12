@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-if($_SESSION['isLogged']!=true){
-    header('location:formLogin.php');
-}
+// if($_SESSION['isLogged']!=true){
+//     header('location:formLogin.php');
+// }
 
 ?>
 <!DOCTYPE html>
@@ -22,6 +22,24 @@ if($_SESSION['isLogged']!=true){
 <body>
     <?php include('includes/header.php'); ?>
 
+    <div class="container p-5">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1>Bonjour, Gabin</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 text-center">
+                <a href="">Se déconnecter</a>
+            </div>
+            <div class="col-4 text-center">
+                <a href="">Mes commandes</a>
+            </div>
+            <div class="col-4">
+                <a href="">Paramètres</a>
+            </div>
+        </div>
+    </div>
 
 
     <?php include('includes/footer.php'); ?>
