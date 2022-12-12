@@ -6,6 +6,10 @@
 
                     <div class="col-5">
                         <p class="text-uppercase fw-bold">Mes informations personnelles</p>
+                        <div class="alert alert-success" role="alert">
+                            Vos identifiants ont correctement été changés
+                        </div>
+
                         <form action="">
                             <div class="mt-1">
                                 <label for="name" class="form-label">Prénom</label>
@@ -17,7 +21,7 @@
                             </div>
                             <div class="mt-1">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" value="test@gmail.com">
+                                <input disabled type="email" class="form-control" id="email" value="test@gmail.com">
                             </div>
                             <div class="mt-1">
                                 <label for="email" class="form-label">Téléphone</label>
