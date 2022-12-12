@@ -29,9 +29,9 @@
                                 <div class="col-md-3">
                                     <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto" class="img-fluid rounded-start" alt="...">
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-9 pl-3">
                                     <div class="card-body text-start">
-                                        <h4 class="card-title">Barre trop sexy</h4>
+                                        <h4 class="card-title fw-bold">Barre trop sexy</h4>
                                         <p class="card-text">Matériaux : Bois</p>
                                         <p class="card-text"><small class="text-muted">Quantité : 1</small></p>
 
