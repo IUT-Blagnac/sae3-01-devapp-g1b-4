@@ -38,12 +38,12 @@ image:{baseURL}/actions/workflows/tests.yml/badge.svg[Tests]
 image:https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg[License: MPL-2.0, link="https://opensource.org/licenses/MPL-2.0"]
 //---------------------------------------------------------------
 
-TIP: Pensez à mettre à jour les infos dans ce fichier pour que les badges pointent sur les résultats effectifs de vos intégrations continue ou sur la bonne licence logicielle.
+//TIP: Pensez à mettre à jour les infos dans ce fichier pour que les badges pointent sur les résultats effectifs de vos intégrations continue ou sur la bonne licence logicielle.
 
-WARNING: Ce dépôt présente le projet à développer dans le cadre de la SAÉ 3.01 du BUT1 Informatique de l'IUT de Blagnac.
+//WARNING: Ce dépôt présente le projet à développer dans le cadre de la SAÉ 3.01 du BUT1 Informatique de l'IUT de Blagnac.
 
-Ce fichier `README.adoc` (dont vous lisez sûrement le rendu HTML automatiquement effectué par GitHUb), fait partie du dépôt initial cloné à partir du lien GitHub classroom qui vous a été donné en cours (https://classroom.github.com/a/OUF7gxEa).
-Vous trouverez le dépôt "template" qui a servi de base ici : https://github.com/IUT-Blagnac/sae3-01-template. En complément du cours Moodle de la SAE 3.01 (cf. <<liensUtiles>>), ce dépôt template vous permet d'accéder à des exemples d'https://github.com/IUT-Blagnac/sae3-01-template/issues[issues], de https://github.com/IUT-Blagnac/sae3-01-template/releases[releases], ou d'autres artefacts à venir.
+//Ce fichier `README.adoc` (dont vous lisez sûrement le rendu HTML automatiquement effectué par GitHUb), fait partie du dépôt initial cloné à partir du lien GitHub classroom qui vous a été donné en cours (https://classroom.github.com/a/OUF7gxEa).
+//Vous trouverez le dépôt "template" qui a servi de base ici : https://github.com/IUT-Blagnac/sae3-01-template. En complément du cours Moodle de la SAE 3.01 (cf. <<liensUtiles>>), ce dépôt template vous permet d'accéder à des exemples d'https://github.com/IUT-Blagnac/sae3-01-template/issues[issues], de https://github.com/IUT-Blagnac/sae3-01-template/releases[releases], ou d'autres artefacts à venir.
 
 toc::[]
 
@@ -62,23 +62,38 @@ Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.
 
 == Contexte général
 
-TIP: Cette partie de votre `README.adoc` peut être supprimée ou mise ailleurs.
+//TIP: Cette partie de votre `README.adoc` peut être supprimée ou mise ailleurs.
+
+Lors de cette SAE, nous avons été choisi par l'entreprise "BlueGym" (groupe 1A-2) afin de développer leur site internet.
+
+En effet, l'entreprise BlueGym à reçu un forte augmentation de la demande lors du confinement.
+De plus, ils veulent augmenter leur visibilité, en passant d'un site vitrine à un site personnel.
+Une plus grande visibilité pourrait aussi les faire grandir à un niveau national.
 
 === Dépôt initial
 
-Ce dépôt initial a été créé pour que tous les groupes de 2ème année aient les mêmes informations de départ.
+//Ce dépôt initial a été créé pour que tous les groupes de 2ème année aient les mêmes informations de départ.
 
-Vous y trouverez des fichiers qui peuvent être supprimés s'ils ne vous sont pas utiles :
+//Vous y trouverez des fichiers qui peuvent être supprimés s'ils ne vous sont pas utiles :
 
-- `.gitignore` => un fichier minimaliste des éléments à ne pas pousser en général sur vos dépôts (utiliser la commande `git add -f` pour forcer l'ajout d'un fichier Jar qui ne bougera plus, pour archive par exemple).
-- `.github` => le répertoire qui contient des éléments de gestion de projet :
-** `workflows` => le repertoire qui contient les actions à lancer à chaque push sur votre repo. 
-*** `blank.yml` => un exemple bidon mais dont vous pourrez vérifier l’exécution correcte (1er tag)
-** `ISSUE_TEMPLATE` => le repertoire qui contient quelques templates pour vos issues.
-*** `us.yml` => Exemple de template pour les User Stories
-*** `bug.yml` => Exemple de template pour les issues de bug report
+//- `.gitignore` => un fichier minimaliste des éléments à ne pas pousser en général sur vos dépôts (utiliser la commande `git add -f` pour forcer l'ajout d'un fichier Jar qui ne bougera plus, pour archive par exemple).
+//- `.github` => le répertoire qui contient des éléments de gestion de projet :
+//** `workflows` => le repertoire qui contient les actions à lancer à chaque push sur votre repo. 
+//*** `blank.yml` => un exemple bidon mais dont vous pourrez vérifier l’exécution correcte (1er tag)
+//** `ISSUE_TEMPLATE` => le repertoire qui contient quelques templates pour vos issues.
+//*** `us.yml` => Exemple de template pour les User Stories
+//*** `bug.yml` => Exemple de template pour les issues de bug report
 
-TIP: Adaptez ces fichiers à votre projet et à votre organisation. Et inspirez-vous en pour en ajouter.
+//TIP: Adaptez ces fichiers à votre projet et à votre organisation. Et inspirez-vous en pour en ajouter.
+
+Dans ce répository git, vous pourrez trouver :
+
+* La partie https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/tree/master/e-commerce[site internet] pour l'entreprise
+
+* La partie https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/tree/master/iot[IOT], contenant :
+** Une sous-partie https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/tree/master/iot/python[python], qui permet de récuperer les données de capteurs se trouvant sur un flux MQTT, et les écrit dans un fichier `.txt`
+** Une sous-partie https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/tree/master/iot/java[java], avec une application en JavaFX permettant de récuperer et afficher les données du fichier `.txt` donné par le python
+
 
 [[liensUtiles]]
 === Liens utiles
@@ -87,7 +102,9 @@ TIP: Adaptez ces fichiers à votre projet et à votre organisation. Et inspirez-
 - Le dépôt https://github.com/IUT-Blagnac/sae3-01-template[template] qui sert de base à tous les dépôts étudiants.
 - Le lien https://classroom.github.com/a/OUF7gxEa[classroom] si besoin.
 
-TIP: Pensez à utiliser les salons Discord dédiés pour poser vos questions.
+- La https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/iot/python/README.adoc[documentation] de la partie Python
+
+//TIP: Pensez à utiliser les salons Discord dédiés pour poser vos questions.
 
 == Réalisations 
 
@@ -95,15 +112,16 @@ TIP: Mettez ici toutes les informations nécessaire à l'utilisation de votre d�
 
 == Gestion de projet & Qualité
 
-Chaque sprint (semaine) vous devrez livrer une nouvelle version de votre application (release).
-Utilisez pour cela les fonctionnalités de GitHub pour les https://docs.github.com/en/repositories/releasing-projects-on-github[Releases].
+//Chaque sprint (semaine) vous devrez livrer une nouvelle version de votre application (release).
+//Utilisez pour cela les fonctionnalités de GitHub pour les https://docs.github.com/en/repositories/releasing-projects-on-github[Releases].
 
-De plus ce fichier `README.adoc` devra être à jour des informations suivantes :
+//De plus ce fichier `README.adoc` devra être à jour des informations suivantes :
 
 - Version courante : https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/releases/tag/1.1[v1.1]
-- Lien vers la doc technique
-- Lien vers la doc utilisateur
-- Liste des (ou lien vers les) User Stories (ToDo/Ongoing/Done) et % restant
-- Tests unitaires et plans de test
-- Indicateurs de qualité du code (dette technique)
-- ... tout autre élément que vous jugerez utiles pour démontrer la qualité de votre application
+//- Lien vers la doc technique
+//- Lien vers la doc utilisateur
+- https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/issues?q=is%3Aissue+is%3Aopen+label%3A"User+story"[Liste des User Stories]
+- https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/projects?query=is%3Aopen[Lien vers les projets]
+- https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/tree/master/iot/python/test[Documentation de test du python]
+//- Indicateurs de qualité du code (dette technique)
+//- ... tout autre élément que vous jugerez utiles pour démontrer la qualité de votre application
