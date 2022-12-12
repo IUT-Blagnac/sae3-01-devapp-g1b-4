@@ -65,7 +65,7 @@ def get_data(mqtt, obj, msg):
             if now.hour > 18 or now.hour < 6:
                 print("[Activité détecté en dehors des horaires!]")
         with open(config["name"] + "_activity_donnees.txt", "a", encoding="utf-8") as file:
-            file.write(str(jsonMsg["object"]["activity"]) + " PIR\n")
+            file.write(str(jsonMsg["object"]["activity"]) + "\n")
             file.close()
             
     if config["object"]["co2"]:
@@ -73,7 +73,7 @@ def get_data(mqtt, obj, msg):
                 config["seuils"]["co2"][1] < jsonMsg["object"]["co2"] or config["seuils"]["co2"][0] > jsonMsg["object"]["co2"]):
             print("[Seuil Concentration de CO2 dépassé]")
         with open(config["name"] + "_co2_donnees.txt", "a", encoding="utf-8") as file:
-            file.write(str(jsonMsg["object"]["co2"]) + " ppm\n")
+            file.write(str(jsonMsg["object"]["co2"]) + "\n")
             file.close()
 
     if config["object"]["humidity"]:
@@ -82,35 +82,35 @@ def get_data(mqtt, obj, msg):
                 jsonMsg["object"]["humidity"]):
             print("[Seuil d'humidité dépassé]")
         with open(config["name"] + "_humidity_donnees.txt", "a", encoding="utf-8") as file:
-            file.write(str(jsonMsg["object"]["humidity"]) + " %\n")
+            file.write(str(jsonMsg["object"]["humidity"]) + "\n")
             file.close()
 
     if config["object"]["illumination"]:
         if config["seuils"]["illumination"] is not None and config["seuils"]["illumination"] < jsonMsg["object"]["illumination"]:
             print("[Seuil d'intensité lumineuse dépassé!]")
         with open(config["name"] + "_illumination_donnees.txt", "a", encoding="utf-8") as file:
-            file.write(str(jsonMsg["object"]["illumination"]) + " lux\n")
+            file.write(str(jsonMsg["object"]["illumination"]) + "\n")
             file.close()
 
     if config["object"]["infrared"]:
         if config["seuils"]["infrared"] is not None and config["seuils"]["infrared"] < jsonMsg["object"]["infrared"]:
             print("[Seuil d'infrarouge dépassé!]")
         with open(config["name"] + "_infrared_donnees.txt", "a", encoding="utf-8") as file:
-            file.write(str(jsonMsg["object"]["infrared"]) + " µm\n")
+            file.write(str(jsonMsg["object"]["infrared"]) + "\n")
             file.close()
 
     if config["object"]["infrared_and_visible"]:
         if config["seuils"]["infrared_and_visible"] is not None and config["seuils"]["infrared_and_visible"] < jsonMsg["object"]["infrared_and_visible"]:
             print("[Seuil d'infrarouge visible dépassé!]")
         with open(config["name"] + "_infrared_and_visible_donnees.txt", "a", encoding="utf-8") as file:
-            file.write(str(jsonMsg["object"]["infrared_and_visible"]) + " µm\n")
+            file.write(str(jsonMsg["object"]["infrared_and_visible"]) + "\n")
             file.close()
 
     if config["object"]["pressure"]:
         if config["seuils"]["pressure"] is not None and config["seuils"]["pressure"] < jsonMsg["object"]["pressure"]:
             print("[Seuil de pression dépassé!]")
         with open(config["name"] + "_pressure_donnees.txt", "a", encoding="utf-8") as file:
-            file.write(str(jsonMsg["object"]["pressure"]) + " hPa\n")
+            file.write(str(jsonMsg["object"]["pressure"]) + "\n")
             file.close()
 
     if config["object"]["temperature"]:
@@ -119,14 +119,14 @@ def get_data(mqtt, obj, msg):
                 config["seuils"]["temperature"][0] > jsonMsg["object"]["temperature"]):
             print("[Seuil de temperature dépassé pour les produits de Blue Gym!]")
         with open(config["name"] + "_temperature_donnees.txt", "a", encoding="utf-8") as file:
-            file.write(str(jsonMsg["object"]["temperature"]) + " °C\n")
+            file.write(str(jsonMsg["object"]["temperature"]) + "\n")
             file.close()
 
     if config["object"]["tvoc"]:
         if config["seuils"]["tvoc"] is not None and config["seuils"]["tvoc"] < jsonMsg["object"]["tvoc"]:
             print("[Seuil de qualité d'air dépassé!]")
         with open(config["name"] + "_tvoc_donnees.txt", "a", encoding="utf-8") as file:
-            file.write(str(jsonMsg["object"]["tvoc"]) + " ppb\n")
+            file.write(str(jsonMsg["object"]["tvoc"]) + "\n")
             file.close()
             
     lines_in_file = open("log.txt", 'r').readlines()
