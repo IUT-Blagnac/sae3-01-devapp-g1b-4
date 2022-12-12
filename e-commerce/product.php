@@ -44,6 +44,8 @@
                         <h1 class="product-title">Barre de traction</h1>
                         <h3>25.90 €</h3>
                     </div>
+
+                    <!-- Section notation -->
                     <div class="col-3">
                         <div class="rate-section">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
@@ -64,15 +66,18 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Section description -->
                 <div class="row mt-5">
                     <div class="col-12">
-                        <h5>Description</h5>
+                        <h5>Description rapide</h5>
                         <p class="product-description">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. In maxime officiis voluptates beatae. Natus modi velit quam impedit quo eum ipsum debitis cumque odit accusantium! Atque, veritatis cumque! At, quasi.
                         </p>
                     </div>
                 </div>
 
+                <!-- Section actions sur le produit -->
                 <div class="row mt-5">
                     <div class="col-12">
                         <div class="dropdown">
@@ -86,6 +91,9 @@
                                 <li><a class="dropdown-item" href="#">Netherite</a></li>
                             </ul>
                         </div>
+                        <p>
+                            Matériaux choisi : <span class="fw-bold">Bois</span>
+                        </p>
                     </div>
                     <div class="col-12 d-flex justify-content-center mt-3">
                         <button class="btn ajouter-panier">
@@ -93,12 +101,14 @@
                         </button>
                     </div>
                 </div>
+
             </div>
         </div>
 
         <!-- Affichage des infos produit en détail -->
         <div class="row">
 
+            <!-- Description produit -->
             <div class="col-12 mt-4">
                 <h2>
                     Description
@@ -111,6 +121,7 @@
                 </p>
             </div>
 
+            <!-- Avantages produit -->
             <div class="col-12 mt-4">
                 <h2>
                     Avantages
@@ -123,6 +134,7 @@
                 </p>
             </div>
 
+            <!-- Avis produit -->
             <div class="col-12 mt-4">
                 <h2>
                     Avis
@@ -194,6 +206,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
         <!-- Suggestion autres produits -->
@@ -203,9 +216,32 @@
                     Produits qui pourraient vous plaire
                 </h2>
                 <hr>
-                ici
+            </div>
+            <div class="col-12">
+                <div class="card-displayer-suggestion">
+                    <div class="product-card" style="transform: none;">
+                        <div class="product-card-img">
+                            <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
+                        </div>
+                        <div class="product-card-content">
+                            <h4 class="title">Barre trop sexy</h4>
+                            <h5 class="price">25.50 €</h5>
+                        </div>
+                    </div>
+                    <div class="product-card" style="transform: none;">
+                        <div class="product-card-img">
+                            <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
+                        </div>
+                        <div class="product-card-content">
+                            <h4 class="title">Barre trop sexy</h4>
+                            <h5 class="price">25.50 €</h5>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
+
     </div>
 
     <?php include('includes/footer.php'); ?>

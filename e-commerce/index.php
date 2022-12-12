@@ -47,38 +47,38 @@
 
     <!-- Product card displayer section -->
     <div class="card-displayer">
-        <div class="homepage-product-card">
-            <div class="homepage-product-card-img">
+        <div class="product-card">
+            <div class="product-card-img">
                 <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
             </div>
-            <div class="homepage-product-card-content">
+            <div class="product-card-content">
                 <h4 class="title">Barre trop sexy</h4>
                 <h5 class="price">25.50 €</h5>
             </div>
         </div>
-        <div class="homepage-product-card">
-            <div class="homepage-product-card-img">
+        <div class="product-card">
+            <div class="product-card-img">
                 <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
             </div>
-            <div class="homepage-product-card-content">
+            <div class="product-card-content">
                 <h4 class="title">Barre trop sexy</h4>
                 <h5 class="price">25.50 €</h5>
             </div>
         </div>
-        <div class="homepage-product-card">
-            <div class="homepage-product-card-img">
+        <div class="product-card">
+            <div class="product-card-img">
                 <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
             </div>
-            <div class="homepage-product-card-content">
+            <div class="product-card-content">
                 <h4 class="title">Barre trop sexy</h4>
                 <h5 class="price">25.50 €</h5>
             </div>
         </div>
-        <div class="homepage-product-card">
-            <div class="homepage-product-card-img">
+        <div class="product-card">
+            <div class="product-card-img">
                 <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
             </div>
-            <div class="homepage-product-card-content">
+            <div class="product-card-content">
                 <h4 class="title">Barre trop sexy</h4>
                 <h5 class="price">25.50 €</h5>
             </div>

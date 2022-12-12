@@ -84,3 +84,14 @@
 .rate-section svg {
     fill: #fdcb6e;
 }
+
+
+/* ================== */
+/* Suggestion produit */
+/* ================== */
+.card-displayer-suggestion {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
