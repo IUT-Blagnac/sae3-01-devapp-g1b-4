@@ -140,6 +140,6 @@ ifndef::env-github[]
 ++++
 endif::[]
 
-=Sprint 1 retour :
+=Sprint 3 retour :
 Rien depuis 10 jours en doc : on attends schéma Site, doc user, doc tech. Aucuns liens dans le readme. Je n'ai pas le Backlog avec les issues US du site Ecommerce, juste le adoc ! Tâches très confuses : précier si c'est du dev, de la doc … confusions avec les US. J'ai dans codes des pages PHP en Ecommerce, je n'ai rien vu en IOT. Rien sur les tests.
 
