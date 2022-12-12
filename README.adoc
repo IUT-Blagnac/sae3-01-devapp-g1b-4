@@ -125,3 +125,21 @@ TIP: Mettez ici toutes les informations nécessaire à l'utilisation de votre d�
 - https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/tree/master/iot/python/test[Documentation de test du python]
 //- Indicateurs de qualité du code (dette technique)
 //- ... tout autre élément que vous jugerez utiles pour démontrer la qualité de votre application
+
+=== Évaluations hebdomadaires
+
+NOTE: Les notes ci-dessous sont mises à jour directement par les enseignants responsables de la compétence 5.
+
+ifdef::env-github[]
+image:https://docs.google.com/spreadsheets/d/e/2PACX-1vTc3HJJ9iSI4aa2I9a567wX1AUEmgGrQsPl7tHGSAJ_Z-lzWXwYhlhcVIhh5vCJxoxHXYKjSLetP6NS/pubchart?oid=1097914647&format=image[link=https://docs.google.com/spreadsheets/d/e/2PACX-1vTc3HJJ9iSI4aa2I9a567wX1AUEmgGrQsPl7tHGSAJ_Z-lzWXwYhlhcVIhh5vCJxoxHXYKjSLetP6NS/pubchart?oid=1097914647&format=image]
+endif::[]
+
+ifndef::env-github[]
+++++
+<iframe width="786" height="430" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTc3HJJ9iSI4aa2I9a567wX1AUEmgGrQsPl7tHGSAJ_Z-lzWXwYhlhcVIhh5vCJxoxHXYKjSLetP6NS/pubchart?oid=1097914647&format=image"></iframe>
+++++
+endif::[]
+
+=Sprint 1 retour :
+Rien depuis 10 jours en doc : on attends schéma Site, doc user, doc tech. Aucuns liens dans le readme. Je n'ai pas le Backlog avec les issues US du site Ecommerce, juste le adoc ! Tâches très confuses : précier si c'est du dev, de la doc … confusions avec les US. J'ai dans codes des pages PHP en Ecommerce, je n'ai rien vu en IOT. Rien sur les tests.
+
