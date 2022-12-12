@@ -45,4 +45,3 @@ function displayDropdown(categorieID) {
         }
     })
 }
-

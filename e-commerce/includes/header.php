@@ -42,8 +42,8 @@ session_start();
 								</svg>
 							</button>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#login-modal">Connexion</a></li>
-								<li><a class="dropdown-item text-primary fw-bold" href="#" data-bs-toggle="modal" data-bs-target="#register-modal"> Inscription</a></li>
+								<li><a class="dropdown-item" href="./formLogin.php"> Connexion</a></li>
+								<li><a class="dropdown-item text-primary fw-bold" href="./formRegister.php"> Inscription</a></li>
 							</ul>
 						</div>
 					</div>
@@ -66,37 +66,6 @@ session_start();
 			</div>
 			<div class="modal-body">
 
-				<p class="text-muted">Si vous possédez déjà un compte sur notre site vous pouvez vous connecter avec vos identifiants. </p>
-
-				<form action="">
-					<div class="mb-3">
-						<label for="exampleInputEmail1" class="form-label">Adresse mail</label>
-						<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-					</div>
-					<div class="mb-3">
-						<label for="exampleInputPassword1" class="form-label"> Mot de passe</label>
-						<input type="password" class="form-control" id="exampleInputPassword1">
-					</div>
-
-					<div class="row d-flex justify-content-center">
-						<div class="col-12 d-flex justify-content-center">
-							<button type="submit" class="btn btn-primary btn-lg">
-								Connexion
-							</button>
-						</div>
-					</div>
-
-					<div class="row mt-3">
-						<div class="col-12 text-center">
-							<p>Vous n'avez pas de compte ?</p>
-							<a data-bs-toggle="modal" data-bs-target="#register-modal" class="text-info text-decoration-underline"> Inscrivez-vous</a>
-						</div>
-					</div>
-				</form>
-
-				<div class="row d-flex justify-content-center">
-					<img src="./assets/images/logo.png" alt="" style="width: 50%;">
-				</div>
 
 			</div>
 		</div>
