@@ -33,13 +33,22 @@ session_start();
             </div>
         </div>
 
+        <?php
+
+        // if get is empty, redirect page to orders
+        if(empty($_GET['tab'])){
+            $_GET['tab'] = "orders";
+        }
+
+        ?>
+
         <!-- Onglets -->
         <div class="row mt-3">
             <div class="profile-tabs">
                 <ul>
                     <li><a href="">Se déconnecter</a></li>
-                    <li><a href="" class="active">Mes commandes</a></li>
-                    <li><a href="">Paramètres</a></li>
+                    <li><a href="./profile.php?tab=orders" class="<?php if($_GET['tab'] == "orders"){ echo 'active'; }; ?>">Mes commandes</a></li>
+                    <li><a href="./profile.php?tab=settings" class="<?php if($_GET['tab'] == "settings"){ echo 'active'; }; ?>">Paramètres</a></li>
                 </ul>
             </div>
         </div>
@@ -57,8 +66,7 @@ session_start();
                 include('./includes/profile-includes/profile-settings.php');
             }
             else{
-                // include the default tab
-                include('./includes/profile-includes/profile-default.php');
+                echo 'ya un problème';
             }
         ?>
 
