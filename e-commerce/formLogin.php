@@ -15,13 +15,26 @@
 
 
 
-    
+
     <div class="container mt-5">
         <div class="row d-flex justify-content-center">
             <div class="col-4 text-left">
-                
+
                 <h1 class="fw-semibold text-center">Connexion</h1>
                 <p class="text-muted">Si vous possédez déjà un compte sur notre site vous pouvez vous connecter avec vos identifiants. </p>
+
+
+                <?php
+                // if GET msgErreur is set, display the error message
+                if (isset($_GET['msgErreur'])) {
+                    echo '
+                    <div class="alert alert-danger" role="alert">
+                        ' . $_GET['msgErreur'] . '
+                    </div>
+                ';
+                }
+                ?>
+
 
                 <form method="POST" action="traitLogin.php">
                     <div class="mb-3">
@@ -57,13 +70,7 @@
     </div>
 
 
-    <?php
-    if (isset($_GET['msgErreur'])) {
-        echo $msgErreur;
-    }
-    
-    include('includes/footer.php');
-    ?>
+    <?php include('includes/footer.php'); ?>
 
 
 </body>
