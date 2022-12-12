@@ -279,6 +279,26 @@ nav {
     fill: #333;
 }
 
+/* ============ */
+/* MODALS STYLE */
+/* ============ */
+.modal-content {
+    display: flex;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.modal-title {
+    font-weight: bold;
+    font-size: 2;
+}
+
 /* ================ */
 /* CATEGORIE HEADER */
 /* ================ */
