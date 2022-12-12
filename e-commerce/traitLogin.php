@@ -2,23 +2,13 @@
 if(!isset($_POST['isSubbed'])){
     header('location:formLogin.php');
 }
-/**
- *⚠ ATTENTION ⚠
- *
- *	LES NOMS DE COLONNES ET DE TABLES DE LA
- *	BD SONT THEORIQUES
- *	CE CODE NE MARCHE PAS EN 
- *	TANT QUE TEL
- *
- *⚠⚠⚠⚠⚠⚠⚠
-*/
 else {
     require_once("includes/connect.inc.php");
 
 	$mdp_client_a_verifier = $_POST['mdpUtil'];
     $emailClient = $_POST['mailUtil'];
 
-    $reqVerif = "SELECT idClient,password FROM Client WHERE emailClient=$emailClient";
+    $reqVerif = "SELECT idClient,motpasseclient FROM Client WHERE mailClient=$emailClient";
 
     $verifMail =  oci_parse($connect, $reqVerif);
 
@@ -31,9 +21,9 @@ else {
     	if(empty($statementBD){
     		header('location:formLogin.php?msgErreur=Compte inexistant');
     	}
-    	if (password_verify($mdp_client_a_verifier, $statementBD['password'])) {
+    	if (password_verify($mdp_client_a_verifier, $statementBD['motpasseclient'])) {
     		session_start();
-    		$_SESSION['idClientIdentifie'] = $statementBD['idClient'];
+    		$_SESSION['idClientIdentifie'] = $statementBD['idclient'];
     		header('location:index.php'):
     	}
     }    

@@ -2,16 +2,6 @@
 if(!isset($_POST['isSubbed'])){
     header('location:formRegister.php');
 }
-/**
- *⚠ ATTENTION ⚠
- *
- *	LES NOMS DE COLONNES ET DE TABLES DE LA
- *	BD SONT THEORIQUES
- *	CE CODE NE MARCHE PAS EN 
- *	TANT QUE TEL
- *
- *⚠⚠⚠⚠⚠⚠⚠
-*/
 else {
 	require_once("includes/connect.inc.php");
 
@@ -22,7 +12,7 @@ else {
     $emailClient = $_POST['mailUtil'];
     $idC = 0;
 
-    $reqInsert = "INSERT INTO Client(nom, prenom, email, passowrd) VALUES(:pNom, :pPrenom, :pEmail, :pPassword) RETURNING idClient INTO :idC";
+    $reqInsert = "INSERT INTO Client(nomC, prenomC, mailC, mdpClient) VALUES(:pNom, :pPrenom, :pEmail, :pPassword) RETURNING idClient INTO :idC";
 
     $insertClient = oci_parse($connect, $reqInsert);
 
