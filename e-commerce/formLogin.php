@@ -61,8 +61,11 @@
     if (isset($_GET['msgErreur'])) {
         echo $msgErreur;
     }
+    
     include('includes/footer.php');
     ?>
+
+
 </body>
 
 </html>
