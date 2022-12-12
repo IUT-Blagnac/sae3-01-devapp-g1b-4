@@ -20,17 +20,17 @@ else {
     $nomClient = $_POST['nomUtil'];
     $prenomClient = $_POST['prenomUtil'];
     $emailClient = $_POST['mailUtil'];
-    
+    $idC = 0;
+
     $reqInsert = "INSERT INTO Client(nom, prenom, email, passowrd) VALUES(:pNom, :pPrenom, :pEmail, :pPassword) RETURNING idClient INTO :idC";
 
     $insertClient = oci_parse($connect, $reqInsert);
 
-    oci_bind_by_name($insertClient,);
-    oci_bind_by_name($insertClient,);
-    oci_bind_by_name($insertClient,);
-    oci_bind_by_name($insertClient,);
-    oci_bind_by_name($insertClient,);
-    oci_bind_by_name($insertClient, ":idC", 32);
+    oci_bind_by_name($insertClient, ":pNom", $nomClient);
+    oci_bind_by_name($insertClient, ":pPrenom", $prenomClient);
+    oci_bind_by_name($insertClient, ":pEmail", $emailClient);
+    oci_bind_by_name($insertClient, ":pPassword", $mdp_client_hashed);
+    oci_bind_by_name($insertClient, ":idC", $idC);
 
     $result = oci_execute($insertClient);
 
