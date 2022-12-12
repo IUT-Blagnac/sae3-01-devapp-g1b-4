@@ -15,7 +15,7 @@ if(!isset($_POST['isSubbed'])){
 else {
     require_once("include/connect.inc.php");
 
-	$mdp_client_a_verifier = $_POST['mdpUtil']
+	$mdp_client_a_verifier = $_POST['mdpUtil'];
     $emailClient = $_POST['mailUtil'];
 
     $reqVerif = "SELECT idClient,password FROM Client WHERE emailClient=$emailClient";
@@ -28,7 +28,7 @@ else {
 		print htmlentities($e['message'].' pour cette requete : '.$e['sqltext']);	
     } else {
     	$statementBD = oci_fetch_assoc($resultVerif));
-    	if(empty($pwdBD){
+    	if(empty($statementBD){
     		header('location:formLogin.php?msgErreur=Compte inexistant');
     	}
     	if (password_verify($mdp_client_a_verifier, $statementBD['password'])) {
