@@ -127,7 +127,7 @@ TIP: Mettez ici toutes les informations nécessaire à l'utilisation de votre d�
 //- ... tout autre élément que vous jugerez utiles pour démontrer la qualité de votre application
 //image schema pages
 
-image::Documentation/SAES3_G14_SEP.drawio.png[]
+image::Documentation/images/SAES3_G14_SEP.drawio.png[]
 
 === Évaluations hebdomadaires
 
