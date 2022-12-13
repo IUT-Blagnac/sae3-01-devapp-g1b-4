@@ -12,7 +12,7 @@ else {
     $emailClient = $_POST['mailUtil'];
     $idC = 0;
 
-    $reqInsert = "INSERT INTO Client(nomC, prenomC, mailC, mdpClient) VALUES(:pNom, :pPrenom, :pEmail, :pPassword) RETURNING idClient INTO :idC";
+    $reqInsert = "INSERT INTO Client(idClient, nomC, prenomC, mailC, mdpClient) VALUES(seqIdClient.nextval, :pNom, :pPrenom, :pEmail, :pPassword) RETURNING idClient INTO :idC";
 
     $insertClient = oci_parse($connect, $reqInsert);
 
