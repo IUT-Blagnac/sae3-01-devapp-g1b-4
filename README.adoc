@@ -120,7 +120,7 @@ TIP: Mettez ici toutes les informations nécessaire à l'utilisation de votre d�
 - Version courante : https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/releases/tag/1.1[v1.1]
 //- Lien vers la doc technique
 //- Lien vers la doc utilisateur
-- https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/issues?q=is%3Aissue+is%3Aopen+label%3A"User+story"[Liste des User Stories]
+- https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/issues?q=is%3Aopen+is%3Aissue+label%3A%22User+story%22[Liste des User Stories]
 - https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/projects?query=is%3Aopen[Lien vers les projets]
 - https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/tree/master/iot/python/test[Documentation de test du python]
 //- Indicateurs de qualité du code (dette technique)
