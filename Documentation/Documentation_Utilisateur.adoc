@@ -1,7 +1,21 @@
-= SAÉ 3.01 2022-2023
-== Documentation utilisateur
+= SAÉ 3.01 2022-2023 : Documentation utilisateur
+:TOC:
+:TOC-title: Sommaire
 
-=== Site
+== Site
+
+=== Accès
+
+L'utilisateur à accès au site avec l'adresse ip http://192.168.224.138/~SAESYS04.
+En entrant cette adresse, il sera renvoyé sur la page index, d'ou il pourra effectuer plusieurs actions, tels qu'accéder aux pages des articles, ou se connecter à son compte.
+
+image::https://github.com/AurelienSP/test/blob/main/images/image.png[index]
+page index du site web
 
 
-=== IOT
+=== Navigation
+
+
+=== Inscription et Connexion
+
+== IOT
