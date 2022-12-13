@@ -125,6 +125,9 @@ TIP: Mettez ici toutes les informations nécessaire à l'utilisation de votre d�
 - https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/tree/master/iot/python/test[Documentation de test du python]
 //- Indicateurs de qualité du code (dette technique)
 //- ... tout autre élément que vous jugerez utiles pour démontrer la qualité de votre application
+//image schema pages
+
+image::Documentation/SAES3_G14_SEP.drawio.png[]
 
 === Évaluations hebdomadaires
 
