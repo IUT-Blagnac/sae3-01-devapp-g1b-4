@@ -17,7 +17,7 @@ else {
     $emailClient = $_POST['mailUtil'];
 
 	// création de la requete
-    $reqVerif = "SELECT idClient, motpasseclient FROM Client WHERE mailC=:pMail";
+    $reqVerif = "SELECT idClient, mdpclient FROM Client WHERE mailC=:pMail";
 
 	// on prépare la requete
     $verifMail =  oci_parse($connect, $reqVerif);
