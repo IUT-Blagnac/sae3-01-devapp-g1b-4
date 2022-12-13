@@ -17,10 +17,12 @@ else {
     $emailClient = $_POST['mailUtil'];
 
 	// création de la requete
-    $reqVerif = "SELECT idClient, motpasseclient FROM Client WHERE mailClient=$emailClient";
+    $reqVerif = "SELECT idClient, motpasseclient FROM Client WHERE mailClient=:pMail";
 
 	// on prépare la requete
     $verifMail =  oci_parse($connect, $reqVerif);
+
+    oci_bind_by_name($verifMail, ":pMail", $emailClient);
 
 	// on execute la requete
     $resultVerif = oci_execute($verifMail);
