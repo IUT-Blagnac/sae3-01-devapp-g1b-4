@@ -6,12 +6,17 @@
 
 === Accès
 
-L'utilisateur à accès au site avec l'adresse ip http://192.168.224.138/~SAESYS04.
+L'utilisateur à deux moyens d'accéder au site. Tout dépends du réseau sur lequel il est branché.
+
+Si il est branché en filaire à l'iut, il à accès au site avec l'adresse ip http://192.168.224.138/~SAESYS04.
+
+Sinon, il peut accéder au site en utilisant l'adresse http://193.54.227.164/~SAESYS04.
+
 En entrant cette adresse, il sera renvoyé sur la page index, d'ou il pourra effectuer plusieurs actions, tels qu'accéder aux pages des articles, ou se connecter à son compte.
 
-image::https://github.com/AurelienSP/test/blob/main/images/image.png[index]
-page index du site web
-
+image::https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/images/DU_index.png[index]
+ page index du site web
+ 
 
 === Navigation
 
