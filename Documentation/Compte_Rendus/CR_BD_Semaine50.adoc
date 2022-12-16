@@ -19,4 +19,4 @@ De plus, la création du script cette semaine et l’insertion de plusieurs donn
 
 == Base de données
 
-Un script sera bientot déposé, un lien renverra dessus
+Vous pouvez acceder au script pour la création de la base de données en cliquant https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/BD/Script.sql[ici]
