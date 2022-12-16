@@ -69,7 +69,7 @@ Le fichier de configuration est un fichier de type YAML où nous y trouvons :
 - name : nom au début du/des fichiers
 - object[ ] avec les types de données qui seront soit en 'true' ou 'false'
 - seuils[ ] avec les seuils maximales et des intervalles
-- frequency : le nombre de fois que nous devons collecter les données
+- frequency : tous les combien de secondes nous récoltons les données
 
 Une fois les données collectées, nous stockons les valeurs dans des fichiers de type .txt que Java va lire.
 
@@ -88,7 +88,7 @@ Une fois les données collectées, nous stockons les valeurs dans des fichiers d
 
 TIP: Dans un terminal, exécutez `pip install pyyaml` et `pip install paho.mqtt`
 
-Une fois les librairies installés, vous pouvez exécutez le fichier sur un IDE (PyCharm, Visual Studio Code)
+Une fois les librairies installés, vous pouvez exécutez le fichier sur un IDE de python (PyCharm, Visual Studio Code) en n'oubliant pas d'avoir son workspace en confiance afin d'avoir les extensions, débuggage activées et les tâches autorisées à s'exécuter (le cas de Visual Studio Code).
 
 == Documentation de tests et fichiers
 
