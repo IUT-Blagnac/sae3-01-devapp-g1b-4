@@ -117,6 +117,11 @@ WARNING: ces deux documentations ne sont pas terminées
 
 Vous pourrez aussi trouver la https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/iot/python/README.adoc[documentation de la partie Python] dans le dossier https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/tree/master/iot/python[iot/python]
 
+=== Semaine 50 
+
+- https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/Compte_Rendus/CR_BD_Semaine50.adoc[Compte rendu de la partie BD]
+- https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/Compte_Rendus/CR_WEB_Semaine50.adoc[Compte rendu de la partie Web]
+
 == Gestion de projet & Qualité
 
 //Chaque sprint (semaine) vous devrez livrer une nouvelle version de votre application (release).
