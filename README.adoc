@@ -119,6 +119,7 @@ TIP: Mettez ici toutes les informations nécessaire à l'utilisation de votre d�
 
 - Version courante : https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/releases/tag/1.1[v1.1]
 //- Lien vers la doc technique
+- https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/Documentation_Technique.adoc[Documentation technique]
 //- Lien vers la doc utilisateur
 - https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/Documentation_Utilisateur.adoc[Documentation utilisateur]
 - https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/issues?q=is%3Aopen+is%3Aissue+label%3A%22User+story%22[Liste des User Stories]
