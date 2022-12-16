@@ -102,13 +102,20 @@ Dans ce répository git, vous pourrez trouver :
 - Le dépôt https://github.com/IUT-Blagnac/sae3-01-template[template] qui sert de base à tous les dépôts étudiants.
 - Le lien https://classroom.github.com/a/OUF7gxEa[classroom] si besoin.
 
-- La https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/iot/python/README.adoc[documentation] de la partie Python
 
 //TIP: Pensez à utiliser les salons Discord dédiés pour poser vos questions.
 
 == Réalisations 
 
-TIP: Mettez ici toutes les informations nécessaire à l'utilisation de votre dépôt (comment on installe votre application, où sont les docs, etc.)
+//TIP: Mettez ici toutes les informations nécessaire à l'utilisation de votre dépôt (comment on installe votre application, où sont les docs, etc.)
+Vous pourrez retrouver la documentation dans le dossier https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/tree/master/Documentation[documentation]
+
+WARNING: ces deux documentations ne sont pas terminées
+
+- https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/Documentation_Technique.adoc[Documentation technique]
+- https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/Documentation_Utilisateur.adoc[Documentation utilisateur]
+
+Vous pourrez aussi trouver la https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/iot/python/README.adoc[documentation de la partie Python] dans le dossier https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/tree/master/iot/python[iot/python]
 
 == Gestion de projet & Qualité
 
@@ -117,7 +124,7 @@ TIP: Mettez ici toutes les informations nécessaire à l'utilisation de votre d�
 
 //De plus ce fichier `README.adoc` devra être à jour des informations suivantes :
 
-- Version courante : https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/releases/tag/1.1[v1.1]
+- Version courante : https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/releases/tag/1.2[v1.2]
 //- Lien vers la doc technique
 - https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/Documentation_Technique.adoc[Documentation technique]
 //- Lien vers la doc utilisateur
@@ -129,7 +136,6 @@ TIP: Mettez ici toutes les informations nécessaire à l'utilisation de votre d�
 //- ... tout autre élément que vous jugerez utiles pour démontrer la qualité de votre application
 //image schema pages
 
-image::Documentation/images/SAES3_G14_SEP.drawio.png[]
 
 === Évaluations hebdomadaires
 
