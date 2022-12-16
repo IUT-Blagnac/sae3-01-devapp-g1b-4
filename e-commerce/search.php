@@ -62,7 +62,7 @@
             <div class="filter-section">
                 <button href="" class="btn btn-primary">Filtrer les éléments</button>
             </div>
-            <div class="dropdown">
+            <div class="dropdown dropdown-button">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Trier par
                 </button>

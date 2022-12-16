@@ -23,18 +23,46 @@ session_start();
 			</form>
 		</div>
 		<div class="navbar-links">
-			<ul>
-				<li><a href="panier.php">
+			<ul class="navbar-link-list">
+
+				<li>
+					<a href="cart.php">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
 							<path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
 						</svg>
-					</a></li>
-				<li><a href="compte.php">
-						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-							<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-						</svg>
-					</a></li>
-				<li><a href="">Langue</a></li>
+						<span class="cart-badge">5</span>
+					</a>
+
+				</li>
+				<li>
+					<div>
+						<div class="dropdown">
+							<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+									<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+								</svg>
+							</button>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="./formLogin.php"> Connexion</a></li>
+								<li><a class="dropdown-item text-primary fw-bold" href="./formRegister.php"> Inscription</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+				<li>
+				<div>
+						<div class="dropdown">
+							<button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<img src="https://cdn-icons-png.flaticon.com/512/206/206657.png" alt="" width="20">
+							</button>
+							<ul class="dropdown-menu">
+								<li><img src="https://cdn-icons-png.flaticon.com/512/206/206657.png" alt="" width="20"></li>
+								<li><img src="https://cdn-icons-png.flaticon.com/512/4060/4060233.png" alt="" width="20"></li>
+								<li><img src="https://cdn-icons-png.flaticon.com/512/3373/3373278.png" alt="" width="20"></li>
+							</ul>
+						</div>
+					</div>
+				</li>
 			</ul>
 		</div>
 	</div>
