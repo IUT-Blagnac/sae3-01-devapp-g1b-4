@@ -1,3 +1,50 @@
+<?php
+if(empty($_GET)){
+    header('location:index.php');
+}
+else{
+    require('includes/connect.inc.php');
+
+    $idProduit = $_GET['idProduit'];
+
+    $reqProduit = "SELECT * FROM Produit WHERE IDPRODUIT = :pIDproduit";
+
+    $produitInfos = oci_parse($connect, $reqProduit);
+
+    oci_bind_by_name($produitInfos, ":pIDproduit", $idProduit);
+
+    $resultInfosProduit = oci_execute($produitInfos);
+
+    // si la requete n'a pas pu être executée, on affiche l'erreur
+    if (!$resultInfosProduit) {
+        $e = oci_error($resultVerif);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
+        print htmlentities($e['message']. ' pour cette requete : ' .$e['sqltext']); 
+    } else {
+        $statementBD = oci_fetch_assoc($produitInfos);
+        if(empty($statementBD)){
+            header('location:index.php?msgErreur=Produit existant mais aucune info trouvée');
+        }
+        
+        $reqCategorie = "SELECT nomcat FROM Categorie WHERE idcategorie = :pIDcat";
+
+        $idCategorie = $statementBD['idcategorie'];
+
+        $categorieInfos = oci_parse($connect, $reqCategorie);
+
+        oci_bind_by_name($categorieInfos, ":pIDcat", $idCategorie);
+
+        $resultCategorie = oci_execute($categorieInfos);
+        // si la requete n'a pas pu être executée, on affiche l'erreur
+        if (!$resultInfosProduit) {
+            $e = oci_error($resultVerif);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
+            print htmlentities($e['message']. ' pour cette requete : ' .$e['sqltext']); 
+        } else{
+            $statementBD_CAT = oci_fetch_assoc($categorieInfos);
+        }
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -41,8 +88,12 @@
             <div class="col-6 pl-5 pt-4">
                 <div class="row">
                     <div class="col-9">
-                        <h1 class="product-title">Barre de traction</h1>
-                        <h3>25.90 €</h3>
+                        <h1 class="product-title">
+                            <?php echo $statementBD['nomP'];?>
+                        </h1>
+                        <h3>
+                            <?php echo $statementBD['prixProduit']." €";?>
+                        </h3>
                     </div>
 
                     <!-- Section notation -->
@@ -73,6 +124,7 @@
                         <h5>Description rapide</h5>
                         <p class="product-description">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. In maxime officiis voluptates beatae. Natus modi velit quam impedit quo eum ipsum debitis cumque odit accusantium! Atque, veritatis cumque! At, quasi.
+                            <?php echo $statementBD['descriptionRapide'];?>
                         </p>
                     </div>
                 </div>
@@ -118,6 +170,7 @@
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. In maxime officiis voluptates beatae. Natus modi velit quam impedit quo eum ipsum debitis cumque odit accusantium! Atque, veritatis cumque! At, quasi.
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis non possimus cupiditate odio accusantium. Recusandae cupiditate odit itaque voluptates, sapiente quos nam aperiam debitis delectus soluta beatae voluptatibus iusto in?
                     Magni, omnis reprehenderit. Sunt officiis vero reprehenderit. Veniam iure, accusamus asperiores eligendi impedit possimus sint vero deserunt repellendus recusandae, velit culpa, ad porro voluptatibus labore doloremque provident. Inventore, iusto labore.
+                    <?php echo $statementBD['descriptionRapide'];?>
                 </p>
             </div>
 
