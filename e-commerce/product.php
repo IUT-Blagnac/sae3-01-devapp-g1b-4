@@ -156,9 +156,13 @@ else{
                         </p>
                     </div>
                     <div class="col-12 d-flex justify-content-center mt-3">
-                        <button class="btn ajouter-panier">
-                            Ajouter au panier
-                        </button>
+                        <form id="formAjoutPanier" method="POST" action="product.php">
+                            <input type="number" name="quantiteSelectionne" min="1" max="10">
+                            <button class="btn ajouter-panier" type="submit" >
+                                Ajouter au panier
+                            </button>
+                            <input type="hidden" name="idProduit" value="<?php echo $idProduit; ?>">
+                        </form>
                     </div>
                 </div>
 
