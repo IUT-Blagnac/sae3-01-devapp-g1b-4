@@ -51,8 +51,8 @@
 .product-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 2rem;
-
+    column-gap: 3rem;
+    row-gap: 10rem;
 }
 
 /* ================== */

@@ -29,7 +29,7 @@
 
                         <!-- Navigation de retour arrière -->
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                            <li class="breadcrumb-item"><a href="./index.php">Accueil</a></li>
                             <li class="breadcrumb-item active">Barres de traction</li>
                         </ul>
 
@@ -79,68 +79,39 @@
         <div class="product-grid">
 
             <!-- Carte produit -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
-                    <div class="product-image-overlay">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill favorite-btn" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="product-infos">
-                    <h5 class="product-title"><a href="">Barre de traction murale compacte</a></h5>
-                    <h5 class="product-price">25.50 €</h5>
-                </div>
-            </div>
+            <?php
+                require_once("includes/connect.inc.php");
+                
+                $reqProducts = "SELECT * FROM PRODUIT";
 
-            <!-- Carte produit -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
-                    <div class="product-image-overlay">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill favorite-btn" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="product-infos">
-                    <h5 class="product-title"><a href="">Barre de traction murale compacte</a></h5>
-                    <h5 class="product-price">25.50 €</h5>
-                </div>
-            </div>
+                $prepProduits = oci_parse($connect, $reqProducts);
 
-            <!-- Carte produit -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
-                    <div class="product-image-overlay">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill favorite-btn" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="product-infos">
-                    <h5 class="product-title"><a href="">Barre de traction murale compacte</a></h5>
-                    <h5 class="product-price">25.50 €</h5>
-                </div>
-            </div>
+                $gotProduits = oci_execute($prepProduits);
+                
+                if($gotProduits){
 
-            <!-- Carte produit -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
-                    <div class="product-image-overlay">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill favorite-btn" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="product-infos">
-                    <h5 class="product-title"><a href="">Barre de traction murale compacte</a></h5>
-                    <h5 class="product-price">25.50 €</h5>
-                </div>
-            </div>
+                    while (($produit = oci_fetch_assoc($prepProduits)) != false) {
+                        echo '<div class="product-card">';
+                            echo '<div class="product-image">';
+                                echo '<img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">';
+                                echo '<div class="product-image-overlay">';
+                                    echo '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill favorite-btn" viewBox="0 0 16 16">';
+                                        echo '<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />';
+                                    echo '</svg>';
+                                echo '</div>';
+                            echo '</div>';
+                            echo '<div class="product-infos">';
+                                echo '<h5 class="product-title"><a href="">'.$produit['NOMP'].'</a></h5>';
+                                echo '<h5 class="product-price">'.$produit['PRIXPRODUIT'].' €</h5>';
+                            echo '</div>';
+                        echo '</div>';
+                    }
+                }
+                else {
+                    $error = oci_error($prepProduits);  // on récupère l'exception liée au pb d'execution de la requete
+		            echo "Aucun résultat trouvé.";
+                }
+            ?>
 
         </div>
     </div>
