@@ -27,7 +27,7 @@ else{
         
         $reqCategorie = "SELECT nomcat FROM Categorie WHERE idcategorie = :pIDcat";
 
-        $idCategorie = $statementBD['idcategorie'];
+        $idCategorie = $statementBD['IDCATEGORIE'];
 
         $categorieInfos = oci_parse($connect, $reqCategorie);
 
@@ -89,10 +89,10 @@ else{
                 <div class="row">
                     <div class="col-9">
                         <h1 class="product-title">
-                            <?php echo $statementBD['nomP'];?>
+                            <?php echo $statementBD['NOMP'];?>
                         </h1>
                         <h3>
-                            <?php echo $statementBD['prixProduit']." €";?>
+                            <?php echo $statementBD['PRIXPRODUIT']." €";?>
                         </h3>
                     </div>
 
@@ -123,8 +123,13 @@ else{
                     <div class="col-12">
                         <h5>Description rapide</h5>
                         <p class="product-description">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. In maxime officiis voluptates beatae. Natus modi velit quam impedit quo eum ipsum debitis cumque odit accusantium! Atque, veritatis cumque! At, quasi.
-                            <?php echo $statementBD['descriptionRapide'];?>
+                            <?php
+                                if (strlen($statementBD['DESCRIPTION'])>120) {
+                                    echo substr($statementBD['DESCRIPTION'], 0, 120)."<a href=#description>...</a>";
+                                } else {
+                                    echo $statementBD['DESCRIPTION'];
+                                }
+                            ?>
                         </p>
                     </div>
                 </div>
@@ -132,7 +137,7 @@ else{
                 <!-- Section actions sur le produit -->
                 <div class="row mt-5">
                     <div class="col-12">
-                        <div class="dropdown">
+                        <!--<div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 Choix des matériaux
                             </button>
@@ -142,9 +147,12 @@ else{
                                 <li><a class="dropdown-item" href="#">Aluminium</a></li>
                                 <li><a class="dropdown-item" href="#">Netherite</a></li>
                             </ul>
-                        </div>
+                        </div>-->
                         <p>
-                            Matériaux choisi : <span class="fw-bold">Bois</span>
+                            Composition : 
+                            <span class="fw-bold">
+                                <?php echo $statementBD['COMPOSITION'];?>
+                            </span>
                         </p>
                     </div>
                     <div class="col-12 d-flex justify-content-center mt-3">
@@ -161,16 +169,13 @@ else{
         <div class="row">
 
             <!-- Description produit -->
-            <div class="col-12 mt-4">
+            <div class="col-12 mt-4" id='description'>
                 <h2>
                     Description
                 </h2>
                 <hr>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. In maxime officiis voluptates beatae. Natus modi velit quam impedit quo eum ipsum debitis cumque odit accusantium! Atque, veritatis cumque! At, quasi.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis non possimus cupiditate odio accusantium. Recusandae cupiditate odit itaque voluptates, sapiente quos nam aperiam debitis delectus soluta beatae voluptatibus iusto in?
-                    Magni, omnis reprehenderit. Sunt officiis vero reprehenderit. Veniam iure, accusamus asperiores eligendi impedit possimus sint vero deserunt repellendus recusandae, velit culpa, ad porro voluptatibus labore doloremque provident. Inventore, iusto labore.
-                    <?php echo $statementBD['descriptionRapide'];?>
+                    <?php echo $statementBD['DESCRIPTION'];?>
                 </p>
             </div>
 
