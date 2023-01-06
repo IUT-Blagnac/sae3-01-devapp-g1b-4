@@ -42,6 +42,9 @@ else {
     		$_SESSION['idClientIdentifie'] = $statementBD['IDCLIENT']; // on stocke l'id du client dans la session
     		header('location:index.php'); // on redirige vers la page d'accueil
     	}
+        else{
+            header('location:formLogin.php?msgErreur=Mot de passe erroné');
+        }
     } 
 }
 

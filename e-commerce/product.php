@@ -1,3 +1,50 @@
+<?php
+if(empty($_GET)){
+    header('location:index.php');
+}
+else{
+    require('includes/connect.inc.php');
+
+    $idProduit = $_GET['idProduit'];
+
+    $reqProduit = "SELECT * FROM Produit WHERE IDPRODUIT = :pIDproduit";
+
+    $produitInfos = oci_parse($connect, $reqProduit);
+
+    oci_bind_by_name($produitInfos, ":pIDproduit", $idProduit);
+
+    $resultInfosProduit = oci_execute($produitInfos);
+
+    // si la requete n'a pas pu être executée, on affiche l'erreur
+    if (!$resultInfosProduit) {
+        $e = oci_error($resultVerif);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
+        print htmlentities($e['message']. ' pour cette requete : ' .$e['sqltext']); 
+    } else {
+        $statementBD = oci_fetch_assoc($produitInfos);
+        if(empty($statementBD)){
+            header('location:index.php?msgErreur=Produit existant mais aucune info trouvée');
+        }
+        
+        $reqCategorie = "SELECT nomcat FROM Categorie WHERE idcategorie = :pIDcat";
+
+        $idCategorie = $statementBD['IDCATEGORIE'];
+
+        $categorieInfos = oci_parse($connect, $reqCategorie);
+
+        oci_bind_by_name($categorieInfos, ":pIDcat", $idCategorie);
+
+        $resultCategorie = oci_execute($categorieInfos);
+        // si la requete n'a pas pu être executée, on affiche l'erreur
+        if (!$resultInfosProduit) {
+            $e = oci_error($resultVerif);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
+            print htmlentities($e['message']. ' pour cette requete : ' .$e['sqltext']); 
+        } else{
+            $statementBD_CAT = oci_fetch_assoc($categorieInfos);
+        }
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -41,8 +88,12 @@
             <div class="col-6 pl-5 pt-4">
                 <div class="row">
                     <div class="col-9">
-                        <h1 class="product-title">Barre de traction</h1>
-                        <h3>25.90 €</h3>
+                        <h1 class="product-title">
+                            <?php echo $statementBD['NOMP'];?>
+                        </h1>
+                        <h3>
+                            <?php echo $statementBD['PRIXPRODUIT']." €";?>
+                        </h3>
                     </div>
 
                     <!-- Section notation -->
@@ -72,7 +123,13 @@
                     <div class="col-12">
                         <h5>Description rapide</h5>
                         <p class="product-description">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. In maxime officiis voluptates beatae. Natus modi velit quam impedit quo eum ipsum debitis cumque odit accusantium! Atque, veritatis cumque! At, quasi.
+                            <?php
+                                if (strlen($statementBD['DESCRIPTION'])>120) {
+                                    echo substr($statementBD['DESCRIPTION'], 0, 120)."<a href=#description>...</a>";
+                                } else {
+                                    echo $statementBD['DESCRIPTION'];
+                                }
+                            ?>
                         </p>
                     </div>
                 </div>
@@ -80,7 +137,7 @@
                 <!-- Section actions sur le produit -->
                 <div class="row mt-5">
                     <div class="col-12">
-                        <div class="dropdown">
+                        <!--<div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 Choix des matériaux
                             </button>
@@ -90,15 +147,22 @@
                                 <li><a class="dropdown-item" href="#">Aluminium</a></li>
                                 <li><a class="dropdown-item" href="#">Netherite</a></li>
                             </ul>
-                        </div>
+                        </div>-->
                         <p>
-                            Matériaux choisi : <span class="fw-bold">Bois</span>
+                            Composition : 
+                            <span class="fw-bold">
+                                <?php echo $statementBD['COMPOSITION'];?>
+                            </span>
                         </p>
                     </div>
                     <div class="col-12 d-flex justify-content-center mt-3">
-                        <button class="btn ajouter-panier">
-                            Ajouter au panier
-                        </button>
+                        <form id="formAjoutPanier" method="POST" action="product.php">
+                            <input type="number" name="quantiteSelectionne" min="1" max="10">
+                            <button class="btn ajouter-panier" type="submit" >
+                                Ajouter au panier
+                            </button>
+                            <input type="hidden" name="idProduit" value="<?php echo $idProduit; ?>">
+                        </form>
                     </div>
                 </div>
 
@@ -109,15 +173,13 @@
         <div class="row">
 
             <!-- Description produit -->
-            <div class="col-12 mt-4">
+            <div class="col-12 mt-4" id='description'>
                 <h2>
                     Description
                 </h2>
                 <hr>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. In maxime officiis voluptates beatae. Natus modi velit quam impedit quo eum ipsum debitis cumque odit accusantium! Atque, veritatis cumque! At, quasi.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis non possimus cupiditate odio accusantium. Recusandae cupiditate odit itaque voluptates, sapiente quos nam aperiam debitis delectus soluta beatae voluptatibus iusto in?
-                    Magni, omnis reprehenderit. Sunt officiis vero reprehenderit. Veniam iure, accusamus asperiores eligendi impedit possimus sint vero deserunt repellendus recusandae, velit culpa, ad porro voluptatibus labore doloremque provident. Inventore, iusto labore.
+                    <?php echo $statementBD['DESCRIPTION'];?>
                 </p>
             </div>
 
