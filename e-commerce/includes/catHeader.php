@@ -10,7 +10,6 @@
 				</a></li>
 			<?php
 			require_once("connect.inc.php");
-			error_reporting(0);
 			$req1 = "SELECT * FROM Categorie WHERE IDCATEGORIEMERE IS NULL ORDER BY IDCATEGORIE";
 			$lesCategories = oci_parse($connect, $req1);
 			$result1 = oci_execute($lesCategories);
@@ -37,20 +36,18 @@
 								<h3 class="dropdown-title">
 									' . $laCategorie["NOMCAT"] . '
 								</h3>
-								<h5 class="dropdown-subtitle text-muted">
-									Sous-titre
-								</h5>
+								
 							</div>
 							<div class="dropdown-links">
 								<ul class="page-links">';
 				oci_bind_by_name($sousCat, ":pIdCM", $laCategorie["IDCATEGORIE"]);
 				$result2 = oci_execute($sousCat);
 				while (($laSousCat = oci_fetch_assoc($sousCat)) != false) {
-					echo '<li><a href="" class="link">' . $laSousCat['NOMCAT'] . '</a></li>';
+					echo '<li><a href="./search.php?getIDCat='. $laSousCat['IDCATEGORIE'] .'" class="link">' . $laSousCat['NOMCAT'] . '</a></li>';
 				}
 				echo '</ul>
 						<ul class="more-action-link">
-								<li><a href="" class="link link-seemore">Tout voir</a></li>
+						<li><a href="./search.php?getIDCat='. $laCategorie["IDCATEGORIE"]. '" class="link link-seemore">Tout voir</a></li>
 						</ul>
 						</div>
 						</div>
