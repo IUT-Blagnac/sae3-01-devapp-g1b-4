@@ -14,13 +14,30 @@ Sinon, il peut accéder au site en utilisant l'adresse http://193.54.227.164/~SA
 
 En entrant cette adresse, il sera renvoyé sur la page index, d'ou il pourra effectuer plusieurs actions, tels qu'accéder aux pages des articles, ou se connecter à son compte.
 
+.page index du site web 
 image::https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/images/DU_index.png[index]
- page index du site web
- 
+
 
 === Navigation
 
+L'utilisateur peut accéder aux différents produits de l'entreprise, en utilisant la barre de recherche, ou en navigant à travers la barre de catégories (se trouvant juste sous le logo et la barre de recherche).
+
+Quand l'utilisateur clique sur un élément de la barre de catégories, un menu est déroulé. Le menu contient les sous catégories de celle choisie, ainsi qu'un lien "Tout voir". Le lien "Tout voir" permet à l'utilisateur d'accéder aux produits de la catégorie choisie.
+
+Une fois que l'utilisateur a décidé où se diriger, il accède à une page présentant les produits de la catégorie demandée. Le nom, la photo et le prix de l'image des produits sont affichés. L'utilisateur peut donc cliquer sur la fiche d'un produit, afin d'accéder à la page du produit. +
+Sinon, l'utilisateur peut basculer sur les produits des catégories en rapport avec celle choisie (categorie mère, sous-catégorie, ...). Il peut aussi retourner à l'accueil, en cliquant sur le logo de l'entreprise ou en suivant une petite arborescence.
 
 === Inscription et Connexion
+
+L'utilisateur peut s'inscrire ou se connecter à son compte. +
+Pour cela, il doit cliquer sur l'icone représentant un individu, et cliquer sur "Connexion" ou "Inscription".
+
+Il devra remplir un formulaire, pour créer un compte ou se connecter, et sera ensuite renvoyé sur la page d'accueil, connecté. +
+Si certaines informations sont invalide, le site le précisera une fois que l'utilisateur envoie le formulaire.
+
+.Formulaire d'inscription
+image::images/DU_INSCRI.png[]
+.Formulaire de connexion
+image::images/DU_CONNEX.png[]
 
 == IOT
