@@ -43,9 +43,17 @@ session_start();
 								</svg>
 							</button>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="./formLogin.php"> Connexion</a></li>
-								<li><a class="dropdown-item text-primary fw-bold" href="./formRegister.php"> Inscription</a></li>
-							</ul>
+							<?php
+							if(!isset($_SESSION['idClientIdentifie'])){
+								echo '<li><a class="dropdown-item" href="./formLogin.php"> Connexion</a></li>';
+								echo '<li><a class="dropdown-item text-primary fw-bold" href="./formRegister.php"> Inscription</a></li>';
+							}
+							else {
+								echo '<li><a class="dropdown-item" href="./profile.php"> Mon profil</a></li>';
+								echo '<li><a class="dropdown-item text-danger fw-bold" href="./deconnexion.php"> Déconnexion</a></li>';
+							}
+							?>
+						</ul>
 						</div>
 					</div>
 				</li>

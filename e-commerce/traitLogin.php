@@ -12,12 +12,12 @@ else {
 	// on se connecte à la base de données
     require_once("includes/connect.inc.php");
 
+
 	// on récupère les données du formulaire
 	$mdp_client_a_verifier = $_POST['mdpUtil'];
     $emailClient = $_POST['mailUtil'];
-
 	// création de la requete
-    $reqVerif = "SELECT idClient, mdpclient FROM Client WHERE mailC=:pMail";
+    $reqVerif = "SELECT idClient, mdpclient FROM Client WHERE mailC = :pMail";
 
 	// on prépare la requete
     $verifMail =  oci_parse($connect, $reqVerif);
@@ -32,17 +32,14 @@ else {
     	$e = oci_error($resultVerif);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
 		print htmlentities($e['message']. ' pour cette requete : ' .$e['sqltext']);	
     } else {
-    	$statementBD = oci_fetch_assoc($resultVerif);
-
-		// vérification de l'existance du compte
+    	$statementBD = oci_fetch_assoc($verifMail);		// vérification de l'existance du compte
     	if(empty($statementBD)){
     		header('location:formLogin.php?msgErreur=Compte inexistant');
     	}
-
 		// vérification du mot de passe
-    	if (password_verify($mdp_client_a_verifier, $statementBD['motpasseclient'])) {
+    	if (password_verify($mdp_client_a_verifier, $statementBD['MDPCLIENT'])) {
     		session_start(); // démarre la session
-    		$_SESSION['idClientIdentifie'] = $statementBD['idclient']; // on stocke l'id du client dans la session
+    		$_SESSION['idClientIdentifie'] = $statementBD['IDCLIENT']; // on stocke l'id du client dans la session
     		header('location:index.php'); // on redirige vers la page d'accueil
     	}
     } 
