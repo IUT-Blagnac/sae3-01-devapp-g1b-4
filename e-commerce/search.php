@@ -25,18 +25,60 @@
         <div class="search-wrap-content">
             <div class="container h-100">
                 <div class="row h-100 d-flex align-content-center">
-                    <div class="col-12">
+                    <?php
+                    require_once("includes/connect.inc.php");
 
-                        <!-- Navigation de retour arrière -->
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="./index.php">Accueil</a></li>
-                            <li class="breadcrumb-item active">Barres de traction</li>
-                        </ul>
+                    $nomCat = "";
+                    $sousCat = FALSE;
 
-                    </div>
-                    <div class="col-7">
-                        <h1 class="text-white fw-bold search-wrap-title"><span style="background-color: #000;">Barres de traction</span></h1>
-                    </div>
+
+                    if (isset($_GET['getIDCat'])) {
+                        //récupère la catégorie de la page
+                        $reqCat = "SELECT * FROM CATEGORIE WHERE IDCATEGORIE =" . $_GET['getIDCat'];
+                        $prepCat = oci_parse($connect, $reqCat);
+                        $gotCat = oci_execute($prepCat);
+
+                        $gotCatMere=FALSE;
+                        if ($gotCat) {
+                            $categorie = oci_fetch_assoc($prepCat);
+                            $nomCat = $categorie['NOMCAT'];
+
+                            //Si la catégorie récupérée est une sous catégorie, ce if permet de récupérer les données de la categorie mère
+                            if($categorie['IDCATEGORIEMERE']!=""){
+                                $sousCat = TRUE;
+                                $reqCatMere = "SELECT * FROM CATEGORIE WHERE IDCATEGORIE =" . $categorie['IDCATEGORIEMERE'];
+                                $prepCatMere = oci_parse($connect, $reqCatMere);
+                                $gotCatMere = oci_execute($prepCatMere);
+                                if($gotCatMere){
+                                    $categorieCatMere=oci_fetch_assoc($prepCatMere);
+                                }
+                            }
+                            
+
+                        } else {
+                            header('location:search.php');
+                        }
+                    } else {
+                        $nomCat = "Tous les produits";
+                        
+                    }
+
+                    echo '<div class="col-12">';
+
+                        //<!-- Navigation de retour arrière -->
+                        echo '<ul class="breadcrumb">';
+                            echo '<li class="breadcrumb-item"><a href="./index.php">Accueil</a></li>';
+                            if($sousCat==TRUE){
+                                echo '<li class="breadcrumb-item active"><a href="./search.php?getIDCat='.$categorieCatMere['IDCATEGORIE'].'">'.$categorieCatMere['NOMCAT'].'</a></li>';
+                            }
+                                echo '<li class="breadcrumb-item active">' . $nomCat . '</li>';
+                        echo '</ul>';
+
+                    echo '</div>';
+                    echo '<div class="col-7">';
+                        echo '<h1 class="text-white fw-bold search-wrap-title"><span style="background-color: #000;">' . $nomCat . '</span></h1>';
+                    echo '</div>';
+                    ?>
                     <div class="col-5">
                         <!-- Section vierge -->
                     </div>
@@ -48,11 +90,30 @@
     <!-- Navigation des sous-catégories -->
     <nav class="subcat-nav">
         <div class="items-section">
-            <ul>
-                <li class="active"><a href="">Toutes les barres</a></li>
-                <li><a href="">Fixation murale</a></li>
-                <li><a href="">Fixation porte</a></li>
-            </ul>
+            <?php
+            if($nomCat != "Tous les produits"){
+
+                if($gotCatMere){
+                    $reqSousCat = "SELECT * FROM CATEGORIE WHERE IDCATEGORIEMERE =" . $categorieCatMere['IDCATEGORIE'];
+                }
+                else {
+                    $reqSousCat = "SELECT * FROM CATEGORIE WHERE IDCATEGORIEMERE =" . $categorie['IDCATEGORIE'];
+
+                }
+                $prepSousCat = oci_parse($connect, $reqSousCat);
+                $gotSousCat = oci_execute($prepSousCat);
+
+                if($gotSousCat){
+                    echo '<ul>';
+                    while (($lesSousCat = oci_fetch_assoc($prepSousCat)) != false) {
+                        echo '<li><a href="./search.php?getIDCat='.$lesSousCat['IDCATEGORIE'].'">'.$lesSousCat['NOMCAT'].'</a></li>'; 
+                    }
+                    echo '</ul>';
+                }
+                
+            }
+            
+            ?>
         </div>
     </nav>
 
@@ -80,37 +141,37 @@
 
             <!-- Carte produit -->
             <?php
-                require_once("includes/connect.inc.php");
-                
+            if (isset($_GET['getIDCat'])) {
+                $reqProducts = "SELECT * FROM PRODUIT WHERE IDCATEGORIE =" . $_GET['getIDCat'];
+            } else {
                 $reqProducts = "SELECT * FROM PRODUIT";
+            }
 
-                $prepProduits = oci_parse($connect, $reqProducts);
+            $prepProduits = oci_parse($connect, $reqProducts);
 
-                $gotProduits = oci_execute($prepProduits);
-                
-                if($gotProduits){
+            $gotProduits = oci_execute($prepProduits);
 
-                    while (($produit = oci_fetch_assoc($prepProduits)) != false) {
-                        echo '<div class="product-card">';
-                            echo '<div class="product-image">';
-                                echo '<img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">';
+            if ($gotProduits) {
+
+                while (($produit = oci_fetch_assoc($prepProduits)) != false) {
+                    echo '<div class="product-card">';
+                        echo '<a href="product.php?idProduit='.$produit['IDPRODUIT'].'" style="text-decoration: none; color: inherit">';
+                        echo '<div class="product-image">';
+                            echo '<img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">';
                                 echo '<div class="product-image-overlay">';
-                                    echo '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill favorite-btn" viewBox="0 0 16 16">';
-                                        echo '<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />';
-                                    echo '</svg>';
-                                echo '</div>';
-                            echo '</div>';
-                            echo '<div class="product-infos">';
-                                echo '<h5 class="product-title"><a href="">'.$produit['NOMP'].'</a></h5>';
-                                echo '<h5 class="product-price">'.$produit['PRIXPRODUIT'].' €</h5>';
                             echo '</div>';
                         echo '</div>';
-                    }
+                        echo '<div class="product-infos">';
+                            echo '<h5 class="product-title">' . $produit['NOMP'] . '</h5>';
+                            echo '<h5 class="product-price">' . $produit['PRIXPRODUIT'] . ' €</h5>';
+                        echo '</div>';
+                        echo '</a>';
+                    echo '</div>';
                 }
-                else {
-                    $error = oci_error($prepProduits);  // on récupère l'exception liée au pb d'execution de la requete
-		            echo "Aucun résultat trouvé.";
-                }
+            } else {
+                $error = oci_error($prepProduits);  // on récupère l'exception liée au pb d'execution de la requete
+                echo "Aucun résultat trouvé.";
+            }
             ?>
 
         </div>
@@ -120,12 +181,6 @@
 
 
     <?php include('includes/footer.php'); ?>
-
-    <!-- Javascript -->
-    <!-- <script src="includes/bootstrap/js/bootstrap.min.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="./assets/js/main.js"></script>
 
 </body>
 
