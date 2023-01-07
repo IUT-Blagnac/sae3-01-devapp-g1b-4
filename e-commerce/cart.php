@@ -29,7 +29,7 @@
                     // Si panier vide
                     if (!isset($_SESSION['idClientIdentifie']) and !isset($_COOKIE["tempPanier"])) {
                         echo '<h3> Votre panier est vide !</h3><br>';
-                        echo '<span class="fs-5"><a href="./index.php">Continuez vos achats</a></span><br>';
+                        echo '<span class="fs-5"><a href="./index.php">Continuez vos achats</a></span><br><br>';
                     }
 
                     // Si utilisateur connecté
@@ -50,12 +50,12 @@
                         // si panier vide
                         if (($leProduitPanier = oci_fetch_assoc($produitsPanier)) == false) {
                             echo '<h3> Votre panier est vide !</h3><br>';
-                            echo '<span class="fs-5"><a href="./index.php">Continuez vos achats</a></span><br>';
+                            echo '<span class="fs-5"><a href="./index.php">Continuez vos achats</a></span><br><br>';
 
                             // si produits dans panier
                         } else {
                             $result1 = oci_execute($produitsPanier);
-                            echo '<span class="fs-5"><a href="./index.php">Continuez vos achats</a></span><br>';
+                            echo '<span class="fs-5"><a href="./index.php">Continuez vos achats</a></span><br><br>';
                             echo '<div class="row mb-5">';
                                 echo '<div class="col-9">';
                                     echo '<div class="row">';
@@ -116,14 +116,14 @@
                             oci_free_statement($produitsPanier);
                         }
                     } else if (isset($_COOKIE["tempPanier"])) {
-                        echo '<span class="fs-5"><a href="./index.php">Continuez vos achats</a></span><br>';
+                        echo '<span class="fs-5"><a href="./index.php">Continuez vos achats</a></span><br><br>';
                     } 
                     // Recommandation
                     else {
                 echo '</div>';
             echo '</div>';
         echo '</div>';
-                        echo '<br><div class="container-fluid"><br>';
+                        echo '<div class="container-fluid"><br>';
                             echo '<div class="product-grid">';
                             $reqCards = 'SELECT * FROM (SELECT * FROM PRODUIT ORDER BY dbms_random.value) WHERE rownum <= 4';
                             $cardsProduct = oci_parse($connect, $reqCards);
