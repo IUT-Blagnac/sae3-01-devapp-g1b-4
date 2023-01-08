@@ -1,0 +1,57 @@
+= SAÉ 3.01 2022-2023 : Documentation technique
+:TOC:
+:TOC-title: Sommaire
+
+== Site
+
+=== Présentation 
+
+L'entreprise BlueGym souhaite avoir une visibilité au niveau national. Pour cela, BlueGym a besoin de migrer de son site vitrine vers un site personnel. +
+Nous sommes donc en train de faire un site pour eux. 
+
+=== Architecture
+
+Le site que nous produisons doit respecter une arborescence précise : +
+Depuis la page d'accueil, l'utilisateur doit pouvoir accéder aux pages des différentes catégories, puis aller sur la page de l'article qui l'interesse. +
+
+Le site est composé de cette façon : +
+image::https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/images/SAES3_G14_SEP.drawio.png[diagramme_site]
+
+Le site est composé de ces pages : 
+
+.Pages de base 
+|=== 
+|*Page* | *Rôle*
+|index.php | accueil
+|product.php | page d'un produit
+|search.php | page de recherche
+|formLogin.php / formRegister.php | page de connexion / incription
+|traitLogin.php / traitRegister.php | traitement de la connexion / inscription
+|deconnexion.php | traitement de la déconnexion de l'utilisateur
+|profile.php | profile de l'utilisateur
+|cart.php | panier de l'utilisateur
+|payement.php | page où l'utilisateur peut payer la commande
+|... |...
+|===
+
+.Pages dans "includes/"
+|=== 
+|*Page* | *Rôle*
+|... |...
+|===
+
+.Pages dans "pages/"
+|=== 
+|*Page* | *Rôle*
+|... |...
+|===
+
+.Fichiers CSS dans "assets/css/"
+|=== 
+|*Page* | *Rôle*
+|main.css | style principal des pages
+|product_page.css | style des pages de produit
+|search.css | style de la page de recherche
+|===
+
+== IOT
