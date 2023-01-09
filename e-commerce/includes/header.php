@@ -59,7 +59,9 @@ session_start();
 							$quantitePanier = oci_fetch_assoc($qttPanier);
 
 							$nbElementsPanier = $quantitePanier['COUNT(IDPRODUIT)'];
-
+							if(isset($_COOKIE['tempPanier'])){
+								$nbElementsPanier = $nbElementsPanier + count(json_decode($_COOKIE['tempPanier']));
+							}
 						?>
 
 						<?php 
