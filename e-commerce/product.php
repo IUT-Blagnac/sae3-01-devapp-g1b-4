@@ -1,10 +1,10 @@
 <?php
-if(empty($_GET)){
+if(!isset($_GET)){
     header('location:index.php');
 }
 else{
     require('includes/connect.inc.php');
-
+    error_reporting(0);
     $idProduit = $_GET['idProduit'];
 
     $reqProduit = "SELECT * FROM Produit WHERE IDPRODUIT = :pIDproduit";
@@ -157,8 +157,8 @@ else{
                     </div>
                     <div class="col-12 d-flex justify-content-center mt-3">
                         <form id="formAjoutPanier" method="POST" action="addingToCart.php">
-                            <input type="number" name="quantiteSelectionne" min="1" max="10">
-                            <button class="btn ajouter-panier" type="submit" name="sub" >
+                            <input type="number" class="form-control" name="quantiteSelectionne" min="1" max="10"><br>
+                            <button class="btn btn-primary p-1" type="submit" name="sub" >
                                 Ajouter au panier
                             </button>
                             <input type="hidden" name="idProduit" value="<?php echo $idProduit; ?>">
@@ -281,25 +281,27 @@ else{
             </div>
             <div class="col-12">
                 <div class="card-displayer-suggestion">
-                    <div class="product-card" style="transform: none;">
-                        <div class="product-card-img">
-                            <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
+                    <?php
+                        // Suggère 4 produits ou moins similaires (la même catégorie)
+                        $reqOthers = 'SELECT * FROM (SELECT * FROM PRODUIT WHERE idCategorie = :pIdCat AND idProduit != :pIdProduit ORDER BY dbms_random.value) WHERE rownum <= 4';
+                        $cardsProductOthers = oci_parse($connect, $reqOthers);
+                        oci_bind_by_name($cardsProductOthers, ":pIdCat", $statementBD['IDCATEGORIE']);
+                        oci_bind_by_name($cardsProductOthers, ":pIdProduit", $idProduit);
+                        $resultOther = oci_execute($cardsProductOthers);
+                        while(($cardProductOther = oci_fetch_assoc($cardsProductOthers)) != false){
+                            echo'
+                        <div class="product-card" style="transform: none;">
+                            <div class="product-card-img">
+                                <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
+                            </div>
+                            <div class="product-card-content">
+                                <h4 class="title">'.$cardProductOther['NOMP'].'</h4>
+                                <h5 class="price">'.$cardProductOther['PRIXPRODUIT'].' €</h5>
+                            </div>
                         </div>
-                        <div class="product-card-content">
-                            <h4 class="title">Barre trop sexy</h4>
-                            <h5 class="price">25.50 €</h5>
-                        </div>
-                    </div>
-                    <div class="product-card" style="transform: none;">
-                        <div class="product-card-img">
-                            <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
-                        </div>
-                        <div class="product-card-content">
-                            <h4 class="title">Barre trop sexy</h4>
-                            <h5 class="price">25.50 €</h5>
-                        </div>
-                    </div>
-
+                            ';
+                        }
+                    ?>
                 </div>
             </div>
         </div>
@@ -312,7 +314,7 @@ else{
     <!-- <script src="includes/bootstrap/js/bootstrap.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="./assets/js/main.js"></script>
+
 
 </body>
 

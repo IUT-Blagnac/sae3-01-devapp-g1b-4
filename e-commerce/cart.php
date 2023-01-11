@@ -35,7 +35,7 @@
                     if (isset($_SESSION['idClientIdentifie'])) {
 
                         require_once("./includes/connect.inc.php");
-
+                        error_reporting(0);
                         // requete
                         $req1 = "SELECT * FROM PANIER P, QUANTITEPANIER QP, PRODUIT PR
                             WHERE P.idpanier = QP.idpanier AND P.idclient = :pIdClient AND PR.idproduit = QP.idproduit AND P.idpanier NOT IN
@@ -68,7 +68,7 @@
                                                     </div>
                                                 <div class="col-md-9 pl-3">
                                                         <div class="card-body text-start">
-                                                            <h4 class="card-title fw-bold">' . $leProduitPanier["NOMP"] . '</h4>
+                                                            <a href="product.php?idProduit='.$leProduitPanier["IDPRODUIT"].'" style="color: inherit; text-decoration:none"><h4 class="card-title fw-bold">' . $leProduitPanier["NOMP"] . '</h4></a>
                                                             <p class="card-text">Matériaux : ' . $leProduitPanier["COMPOSITION"] . '</p>
                                                             <p class="card-text"><small class="text-muted">Quantité : ' . $leProduitPanier["NBPRODUIT"] . '</small></p>
                                                             <a href="" class="btn btn-danger">Supprimer du panier</a>
@@ -103,7 +103,7 @@
                                             echo $row[2];
                                             echo ' €</span> <span class="text-muted fs-6">TTC</span></h5>
                                             <div class="d-flex justify-content-center mt-3 mb-3">
-                                                <a href="" class="btn btn-primary">Passer commande</a>
+                                                <a href="payment.php?tab=bill?cartID=' . 12 . '" class="btn btn-primary">Passer commande</a>
                                             </div>
                                         </div>
                                         <div class="card-footer d-flex justify-content-center">
@@ -134,21 +134,54 @@
                                                 </div>
                                                 <div class="col-md-9 pl-3">
                                                     <div class="card-body text-start">
-                                                        <h4 class="card-title fw-bold">' . $row[2] . '</h4>
+                                                        <a href="product.php?idProduit='.$row[0].'" style="color: inherit; text-decoration:none"><h4 class="card-title fw-bold">' . $row[2] . '</h4></a>
                                                         <p class="card-text">Matériaux : ' . $row[5] . '</p>
                                                         <p class="card-text"><small class="text-muted">Quantité : ' . $articleCookie["qteProduit"] . '</small></p>
                                                         <a href="" class="btn btn-danger">Supprimer du panier</a>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>';
                                     }
-                                
-                                echo '</div>
-                            </div>
-                        </div>';
-                    } 
+                                    // Récap avec cookie seulement
+                                    $prixTotalCookie = 0;
+                                    echo '</div></div><div class="col-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div><h5>Récapitulatif</h5><hr>
+                                                <div class="text-start ml-5">';
+                                                foreach(json_decode($_COOKIE['tempPanier'], true) as $articleCookie){
+                                                    oci_bind_by_name($produitCookie, ":pIdProduit", $articleCookie['idProduit']);
+                                                    $resultCookie = oci_execute($produitCookie);
+                                                    $row = oci_fetch_row($produitCookie);
+                                                    if($articleCookie['qteProduit'] > 1){
+                                                        echo '<p>' . $row[2] . ' - ' . $articleCookie['qtePrixProduit'] . ' € - x'.$articleCookie['qteProduit'].'</p>';
+                                                    }
+                                                    else{   
+                                                       echo '<p>' . $row[2] . ' - ' . $articleCookie['qtePrixProduit'] . ' €</p>';
+                                                    }
+                                                    $prixTotalCookie = $prixTotalCookie + $articleCookie['qtePrixProduit'];
+                                                }
+                                                echo '</div>
+                                            </div>
+                                            <hr>
+                                            <h5>Total : <span class="fw-bold">';
+                                            echo $prixTotalCookie;
+                                            echo ' €</span> <span class="text-muted fs-6">TTC</span></h5>
+                                            <div class="d-flex justify-content-center mt-3 mb-3">
+                                                <a href="" class="btn btn-primary">Passer commande</a>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-center">
+                                            <img width="170" src="https://cdn.shopify.com/s/files/1/0318/5718/0809/t/2/assets/gateways-cart.png?v=fd3b6526858486989ac0" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>';
+                            oci_free_statement($produitCookie);
+                        } 
                     // Recommandation
                     else {
                 echo '</div>
@@ -171,7 +204,7 @@
                                     </div>
                                 </a></div>';
                             }
-                            
+                            oci_free_statement($cardsProduct);
 
                             echo '</div>
                         </div>';
