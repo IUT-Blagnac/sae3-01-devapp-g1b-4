@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import view.windowController;
 
 public class appli extends Application {
-
+	//Lancement de l'interface
 	private Stage primaryStage;
 	
 	@Override
