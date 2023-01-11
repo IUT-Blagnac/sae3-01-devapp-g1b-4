@@ -8,18 +8,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
-import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class windowController implements Initializable {
 	
-	@FXML
-	private VBox VboxGauche;
-	@FXML
-	private VBox VboxCentre;
-	@FXML
-	private VBox VboxDroite;
+	private Stage primaryStage;
 	
 	@FXML
 	private RadioButton bActivity;
@@ -40,14 +34,40 @@ public class windowController implements Initializable {
 	@FXML
 	private RadioButton bTvoc;
 	
+    CategoryAxis xAxis = new CategoryAxis();
+    NumberAxis yAxis = new NumberAxis();
+	
+	@FXML
+	private BarChart<String,Number> bc1 = new BarChart<String,Number>(xAxis,yAxis);
+	@FXML
+	private BarChart<String,Number> bc2 = new BarChart<String,Number>(xAxis,yAxis);
+	@FXML
+	private BarChart<String,Number> bc3 = new BarChart<String,Number>(xAxis,yAxis);
+	@FXML
+	private BarChart<String,Number> bc4 = new BarChart<String,Number>(xAxis,yAxis);
+	@FXML
+	private BarChart<String,Number> bc5 = new BarChart<String,Number>(xAxis,yAxis);
+	@FXML
+	private BarChart<String,Number> bc6 = new BarChart<String,Number>(xAxis,yAxis);
+	@FXML
+	private BarChart<String,Number> bc7 = new BarChart<String,Number>(xAxis,yAxis);
+	@FXML
+	private BarChart<String,Number> bc8 = new BarChart<String,Number>(xAxis,yAxis);
+	@FXML
+	private BarChart<String,Number> bc9 = new BarChart<String,Number>(xAxis,yAxis);
+	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 	}
 	
-	public static void ajoutGraph(int graphId) {
+	public void ajoutGraph(int graphId) {
 		 
+	}
+	
+	public void WInitialisation(Stage PStage) {
+		this.primaryStage=PStage;
 	}
 
 	

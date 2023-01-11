@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import view.windowController;
 
 public class appli extends Application {
 
@@ -26,6 +27,11 @@ public class appli extends Application {
 		
 		primaryStage.setScene(sceneM);
 		primaryStage.setTitle("Visionnage des données");
+		
+		windowController Wcontroll = loader.getController();
+		
+		Wcontroll.WInitialisation(primaryStage);
+		
 		primaryStage.show();
 		
 	}

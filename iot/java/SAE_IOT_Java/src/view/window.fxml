@@ -23,15 +23,15 @@
    <left>
       <VBox prefHeight="453.0" prefWidth="165.0" spacing="40.0" BorderPane.alignment="CENTER">
          <children>
-            <RadioButton fx:id="bActivity" mnemonicParsing="false" text="Activité" />
-            <RadioButton fx:id="bCo2" mnemonicParsing="false" text="CO2" />
-            <RadioButton fx:id="bHumidity" mnemonicParsing="false" text="Humidité" />
-            <RadioButton fx:id="bIllumination" mnemonicParsing="false" text="Illumination" />
-            <RadioButton fx:id="bInfrared" mnemonicParsing="false" text="Infrarouge" />
-            <RadioButton fx:id="bInfraredAndVisible" mnemonicParsing="false" text="Infrarouge et visible" />
-            <RadioButton fx:id="bPressure" mnemonicParsing="false" text="Pression" />
-            <RadioButton fx:id="bTemperature" mnemonicParsing="false" text="Température" />
-            <RadioButton fx:id="bTvoc" mnemonicParsing="false" text="Qualité de l'air" />
+            <RadioButton fx:id="bActivity" mnemonicParsing="false" selected="true" text="Activité" />
+            <RadioButton fx:id="bCo2" mnemonicParsing="false" selected="true" text="CO2" />
+            <RadioButton fx:id="bHumidity" mnemonicParsing="false" selected="true" text="Humidité" />
+            <RadioButton fx:id="bIllumination" mnemonicParsing="false" selected="true" text="Illumination" />
+            <RadioButton fx:id="bInfrared" mnemonicParsing="false" selected="true" text="Infrarouge" />
+            <RadioButton fx:id="bInfraredAndVisible" mnemonicParsing="false" selected="true" text="Infrarouge et visible" />
+            <RadioButton fx:id="bPressure" mnemonicParsing="false" selected="true" text="Pression" />
+            <RadioButton fx:id="bTemperature" mnemonicParsing="false" selected="true" text="Température" />
+            <RadioButton fx:id="bTvoc" mnemonicParsing="false" selected="true" text="Qualité de l'air" />
          </children>
          <padding>
             <Insets bottom="35.0" left="5.0" right="5.0" top="35.0" />
@@ -56,7 +56,7 @@
          <children>
             <Label text="Label" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Label text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <BarChart GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <BarChart fx:id="bc1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -64,7 +64,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </BarChart>
-            <BarChart GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <BarChart fx:id="bc2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -72,7 +72,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </BarChart>
-            <BarChart GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <BarChart fx:id="bc3" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -80,7 +80,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </BarChart>
-            <BarChart GridPane.rowIndex="3">
+            <BarChart fx:id="bc4" GridPane.rowIndex="3">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -88,7 +88,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </BarChart>
-            <BarChart GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <BarChart fx:id="bc5" GridPane.columnIndex="1" GridPane.rowIndex="3">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -96,7 +96,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </BarChart>
-            <BarChart GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <BarChart fx:id="bc6" GridPane.columnIndex="2" GridPane.rowIndex="3">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -104,7 +104,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </BarChart>
-            <BarChart GridPane.rowIndex="5">
+            <BarChart fx:id="bc7" GridPane.rowIndex="5">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -112,7 +112,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </BarChart>
-            <BarChart GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <BarChart fx:id="bc8" GridPane.columnIndex="1" GridPane.rowIndex="5">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -120,7 +120,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </BarChart>
-            <BarChart GridPane.columnIndex="2" GridPane.rowIndex="5">
+            <BarChart fx:id="bc9" GridPane.columnIndex="2" GridPane.rowIndex="5">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
