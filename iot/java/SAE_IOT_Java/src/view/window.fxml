@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.windowController">
+<BorderPane prefHeight="600.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.windowController">
    <top>
       <Label alignment="CENTER" prefHeight="57.0" prefWidth="237.0" text="Visualisation des données" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <font>
@@ -61,7 +61,7 @@
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
               <yAxis>
-                <NumberAxis side="LEFT" />
+                <NumberAxis fx:id="yaxis" side="LEFT" />
               </yAxis>
             </BarChart>
             <BarChart fx:id="bc2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">

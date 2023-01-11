@@ -32,6 +32,7 @@ public class appli extends Application {
 		
 		Wcontroll.WInitialisation(primaryStage);
 		
+		Wcontroll.start(primaryStage);
 		primaryStage.show();
 		
 	}
