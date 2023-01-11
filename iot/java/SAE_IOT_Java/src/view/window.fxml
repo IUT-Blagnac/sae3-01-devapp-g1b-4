@@ -46,17 +46,14 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="165.0" minHeight="10.0" prefHeight="165.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="165.0" minHeight="10.0" prefHeight="165.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="254.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="165.0" minHeight="10.0" prefHeight="165.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Label" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Label text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <BarChart fx:id="bc1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <BarChart fx:id="bc1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -64,7 +61,23 @@
                 <NumberAxis fx:id="yaxis" side="LEFT" />
               </yAxis>
             </BarChart>
-            <BarChart fx:id="bc2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <BarChart fx:id="bc2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="yaxis" side="LEFT" />
+              </yAxis>
+            </BarChart>
+            <BarChart fx:id="bc3" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="yaxis" side="LEFT" />
+              </yAxis>
+            </BarChart>
+            <BarChart fx:id="bc4" GridPane.rowIndex="2">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -72,7 +85,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </BarChart>
-            <BarChart fx:id="bc3" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <BarChart fx:id="bc5" GridPane.columnIndex="1" GridPane.rowIndex="2">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -80,7 +93,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </BarChart>
-            <BarChart fx:id="bc4" GridPane.rowIndex="3">
+            <BarChart fx:id="bc6" GridPane.columnIndex="2" GridPane.rowIndex="2">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -88,7 +101,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </BarChart>
-            <BarChart fx:id="bc5" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <BarChart fx:id="bc7" GridPane.rowIndex="4">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -96,7 +109,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </BarChart>
-            <BarChart fx:id="bc6" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <BarChart fx:id="bc8" GridPane.columnIndex="1" GridPane.rowIndex="4">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -104,7 +117,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </BarChart>
-            <BarChart fx:id="bc7" GridPane.rowIndex="5">
+            <BarChart fx:id="bc9" GridPane.columnIndex="2" GridPane.rowIndex="4">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -112,29 +125,6 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </BarChart>
-            <BarChart fx:id="bc8" GridPane.columnIndex="1" GridPane.rowIndex="5">
-              <xAxis>
-                <CategoryAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-            </BarChart>
-            <BarChart fx:id="bc9" GridPane.columnIndex="2" GridPane.rowIndex="5">
-              <xAxis>
-                <CategoryAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-            </BarChart>
-            <Label text="Label" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Label text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Label text="Label" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-            <Label text="Label" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
    </center>

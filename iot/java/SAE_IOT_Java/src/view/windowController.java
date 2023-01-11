@@ -25,7 +25,7 @@ public class windowController implements Initializable {
 	@FXML
 	private RadioButton bActivity;
 	@FXML
-	private RadioButton bCo2;
+	private RadioButton bActivité;
 	@FXML
 	private RadioButton bHumidity;
 	@FXML
@@ -47,24 +47,26 @@ public class windowController implements Initializable {
 	@FXML
 	private BarChart<String,Number> bc1; 
 	@FXML
-	private BarChart<String,Number> bc2 = new BarChart<String,Number>(xAxis,yAxis);
+	private BarChart<String,Number> bc2;
 	@FXML
-	private BarChart<String,Number> bc3 = new BarChart<String,Number>(xAxis,yAxis);
+	private BarChart<String,Number> bc3;
 	@FXML
-	private BarChart<String,Number> bc4 = new BarChart<String,Number>(xAxis,yAxis);
+	private BarChart<String,Number> bc4;
 	@FXML
-	private BarChart<String,Number> bc5 = new BarChart<String,Number>(xAxis,yAxis);
+	private BarChart<String,Number> bc5;
 	@FXML
-	private BarChart<String,Number> bc6 = new BarChart<String,Number>(xAxis,yAxis);
+	private BarChart<String,Number> bc6;
 	@FXML
-	private BarChart<String,Number> bc7 = new BarChart<String,Number>(xAxis,yAxis);
+	private BarChart<String,Number> bc7;
 	@FXML
-	private BarChart<String,Number> bc8 = new BarChart<String,Number>(xAxis,yAxis);
+	private BarChart<String,Number> bc8;
 	@FXML
-	private BarChart<String,Number> bc9 = new BarChart<String,Number>(xAxis,yAxis);
+	private BarChart<String,Number> bc9;
 	
 	@FXML
 	private NumberAxis yaxis;
+	
+	
 	
 	
 	@Override
@@ -80,9 +82,9 @@ public class windowController implements Initializable {
 		this.primaryStage=PStage;
 	}
 	
-	final static String CO2 = "CO2";
-    final static String brazil = "Brazil";
-    final static String france = "France";
+	final static String Activité = "Activité";
+    final static String CO2 = "CO2";
+    final static String humidité = "humidité";
     final static String italy = "Italy";
     final static String usa = "USA";
  
@@ -92,18 +94,34 @@ public class windowController implements Initializable {
         final NumberAxis yAxis = new NumberAxis();
         final BarChart<String,Number> bc1 = 
             new BarChart<String,Number>(xAxis,yAxis);*/
-        bc1.setTitle("Evolution CO2");
+        bc1.setTitle("Evolution Activité");
+        xAxis.setLabel("Country");       
+        yAxis.setLabel("Value");
+        
+        bc2.setTitle("Evolution CO2");
+        xAxis.setLabel("Country");       
+        yAxis.setLabel("Value");
+        
+        bc3.setTitle("Evolution humidités");
         xAxis.setLabel("Country");       
         yAxis.setLabel("Value");
  
         XYChart.Series series1 = new XYChart.Series<>();
         series1.setName("2003");       
-        series1.getData().add(new XYChart.Data(CO2, 25601.34));
+        series1.getData().add(new XYChart.Data(Activité, 25601.34));
+        
+        XYChart.Series series2 = new XYChart.Series<>();
+        series2.getData().add(new XYChart.Data(CO2, 15601.34));
+        
+        XYChart.Series series3 = new XYChart.Series<>();
+        series3.getData().add(new XYChart.Data(humidité, 10000.34));
         
  
        
  
         bc1.getData().addAll(series1);
+        bc2.getData().addAll(series2);
+        bc3.getData().addAll(series3);
     }
     
     
