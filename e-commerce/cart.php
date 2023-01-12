@@ -14,10 +14,6 @@
 <body>
     <?php include('includes/header.php'); ?>
 
-    <?php
-
-
-    ?>
 
     <?php
         echo'<div class="container mt-5">
@@ -103,7 +99,7 @@
                                             echo $row[2];
                                             echo ' €</span> <span class="text-muted fs-6">TTC</span></h5>
                                             <div class="d-flex justify-content-center mt-3 mb-3">
-                                                <a href="payment.php?tab=bill?cartID=' . 12 . '" class="btn btn-primary">Passer commande</a>
+                                                <a href="payment.php?tab=shipping&cartID='.$row[0].'" class="btn btn-primary">Passer commande</a>
                                             </div>
                                         </div>
                                         <div class="card-footer d-flex justify-content-center">
@@ -199,8 +195,8 @@
                                         <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
                                     </div>
                                     <div class="product-infos">
-                                        <h5 class="product-title">'.$cardProduct["NOMP"].'</h5>
-                                        <h5 class="product-price"> '.$cardProduct["PRIXPRODUIT"].' €</h5>
+                                        <h7 class="product-title">'.$cardProduct["NOMP"].'</h7>
+                                        <h7 class="product-price"> '.$cardProduct["PRIXPRODUIT"].' €</h7>
                                     </div>
                                 </a></div>';
                             }

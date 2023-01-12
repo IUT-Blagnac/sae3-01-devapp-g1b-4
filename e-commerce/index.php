@@ -60,7 +60,7 @@
                 <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
             </div>
             <div class="product-card-content">
-                <h4 class="title">'.$cardProduct["NOMP"].'</h4>
+                <h5 class="title">'.$cardProduct["NOMP"].'</h5>
                 <h5 class="price">'.$cardProduct['PRIXPRODUIT'].' €</h5>
             </div></a>
         </div>

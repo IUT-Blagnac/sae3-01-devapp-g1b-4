@@ -134,6 +134,20 @@ else{
                     </div>
                 </div>
 
+                <!-- Section Taille -->
+                <?php
+                if($statementBD['TAILLE']){
+                echo'<div class="row mt-5">
+                    <div class="col-12">
+                        <h5>Taille</h5>
+                        <p class="product-description">
+                        '.$statementBD['TAILLE'].'
+                        </p>
+                    </div>
+                </div>';   
+                }
+                ?>
+
                 <!-- Section actions sur le produit -->
                 <div class="row mt-5">
                     <div class="col-12">
@@ -184,18 +198,17 @@ else{
             </div>
 
             <!-- Avantages produit -->
-            <div class="col-12 mt-4">
+            <?php
+            if($statementBD['AVANTAGES']){
+            echo'<div class="col-12 mt-4">
                 <h2>
                     Avantages
                 </h2>
                 <hr>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. In maxime officiis voluptates beatae. Natus modi velit quam impedit quo eum ipsum debitis cumque odit accusantium! Atque, veritatis cumque! At, quasi.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis non possimus cupiditate odio accusantium. Recusandae cupiditate odit itaque voluptates, sapiente quos nam aperiam debitis delectus soluta beatae voluptatibus iusto in?
-                    Magni, omnis reprehenderit. Sunt officiis vero reprehenderit. Veniam iure, accusamus asperiores eligendi impedit possimus sint vero deserunt repellendus recusandae, velit culpa, ad porro voluptatibus labore doloremque provident. Inventore, iusto labore.
-                </p>
-            </div>
-
+                <p>'.$statementBD["AVANTAGES"].'</p>
+            </div>';
+            }
+            ?>
             <!-- Avis produit -->
             <div class="col-12 mt-4">
                 <h2>
@@ -290,17 +303,20 @@ else{
                         $resultOther = oci_execute($cardsProductOthers);
                         while(($cardProductOther = oci_fetch_assoc($cardsProductOthers)) != false){
                             echo'
-                        <div class="product-card" style="transform: none;">
+                        <div class="product-card" style="transform: none;"><a href="product.php?idProduit='.$cardProductOther["IDPRODUIT"].'" style="color: inherit; text-decoration:none">
                             <div class="product-card-img">
                                 <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
                             </div>
                             <div class="product-card-content">
-                                <h4 class="title">'.$cardProductOther['NOMP'].'</h4>
+                                <h5 class="title">'.$cardProductOther['NOMP'].'</h5>
                                 <h5 class="price">'.$cardProductOther['PRIXPRODUIT'].' €</h5>
                             </div>
-                        </div>
+                        </a></div>
                             ';
                         }
+                        oci_free_statement($categorieInfos);
+                        oci_free_statement($produitInfos);
+                        oci_free_statement($cardsProductOthers);
                     ?>
                 </div>
             </div>
