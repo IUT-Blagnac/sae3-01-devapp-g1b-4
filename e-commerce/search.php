@@ -139,9 +139,8 @@
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <?php
-                    echo '<li><a class="dropdown-item" href="search.php?';
                     if(isset($_GET["rechercheUser"])){
-                        echo 'rechercheUser='.$_GET["rechercheUser"].'&sort=ASC">Prix croissant</a></li>';
+                        echo '<li><a class="dropdown-item" href="search.php?rechercheUser='.$_GET["rechercheUser"].'&sort=ASC">Prix croissant</a></li>';
                         echo '<li><a class="dropdown-item" href="search.php?rechercheUser='.$_GET["rechercheUser"].'&sort=DESC">Prix décroissant</a></li>';
                     }
                     else if(isset($_GET["getIDCat"])){
