@@ -170,8 +170,8 @@
 
             $gotProduits = oci_execute($prepProduits);
 
-            if ($gotProduits) {
-
+            if (($produit = oci_fetch_assoc($prepProduits)) != false) {
+                $gotProduits = oci_execute($prepProduits);
                 while (($produit = oci_fetch_assoc($prepProduits)) != false) {
                     echo '<div class="product-card">';
                         echo '<a href="product.php?idProduit='.$produit['IDPRODUIT'].'" style="text-decoration: none; color: inherit">';
