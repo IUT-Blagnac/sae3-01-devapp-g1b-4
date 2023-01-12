@@ -17,7 +17,9 @@
 </head>
 
 <body>
-    <?php include('includes/header.php'); ?>
+    <?php 
+    include('includes/header.php'); 
+    ?>
 
     <!-- Bannière de recherche -->
     <div class="search-wrap-wrap">
@@ -136,8 +138,21 @@
                     Trier par
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Prix croissant</a></li>
-                    <li><a class="dropdown-item" href="#">Prix décroissant</a></li>
+                    <?php
+                    echo '<li><a class="dropdown-item" href="search.php?';
+                    if(isset($_GET["rechercheUser"])){
+                        echo 'rechercheUser='.$_GET["rechercheUser"].'&sort=ASC">Prix croissant</a></li>';
+                        echo '<li><a class="dropdown-item" href="search.php?rechercheUser='.$_GET["rechercheUser"].'&sort=DESC">Prix décroissant</a></li>';
+                    }
+                    else if(isset($_GET["getIDCat"])){
+                        echo 'getIDCat='.$_GET["getIDCat"].'&sort=ASC">Prix croissant</a></li>';
+                        echo '<li><a class="dropdown-item" href="search.php?getIDCat='.$_GET["getIDCat"].'&sort=DESC">Prix décroissant</a></li>';
+                    }
+                    else{
+                        echo'<li><a class="dropdown-item" href="search.php?sort=ASC">Prix croissant</a></li>
+                        <li><a class="dropdown-item" href="search.php?sort=DESC">Prix décroissant</a></li>';
+                    }
+                    ?>    
                 </ul>
             </div>
         </div>
@@ -149,22 +164,30 @@
 
             <!-- Carte produit -->
             <?php
+
+            // Vérification si il y a triage ou non
+            if(isset($_GET['sort'])){
+                $sort = " PRIXPRODUIT ".$_GET['sort'].",";
+            }
+            else{
+                $sort ="";
+            }
             // Cas selon la barre de recherche, mot clé du nom du produit, ou de la catégorie ou catégorie mère
             if($_GET['rechercheUser']!= "" and isset($_GET['rechercheUser'])){
-                $reqProducts = "SELECT * FROM PRODUIT P, CATEGORIE C1, CATEGORIE C2 WHERE P.idCategorie = C1.idCategorie AND C1.idCategorieMere = C2.idCategorie AND (UPPER(P.nomP) LIKE :pRecherche OR UPPER(C1.nomCat) LIKE :pRecherche OR UPPER(C2.nomCat) LIKE :pRecherche)";
+                $reqProducts = "SELECT * FROM PRODUIT P, CATEGORIE C1, CATEGORIE C2 WHERE P.idCategorie = C1.idCategorie AND C1.idCategorieMere = C2.idCategorie AND (UPPER(P.nomP) LIKE :pRecherche OR UPPER(C1.nomCat) LIKE :pRecherche OR UPPER(C2.nomCat) LIKE :pRecherche) ORDER BY".$sort." P.nomP";
                 $prepProduits = oci_parse($connect, $reqProducts);
                 $pRecherche = strtoupper('%' .$_GET['rechercheUser']. '%');
                 oci_bind_by_name($prepProduits, ":pRecherche", $pRecherche);
             }  
             // Cas selon la catégorie
             else if (isset($_GET['getIDCat'])) {
-                $reqProducts = "SELECT * FROM PRODUIT WHERE IDCATEGORIE = :pIdCat OR IDCATEGORIE IN (SELECT IDCATEGORIE FROM CATEGORIE WHERE IDCATEGORIEMERE = :pIdCat)";
+                $reqProducts = "SELECT * FROM PRODUIT WHERE IDCATEGORIE = :pIdCat OR IDCATEGORIE IN (SELECT IDCATEGORIE FROM CATEGORIE WHERE IDCATEGORIEMERE = :pIdCat) ORDER BY".$sort." nomP";
                 $prepProduits = oci_parse($connect, $reqProducts);
                 oci_bind_by_name($prepProduits, ":pIdCat", $_GET['getIDCat']);
             } 
             // Cas rien, donc tous les produits
             else {
-                $reqProducts = "SELECT * FROM PRODUIT";    
+                $reqProducts = "SELECT * FROM PRODUIT ORDER BY".$sort." nomP";
                 $prepProduits = oci_parse($connect, $reqProducts);
             }
 
