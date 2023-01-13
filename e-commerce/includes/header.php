@@ -34,12 +34,10 @@ session_start();
 						<?php
 
 							require_once("./includes/connect.inc.php");
-
+							error_reporting(0);
 							// Récupération du idPanier associé à l'utilisateur
-							$reqPanier = "SELECT DISTINCT P.idpanier FROM PANIER P, QUANTITEPANIER QP, PRODUIT PR
-                            WHERE P.idpanier = QP.idpanier AND P.idclient = :idClient AND PR.idproduit = QP.idproduit AND P.idpanier NOT IN
-                            (SELECT idpanier FROM COMMANDE C
-                            WHERE P.idpanier = C.idpanier)";
+							$reqPanier = "SELECT DISTINCT P.idPanier FROM PANIER P, QUANTITEPANIER QP, PRODUIT PR
+							WHERE P.idpanier = QP.idpanier AND P.idclient = :idClient AND PR.idproduit = QP.idproduit AND P.encours IS NULL";
 
 							$idPanierUtilisateur = oci_parse($connect, $reqPanier);
 							oci_bind_by_name($idPanierUtilisateur, ":idClient", $_SESSION['idClientIdentifie']);
@@ -49,7 +47,7 @@ session_start();
 							$idPanier = oci_fetch_assoc($idPanierUtilisateur);
 							
 							// Récupération de la quantité panier
-							$reqQuantite = "SELECT DISTINCT COUNT(IDPRODUIT) FROM QUANTITEPANIER WHERE IDPANIER = :idPanier";
+							$reqQuantite = "SELECT COUNT(IDPRODUIT) FROM QUANTITEPANIER WHERE IDPANIER = :idPanier";
 
 							$qttPanier = oci_parse($connect, $reqQuantite);
 							oci_bind_by_name($qttPanier, ":idPanier", $idPanier['IDPANIER']);
@@ -62,6 +60,8 @@ session_start();
 							if(isset($_COOKIE['tempPanier'])){
 								$nbElementsPanier = $nbElementsPanier + count(json_decode($_COOKIE['tempPanier']));
 							}
+							oci_free_statement($idPanierUtilisateur);
+							oci_free_statement($qttPanier);
 						?>
 
 						<?php 

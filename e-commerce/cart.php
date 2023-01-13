@@ -34,9 +34,7 @@
                         error_reporting(0);
                         // requete
                         $req1 = "SELECT * FROM PANIER P, QUANTITEPANIER QP, PRODUIT PR
-                            WHERE P.idpanier = QP.idpanier AND P.idclient = :pIdClient AND PR.idproduit = QP.idproduit AND P.idpanier NOT IN
-                            (SELECT idpanier FROM COMMANDE C
-                            WHERE P.idpanier = C.idpanier)";
+                        WHERE P.idpanier = QP.idpanier AND P.idclient = :pIdClient AND PR.idproduit = QP.idproduit AND P.encours IS NULL";
 
                         $produitsPanier = oci_parse($connect, $req1);
                         oci_bind_by_name($produitsPanier, ":pIdClient", $_SESSION['idClientIdentifie']);
@@ -67,7 +65,16 @@
                                                             <a href="product.php?idProduit='.$leProduitPanier["IDPRODUIT"].'" style="color: inherit; text-decoration:none"><h4 class="card-title fw-bold">' . $leProduitPanier["NOMP"] . '</h4></a>
                                                             <p class="card-text">Matériaux : ' . $leProduitPanier["COMPOSITION"] . '</p>
                                                             <p class="card-text"><small class="text-muted">Quantité : ' . $leProduitPanier["NBPRODUIT"] . '</small></p>
-                                                            <a href="" class="btn btn-danger">Supprimer du panier</a>
+                                                            <form id="formDeletePanier" method="POST" action="deleteFromCart.php">
+                                                            <button class="btn btn-danger" type="submit" name="del" >
+                                                                Supprimer 1
+                                                            </button>
+                                                            <button class="btn btn-danger" type="submit" name="delAll" >
+                                                                Supprimer Tout
+                                                            </button>
+                                                            <input type="hidden" name="idPanier" value="'.$leProduitPanier['IDPANIER'].'">
+                                                            <input type="hidden" name="idProduit" value="'.$leProduitPanier['IDPRODUIT'].'">
+                                                        </form>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -111,7 +118,7 @@
                             oci_free_statement($produitsPanier);
                         }
                     } // Panier avec seulement le cookie 
-                    else if (isset($_COOKIE["tempPanier"])) {
+                    else if (!empty($_COOKIE["tempPanier"])) {
                         $reqProduit = "SELECT * FROM Produit WHERE idProduit = :pIdProduit";
                         $produitCookie = oci_parse($connect, $reqProduit);
                         echo '<span class="fs-5"><a href="./index.php">Continuez vos achats</a></span><br><br>
@@ -133,8 +140,18 @@
                                                         <a href="product.php?idProduit='.$row[0].'" style="color: inherit; text-decoration:none"><h4 class="card-title fw-bold">' . $row[2] . '</h4></a>
                                                         <p class="card-text">Matériaux : ' . $row[5] . '</p>
                                                         <p class="card-text"><small class="text-muted">Quantité : ' . $articleCookie["qteProduit"] . '</small></p>
-                                                        <a href="" class="btn btn-danger">Supprimer du panier</a>
                                                         
+                                                        <form id="formDeletePanier" method="POST" action="deleteFromCart.php">
+                                                            <button class="btn btn-danger" type="submit" name="del" >
+                                                                Supprimer 1
+                                                            </button>
+                                                            <button class="btn btn-danger" type="submit" name="delAll" >
+                                                                Supprimer Tout
+                                                            </button>
+                                                            <input type="hidden" name="index" value="'.array_search($articleCookie, json_decode($_COOKIE['tempPanier'], true)).'">
+                                                        </form>
+                                                        
+                                                    
                                                     </div>
                                                 </div>
                                             </div>
