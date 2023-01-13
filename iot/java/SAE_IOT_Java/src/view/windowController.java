@@ -1,26 +1,27 @@
 package view;
-import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.RadioButton;
-import javafx.stage.Stage;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class windowController implements Initializable {
 	
-	private Stage primaryStage;
+	private static Stage primaryStage;
 	
 	@FXML
 	private RadioButton bActivity;
@@ -68,8 +69,9 @@ public class windowController implements Initializable {
 	
 	
 	
+	private File path;
+	private File activity;
 	
-	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 	}
@@ -78,9 +80,99 @@ public class windowController implements Initializable {
 		 
 	}
 	
-	public void WInitialisation(Stage PStage) {
+	/**
+	 * Permet d'initialiser le controlleur
+	 * 
+	 * Demande à l'utilisateur de renseigner le chemin vers le programme python qui récupère les données des capteurs.
+	 * Sera utile pour la methode reading().
+	 * @param PStage le PrimaryStage de l'application, qui sera aussi stocké dans le controlleur
+	 * @return noRet un int qui va servir à savoir si le programme continue ou non
+	 */
+	public int WInitialisation(Stage PStage) {
 		this.primaryStage=PStage;
+		
+		int noRet=1;
+		
+		/*File pyth = new File("./../../../../python/Python_SAE_IoT_1G4.py");
+		System.out.println(pyth.getAbsolutePath());
+		if(pyth.exists()) {
+			System.out.println("Python existant !");
+		}
+		else {*/
+			Alert pythPath=new Alert(AlertType.WARNING);
+			pythPath.setTitle("python");
+			pythPath.setHeaderText("Chemin vers le python");
+			pythPath.setContentText("Afin de permettre à cette application java de fonctionner correctement, vous devez indiquer où se trouve le programme python.\n"
+			+"Merci d'indiquer ou se trouve le python.");
+			
+			pythPath.showAndWait();
+			
+			Boolean valide = false;
+
+			while(valide==false) {
+				try {
+					FileChooser fileChooser = new FileChooser();
+					fileChooser.setTitle("Sélectionnez un répertoire");
+					fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+					fileChooser.getExtensionFilters().addAll(
+					    new ExtensionFilter("Python Files", "*.py")
+					);
+					File selectedFile = fileChooser.showOpenDialog(null);
+					if (selectedFile != null) {
+					  System.out.println("Le chemin d'accès sélectionné est : " + selectedFile.getAbsolutePath());
+					  String getpath= selectedFile.getAbsolutePath().substring(0, selectedFile.getAbsolutePath().lastIndexOf("Python_SAE_IoT_1G4.py"));
+					  path=new File(getpath);
+					}
+					else {
+						//le programme sera arreté
+						noRet=0; 
+					}
+					
+					valide=true;
+				}
+				catch (Exception e) {
+					pythPath=new Alert(AlertType.ERROR);
+					pythPath.setTitle("python");
+					pythPath.setHeaderText("Erreur");
+					pythPath.setContentText("Chemin vers le fichier python invalide");
+					
+					pythPath.showAndWait();
+				}
+			}
+		//}
+		return noRet;
 	}
+	
+	/**
+	 * Cette methode permet de lire les données d'un fichier donné en paramètre.
+	 * Le fichier doit se trouver dans le dossier du python (renseigné dans la méthode WInitialisation).
+	 * reading() renvoie la dernière ligne du fichier, 
+	 * 
+	 * @param fileName le nom du fichier dont les données doivent être lues
+	 * @return lastLine la dernière ligne du fichier
+	 */
+	public String reading(String fileName) {
+				
+		String line=path.getPath()+"\\"+fileName;		
+		String lastLine="";
+		System.out.println(line);
+		
+		activity = new File(line);
+		
+		try {
+			BufferedReader doc = new BufferedReader(new FileReader(activity));
+			while ((line = doc.readLine()) != null) {
+				lastLine = line;
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			System.out.println("erreur");
+		}
+		return lastLine;
+	}
+	
+	
 	
 	final static String Activité = "Activité";
     final static String CO2 = "CO2";
@@ -172,6 +264,12 @@ public class windowController implements Initializable {
         bc7.getData().addAll(series7);
         bc8.getData().addAll(series8);
         bc9.getData().addAll(series9);
+        
+        //cette ligne permet de tester la méthode reading()
+        //Il faut que l'utilisateur ait déjà éxécuté le fichier python, et que celui-ci ait créé 
+        //les fichiers de données, pour que ce test fonctionne.
+        //Pour ce test, les données de CO2 sont récoltées
+        System.out.println(this.reading("Blue Gym_CO2_donnees.txt"));
     }
     
     

@@ -8,8 +8,8 @@ import javafx.stage.Stage;
 import view.windowController;
 
 public class appli extends Application {
-	//Lancement de l'interface
-	private Stage primaryStage;
+
+	private static Stage primaryStage;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -30,10 +30,14 @@ public class appli extends Application {
 		
 		windowController Wcontroll = loader.getController();
 		
-		Wcontroll.WInitialisation(primaryStage);
+		int noCont = Wcontroll.WInitialisation(primaryStage);
 		
-		Wcontroll.start(primaryStage);
-		primaryStage.show();
+		
+
+		if(noCont==1) {
+			Wcontroll.start(primaryStage);
+			primaryStage.show();
+		}
 		
 	}
 	
