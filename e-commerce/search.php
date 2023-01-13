@@ -173,7 +173,7 @@
             }
             // Cas selon la barre de recherche, mot clé du nom du produit, ou de la catégorie ou catégorie mère
             if($_GET['rechercheUser']!= "" and isset($_GET['rechercheUser'])){
-                $reqProducts = "SELECT * FROM PRODUIT P, CATEGORIE C1, CATEGORIE C2 WHERE P.idCategorie = C1.idCategorie AND C1.idCategorieMere = C2.idCategorie AND (UPPER(P.nomP) LIKE :pRecherche OR UPPER(C1.nomCat) LIKE :pRecherche OR UPPER(C2.nomCat) LIKE :pRecherche) ORDER BY".$sort." P.nomP";
+                $reqProducts = "SELECT * FROM PRODUIT P, CATEGORIE C1, CATEGORIE C2 WHERE P.idCategorie = C1.idCategorie AND C1.idCategorieMere = C2.idCategorie AND (UPPER(P.nomP) LIKE :pRecherche OR LOWER(P.nomP) LIKE :pRecherche OR UPPER(C1.nomCat) LIKE :pRecherche OR LOWER(C1.nomCat) LIKE :pRecherche OR UPPER(C2.nomCat) LIKE :pRecherche OR LOWER(C2.nomCat) LIKE :pRecherche) ORDER BY".$sort." P.nomP";
                 $prepProduits = oci_parse($connect, $reqProducts);
                 $pRecherche = strtoupper('%' .$_GET['rechercheUser']. '%');
                 oci_bind_by_name($prepProduits, ":pRecherche", $pRecherche);
