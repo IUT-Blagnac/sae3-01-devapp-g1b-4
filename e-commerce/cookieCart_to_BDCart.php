@@ -6,7 +6,7 @@
 		$arrayTempPanier = json_decode($_COOKIE['tempPanier'], true);
 
 
-		$reqSelPanier = "SELECT idproduit, NBPRODUIT, PRIXQTEPRODUIT FROM QUANTITEPANIER INNER JOIN PANIER ON QUANTITEPANIER.IDPANIER=PANIER.IDPANIER WHERE PANIER.IDCLIENT = :pIDclient";
+		$reqSelPanier = "SELECT idproduit, NBPRODUIT, PRIXQTEPRODUIT FROM QUANTITEPANIER INNER JOIN PANIER ON QUANTITEPANIER.IDPANIER=PANIER.IDPANIER WHERE PANIER.IDCLIENT = :pIDclient AND PANIER.ENCOURS IS NULL";
 		$sel_panier = oci_parse($connect, $reqSelPanier);
 		oci_bind_by_name($sel_panier, ":pIDclient", $_SESSION['idClientTransiting']);
 		$resultSelPanier = oci_execute($sel_panier);
@@ -27,8 +27,8 @@
 				oci_bind_by_name($insertPanier, ":IDPANIER_RETURNED", $idpanier_returned);
 				$resultInsertPanier = oci_execute($insertPanier);
 				if (!$resultInsertPanier) {
-						$e = oci_error($result_insert_panier);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
-						print htmlentities($e['message']. ' pour cette requete : ' .$e['sqltext']);
+					$e = oci_error($result_insert_panier);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
+					print htmlentities($e['message']. ' pour cette requete : ' .$e['sqltext']);
 				}
 				oci_commit($connect);
 
@@ -37,9 +37,10 @@
 				$reqInsertProduit = "INSERT INTO QUANTITEPANIER(IDPANIER, IDPRODUIT, NBPRODUIT, PRIXQTEPRODUIT) VALUES(:pID_PANIER, :pID_PRODUIT, :pNB_PRODUIT, :pPRIX_QTEPRODUIT)";
 
 				$insert_produit = oci_parse($connect, $reqInsertProduit);
+				
+				oci_bind_by_name($insert_produit, ":pID_PANIER", $idpanier_returned);
 
 				foreach ($arrayTempPanier as $value) {
-					oci_bind_by_name($insert_produit, ":pID_PANIER", $idpanier_returned);
 					oci_bind_by_name($insert_produit, ":pID_PRODUIT", $value['idProduit']);
 					oci_bind_by_name($insert_produit, ":pNB_PRODUIT", $value['qteProduit']);
 					oci_bind_by_name($insert_produit, ":pPRIX_QTEPRODUIT", $value['qtePrixProduit']);
@@ -79,7 +80,7 @@
 				            <div class="col-4 text-left">
 
 				                <h1 class="fw-semibold text-center">Connexion</h1>
-				                <p class="text-muted">Si vous possédez déjà un compte sur notre site vous pouvez vous connecter avec vos identifiants. </p>
+				                <p class="text-muted">Vous avez créé un panier avant de vous connecter. Cependant, nous avons déjà enregistré un panier il y a quelques temps à votre nom. Veuillez choisir celui que vous voulez garder.</p>
 
 				                <?php
 					                // if GET msgErreur is set, display the error message
@@ -91,89 +92,103 @@
 					                }
 				                ?>
 
-				                <!--Tableau panier cookie-->
-				                <table>
-				                	<caption>Panier déconnecté</caption>
-				                	<thead>
-				                		<tr>
-				                			<th>
-				                				Nom du produit
-				                			</th>
-				                			<th>
-				                				Quantité sélectionné
-				                			</th>
-				                			<th>
-				                				Total
-				                			</th>
-				                		</tr>
-				                	</thead>
-				                	<tbody>
-				                		<?php
-				                			/*
-				                			ce tableau n'est pas directement utilisable pour
-											de l'affichage, il faut donc aller chercher les noms
-											des produits sur la BD
-											*/
-											$reqSelNomProduit = "";
-											$sel_NomProduit = oci_parse($connect, $reqSelNomProduit);
-				                			foreach ($arrayTempPanier as $unProduit) {
-				                				oci_bind_by_name($sel_NomProduit, ":pIDProduit_np", $unProduit['idProduit']);
-				                				$result_sel_NomProduit = oci_execute($sel_NomProduit);
-				                				if(!$result_sel_NomProduit){
-				                					$e = oci_error($sel_NomProduit);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
+				                <form method="POST" action="traitTransitingCart.php">
+					                <!--Tableau panier cookie-->
+					                <table border="1">
+					                	<caption>Panier déconnecté</caption>
+					                	<thead>
+					                		<tr>
+					                			<th>
+					                				Nom du produit
+					                			</th>
+					                			<th>
+					                				Quantité sélectionné
+					                			</th>
+					                			<th>
+					                				Total
+					                			</th>
+					                		</tr>
+					                	</thead>
+					                	<tbody>
+					                		<?php
+					                			/*
+					                			ce tableau n'est pas directement utilisable pour
+												de l'affichage, il faut donc aller chercher les noms
+												des produits sur la BD
+												*/
+												$reqSelNomProduit = "SELECT NOMP FROM PRODUIT WHERE IDPRODUIT = :pIDProduit_np";
+												$sel_NomProduit = oci_parse($connect, $reqSelNomProduit);
+					                			foreach ($arrayTempPanier as $unProduit) {
+					                				oci_bind_by_name($sel_NomProduit, ":pIDProduit_np", $unProduit['idProduit']);
+					                				$result_sel_NomProduit = oci_execute($sel_NomProduit);
+					                				if(!$result_sel_NomProduit){
+					                					$e = oci_error($sel_NomProduit);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
+														print htmlentities($e['message']. ' pour cette requete : ' .$e['sqltext']);
+					                				}
+					                				else{
+					                					$statementBD_selNomProduit = oci_fetch_assoc($sel_NomProduit);
+					                					echo "<tr><td>".$statementBD_selNomProduit['NOMP']."</td><td>".$unProduit['qteProduit']."</td><td>".$unProduit['qtePrixProduit']."</td></tr>";
+					                				}
+					                				
+					                			}
+					                		?>
+					                	</tbody>
+					                </table>
+					                <input type="radio" name="selectedCart" value="cookie">
+					                <!--Tableau panier BD-->
+					                <table border="1">
+					                	<caption>Panier connecté</caption>
+					                	<thead>
+					                		<tr>
+					                			<th>
+					                				Nom du produit
+					                			</th>
+					                			<th>
+					                				Quantité sélectionné
+					                			</th>
+					                			<th>
+					                				Total
+					                			</th>
+					                		</tr>
+					                	</thead>
+					                	<tbody>
+					                		<?php
+					                			$reqSelNomProduitBD = "SELECT NOMP FROM PRODUIT WHERE IDPRODUIT = :pIDProduit_npBD";
+					                			$sel_NomProduitBD = oci_parse($connect, $reqSelNomProduitBD);
+					                			oci_bind_by_name($sel_NomProduitBD, ":pIDProduit_npBD", $statementBD_selPanier['IDPRODUIT']);
+					                			$result_sel_NomProduitBD = oci_execute($sel_NomProduitBD);
+					                			if(!$result_sel_NomProduitBD){
+					                				$e = oci_error($sel_NomProduitBD);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
 													print htmlentities($e['message']. ' pour cette requete : ' .$e['sqltext']);
-				                				}
-				                				else{
-				                					$statementBD_selNomProduit = oci_fetch_assoc($sel_NomProduit);
-				                				}
-				                				echo "<tr><td>".$statementBD_selNomProduit['NOMP']."</td><td>".$unProduit['qteProduit']."</td><td>".$unProduit['qtePrixProduit']."</td></tr>";
-				                			}
-				                		?>
-				                	</tbody>
-				                </table>
-				                <!--Tableau panier BD-->
-				                <table>
-				                	<caption>Panier connecté</caption>
-				                	<thead>
-				                		<tr>
-				                			<th>
-				                				Nom du produit
-				                			</th>
-				                			<th>
-				                				Quantité sélectionné
-				                			</th>
-				                			<th>
-				                				Total
-				                			</th>
-				                		</tr>
-				                	</thead>
-				                	<tbody>
-				                		<?php
-				                			$reqSelNomProduitBD = "SELECT NOMP FROM PRODUIT WHERE IDPRODUIT = :pIDProduit_npBD";
-				                			$sel_NomProduitBD = oci_parse($connect, $reqSelNomProduitBD);
-				                			oci_bind_by_name($sel_NomProduitBD, ":pIDProduit_npBD", $statementBD_selPanier['IDPRODUIT']);
-				                			$result_sel_NomProduitBD = oci_execute($sel_NomProduitBD);
-				                			if(!$result_sel_NomProduitBD){
-				                				$e = oci_error($sel_NomProduitBD);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
-												print htmlentities($e['message']. ' pour cette requete : ' .$e['sqltext']);
-				                			}
-				                			else{
-				                				/*
-				                				oblige de le faire en 2 fois puisque on a du recuperer une ligne
-				                				en haut pour verifier si un panier bd existait
-				                				*/
-				                				$statementBD_selNomProduitBD = oci_fetch_assoc($sel_NomProduitBD);
-				                				echo "<tr><td>".$statementBD_selNomProduitBD['NOMP']."</td><td>".$statementBD_selPanier['NBPRODUIT']."</td><td>".$statementBD_selPanier['PRIXQTEPRODUIT']."</td></tr>";
-				                				while ($ligne_selNomProduitBD = oci_fetch_assoc($sel_NomProduitBD)) {
-				                					oci_bind_by_name($sel_NomProduitBD, ":", variable)
-				                					echo "<tr><td>".$statementBD_selNomProduitBD['NOMP']."</td><td>".$statementBD_selPanier['NBPRODUIT']."</td><td>".$statementBD_selPanier['PRIXQTEPRODUIT']."</td></tr>";
-				                				}
-				                			}
+					                			}
+					                			else{
+					                				/*
+					                				oblige de le faire en 2 fois puisque on a du recuperer une ligne
+					                				en haut pour verifier si un panier bd existait
+					                				*/
+					                				$statementBD_selNomProduitBD = oci_fetch_assoc($sel_NomProduitBD);
+					                				echo "<tr><td>".$statementBD_selNomProduitBD['NOMP']."</td><td>".$statementBD_selPanier['NBPRODUIT']."</td><td>".$statementBD_selPanier['PRIXQTEPRODUIT']."</td></tr>";
+					                				while ($ligne_selPanier = oci_fetch_assoc($sel_panier)) {
+					                					
+					                					oci_bind_by_name($sel_NomProduitBD, ":pIDProduit_npBD", $ligne_selPanier['IDPRODUIT']);
+					                					$result_sel_NomProduitBD2 = oci_execute($sel_NomProduitBD);
+							                			if(!$result_sel_NomProduitBD2){
+							                				$e = oci_error($sel_NomProduitBD);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
+															print htmlentities($e['message']. ' pour cette requete : ' .$e['sqltext']);
+							                			}
+							                			else{
+							                				$statementBD_selNomProduitBD2 = oci_fetch_assoc($sel_NomProduitBD);
+					                						echo "<tr><td>".$statementBD_selNomProduitBD2['NOMP']."</td><td>".$ligne_selPanier['NBPRODUIT']."</td><td>".$ligne_selPanier['PRIXQTEPRODUIT']."</td></tr>";
+					                					}
+					                				}
+					                			}
 
-				                		?>
-				                	</tbody>
-				                </table>
-
+					                		?>
+					                	</tbody>
+					                </table>
+					                <input type="radio" name="selectedCart" value="bd" checked>
+					                <input type="submit" name="sub">
+				                </form>
 				                <div class="row d-flex justify-content-center">
 				                    <img src="./assets/images/logo.png" alt="" style="width: 50%;">
 				                </div>

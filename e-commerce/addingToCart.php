@@ -76,8 +76,10 @@ if(isset($_POST['sub'])){
 						} else {
 							$statementBD_is_already_in_cart = oci_fetch_assoc($is_already_in_cart);
 						}
-						//si cet element a une valeur cela veut dire que la requete a renvoye
-						//un resultat non vide, donc que le produit est deja dans le panier
+						/*
+						si cet element a une valeur cela veut dire que la requete a renvoye
+						un resultat non vide, donc que le produit est deja dans le panier
+						*/
 						if (isset($statementBD_is_already_in_cart['NBPRODUIT'])) {
 							/*
 								il a ete decide qu un produit ne peut pas etre commande plus de 10 fois

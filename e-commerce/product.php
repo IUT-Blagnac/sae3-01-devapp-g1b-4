@@ -125,7 +125,7 @@ else{
                         <p class="product-description">
                             <?php
                                 if (strlen($statementBD['DESCRIPTION'])>150) {
-                                    echo substr($statementBD['DESCRIPTION'], 0, 120)."<a href=#description>...</a>";
+                                    echo substr($statementBD['DESCRIPTION'], 0, 150)."<a href=#description>...</a>";
                                 } else {
                                     echo $statementBD['DESCRIPTION'];
                                 }
@@ -136,21 +136,22 @@ else{
 
                 <!-- Section Taille -->
                 <?php
-                if($statementBD['TAILLE']){
-                echo'<div class="row mt-5">
-                    <div class="col-12">
-                        <h5>Taille</h5>
-                        <p class="product-description">
-                        '.$statementBD['TAILLE'].'
-                        </p>
-                    </div>
-                </div>';   
-                }
+                    if($statementBD['TAILLE']){
+                    echo'<div class="row mt-5">
+                        <div class="col-12">
+                            <h5>Taille</h5>
+                            <p class="product-description">
+                            '.$statementBD['TAILLE'].'
+                            </p>
+                        </div>
+                    </div>';   
+                    }
                 ?>
 
                 <!-- Section actions sur le produit -->
                 <div class="row mt-5">
                     <div class="col-12">
+                        <!-- abandon de cette option pour l'instant -->
                         <!--<div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 Choix des matériaux
@@ -171,7 +172,7 @@ else{
                     </div>
                     <div class="col-12 d-flex justify-content-center mt-3">
                         <form id="formAjoutPanier" method="POST" action="addingToCart.php">
-                            <input type="number" class="form-control" name="quantiteSelectionne" min="1" max="10"><br>
+                            <input type="number" class="form-control" name="quantiteSelectionne" min="1" max="10" value="1"><br>
                             <button class="btn btn-primary p-1" type="submit" name="sub" onclick="validateFormAddCart()">
                                 Ajouter au panier
                             </button>
