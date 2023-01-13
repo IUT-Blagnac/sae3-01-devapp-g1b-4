@@ -70,9 +70,11 @@
     </div>
 
     <script type="text/javascript">
-        //dans cette fonction on vérifie que les deux mots de passe
-        //saisies par l'utilisateur sont les mêmes puis on
-        //soumet le formulaire.
+        /*
+        dans cette fonction on vérifie que les deux mots de passe
+        saisies par l'utilisateur sont les mêmes puis on
+        soumet le formulaire.
+        */
         function validateForm() {
             let pwd1 = document.querySelector('input[name="mdpUtil"]').value;
             let pwd2 = document.querySelector('input[name="mdpUtilAconfirmer"]').value;

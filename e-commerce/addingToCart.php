@@ -24,21 +24,22 @@ if(isset($_POST['sub'])){
 		//fin recuperer prix produit
 
 
-		if(isset($_SESSION['idClientIdentifie'])){
+		//si l'utilisateur est connecte
+			if(isset($_SESSION['idClientIdentifie'])){
 			//sql
 			/*
-			recuperer prix produit
-			recuperer idpanier
-			si panier deja existant
-				si produit deja dans panier
-					update de quantitepanier
+				recuperer prix produit
+				recuperer idpanier
+				si panier deja existant
+					si produit deja dans panier
+						update de quantitepanier
+					sinon
+						insert produit dans quantitepanier
 				sinon
+					insert panier dans panier en recuperant idpanier crée
 					insert produit dans quantitepanier
-			sinon
-				insert panier dans panier en recuperant idpanier crée
-				insert produit dans quantitepanier
 			*/
-		//---------------------------------------------------------
+			//---------------------------------------------------------
 			//recuperer id panier
 				$identifiantClient = $_SESSION['idClientIdentifie'];
 				$req_is_panier = "SELECT IDPANIER FROM PANIER WHERE IDCLIENT = :pIDCLIENT AND ENCOURS IS NULL";
@@ -56,11 +57,11 @@ if(isset($_POST['sub'])){
 					$statementBD_is_panier = oci_fetch_assoc($is_panier);
 				}
 			//fin recuperer id panier
-		//---------------------------------------------------------
+		 //---------------------------------------------------------
 			//si panier deja existant
 				if(isset($statementBD_is_panier['IDPANIER'])){
 					//si article deja dans panier
-						$req_is_already_in_cart  = "SELECT IDPRODUIT FROM QUANTITEPANIER WHERE IDPANIER = :pID_PANIER_is_in_cart AND IDPRODUIT = :pID_PRODUIT_is_in_cart";
+						$req_is_already_in_cart  = "SELECT NBPRODUIT FROM QUANTITEPANIER WHERE IDPANIER = :pID_PANIER_is_in_cart AND IDPRODUIT = :pID_PRODUIT_is_in_cart";
 
 						$is_already_in_cart = oci_parse($connect, $req_is_already_in_cart);
 
@@ -75,20 +76,36 @@ if(isset($_POST['sub'])){
 						} else {
 							$statementBD_is_already_in_cart = oci_fetch_assoc($is_already_in_cart);
 						}
-						if (isset($statementBD_is_already_in_cart['IDPRODUIT'])) {
-							$req_update_already_in_cart = "UPDATE QUANTITEPANIER SET NBPRODUIT = NBPRODUIT+:pNB_PRODUIT_ALREADY_IN_CART WHERE IDPANIER = :pID_PANIER_ALREADY_IN_CART AND IDPRODUIT = :pID_PRODUIT_ALRDY_CART";
+						//si cet element a une valeur cela veut dire que la requete a renvoye
+						//un resultat non vide, donc que le produit est deja dans le panier
+						if (isset($statementBD_is_already_in_cart['NBPRODUIT'])) {
+							/*
+								il a ete decide qu un produit ne peut pas etre commande plus de 10 fois
+								en une commande, il faut donc verifier que l'utilisateur qui essaye de
+								rajouter un produit qui est deja dans le panier ne fera pas exceder la
+								quantite maximale de ce produit dans le panier
+							*/
+							if ($statementBD_is_already_in_cart['NBPRODUIT']+$qteSelectionne<=10) {
+								$req_update_already_in_cart = "UPDATE QUANTITEPANIER SET NBPRODUIT = NBPRODUIT+:pNB_PRODUIT_ALREADY_IN_CART WHERE IDPANIER = :pID_PANIER_ALREADY_IN_CART AND IDPRODUIT = :pID_PRODUIT_ALRDY_CART";
 						
-							$up_alrdy_in_cart = oci_parse($connect, $req_update_already_in_cart);
-						
-							oci_bind_by_name($up_alrdy_in_cart, ":pNB_PRODUIT_ALREADY_IN_CART", $qteSelectionne);
-							oci_bind_by_name($up_alrdy_in_cart, ":pID_PANIER_ALREADY_IN_CART", $statementBD_is_panier['IDPANIER']);
-							oci_bind_by_name($up_alrdy_in_cart, ":pID_PRODUIT_ALRDY_CART", $idArticle);
-						
-							$result_update_already_in_cart = oci_execute($up_alrdy_in_cart);
-						
-							oci_commit($connect);
-						
-							oci_free_statement($up_alrdy_in_cart);
+								$up_alrdy_in_cart = oci_parse($connect, $req_update_already_in_cart);
+							
+								oci_bind_by_name($up_alrdy_in_cart, ":pNB_PRODUIT_ALREADY_IN_CART", $qteSelectionne);
+								oci_bind_by_name($up_alrdy_in_cart, ":pID_PANIER_ALREADY_IN_CART", $statementBD_is_panier['IDPANIER']);
+								oci_bind_by_name($up_alrdy_in_cart, ":pID_PRODUIT_ALRDY_CART", $idArticle);
+							
+								$result_update_already_in_cart = oci_execute($up_alrdy_in_cart);
+							
+								oci_commit($connect);
+							
+								oci_free_statement($up_alrdy_in_cart);
+							} 
+							//si cette valeur va etre excede on renvoie l'utilisateur vers l'accueil avec un message d'erreur
+							else {
+								header('location:index.php?msgError=Ce produit ne peut pas être ajouté plus de 10 fois dans le panier');
+							}
+							
+							
 						}
 					//fin si article deja dans panier
 				//----------------------------------------------------------
@@ -119,6 +136,15 @@ if(isset($_POST['sub'])){
 			//fin si panier deja existant
 			//sinon
 				else{
+					/*
+						Si le panier n'existe pas encore on va devoir le creer puis y
+						rajouter le produit
+						A noter que pour y rajouter le produit il faut l'idPanier qui est
+						genere grace au sequenceur a l'insertion du panier
+						On indique donc a l insertion du panier de nous renvoyer l'idPanier
+						genere pour eviter d'avoir une requete de plus a faire pour aller chercher
+						l'idPanier
+					*/
 					$idPanier_returned = 0;
 
 					$reqInsertPanier = "INSERT INTO PANIER(IDPANIER, IDCLIENT, PRIXPANIER) VALUES(SEQIDPANIER.nextval, :pID_CLIENT, 0) RETURNING IDPANIER INTO :IDPANIER_RETURNED";
@@ -140,7 +166,7 @@ if(isset($_POST['sub'])){
 
 					echo "Nouveau id panier = ".$idPanier_returned;
 
-					//idem que l.52 à 66 sauf qu'on utilise les nouvelles variables d'au dessus
+					//idem que l.114 à 132 sauf qu'on utilise les nouvelles variables de l'insertion du panier
 					$reqInsertQuantitePanier = "INSERT INTO QUANTITEPANIER(IDPANIER, IDPRODUIT, NBPRODUIT, PRIXQTEPRODUIT) VALUES(:pID_PANIER, :pID_PRODUIT, :pNB_PRODUIT, :pPRIX_QTEPRODUIT)";
 
 					$ins_new_qte_panier = oci_parse($connect, $reqInsertQuantitePanier);
@@ -162,6 +188,7 @@ if(isset($_POST['sub'])){
 					oci_free_statement($ins_new_qte_panier);
 				}
 		}
+		//fin si l'utilisateur est connecte
 		else{
 			//cookie
 			/*
@@ -174,7 +201,8 @@ if(isset($_POST['sub'])){
 				sinon
 					setcookie en creant avec produit,qte,prixqte
 
-			$json = '{"a":1,"b":2,"c":3,"d":4,"e":5}';
+			Le panier en cookie est sous forme de tableau multi dimensionnel de la forme :
+				Array(Array(String x String x String)?)
 			*/
 			if (isset($_COOKIE['tempPanier'])) {
 				$oldArray_tempPanier = json_decode($_COOKIE['tempPanier'], true);
@@ -187,6 +215,7 @@ if(isset($_POST['sub'])){
 						break;
 					}
 				}
+				//Si le produit n'a pas ete trouve dans le panier, on construit le tableau
 				if ($isNotFound) {
 					$newProduct_in_tempPanier = array('idProduit' => $idArticle, 'qteProduit' => $qteSelectionne,  'qtePrixProduit' => $prix_qte_produit);
 					array_push($oldArray_tempPanier, $newProduct_in_tempPanier);
@@ -210,7 +239,7 @@ if(isset($_POST['sub'])){
 			*/
 		}
 	}
-	header("location:product.php?idProduit=$idArticle");
+	header("location:product.php?idProduit=$idArticle&msgConfirm=Produit ajouté dans le panier");
 }
 else{
 	header('location:index.php');

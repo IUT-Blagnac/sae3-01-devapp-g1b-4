@@ -124,7 +124,7 @@ else{
                         <h5>Description rapide</h5>
                         <p class="product-description">
                             <?php
-                                if (strlen($statementBD['DESCRIPTION'])>120) {
+                                if (strlen($statementBD['DESCRIPTION'])>150) {
                                     echo substr($statementBD['DESCRIPTION'], 0, 120)."<a href=#description>...</a>";
                                 } else {
                                     echo $statementBD['DESCRIPTION'];
@@ -172,7 +172,7 @@ else{
                     <div class="col-12 d-flex justify-content-center mt-3">
                         <form id="formAjoutPanier" method="POST" action="addingToCart.php">
                             <input type="number" class="form-control" name="quantiteSelectionne" min="1" max="10"><br>
-                            <button class="btn btn-primary p-1" type="submit" name="sub" >
+                            <button class="btn btn-primary p-1" type="submit" name="sub" onclick="validateFormAddCart()">
                                 Ajouter au panier
                             </button>
                             <input type="hidden" name="idProduit" value="<?php echo $idProduit; ?>">
@@ -327,6 +327,22 @@ else{
     <?php include('includes/footer.php'); ?>
 
     <!-- Javascript -->
+    <script type="text/javascript">
+        /*
+            Cette fonction verifie que l'utilisateur n'a pas mis
+            une quantite valide en modifiant le code source
+        */
+        function validateFormAddCart(){
+            let qteProduitUser = document.querySelector('input[name="quantiteSelectionne"]').value;
+            let formAddCart = document.forms['formAddToCart'];
+            if(qteProduitUser > 10 or qteProduitUser < 1){
+                alert('Quantite incorrecte !');
+            }
+            else{
+                formAddCart.submit();
+            }
+        }
+    </script>
     <!-- <script src="includes/bootstrap/js/bootstrap.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>

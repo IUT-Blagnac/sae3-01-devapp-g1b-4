@@ -32,15 +32,28 @@ else {
     	$e = oci_error($resultVerif);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
 		print htmlentities($e['message']. ' pour cette requete : ' .$e['sqltext']);	
     } else {
-    	$statementBD = oci_fetch_assoc($verifMail);		// vérification de l'existance du compte
+    	$statementBD = oci_fetch_assoc($verifMail);		// vérification de l'existence du compte
     	if(empty($statementBD)){
     		header('location:formLogin.php?msgErreur=Compte inexistant');
     	}
 		// vérification du mot de passe
     	if (password_verify($mdp_client_a_verifier, $statementBD['MDPCLIENT'])) {
-    		session_start(); // démarre la session
-    		$_SESSION['idClientIdentifie'] = $statementBD['IDCLIENT']; // on stocke l'id du client dans la session
-    		header('location:index.php'); // on redirige vers la page d'accueil
+            /*
+                si panier cookie existe alors on redirige vers
+                une page qui propose soit de garder le panier
+                cookie soit le panier BD
+                putain                
+            */
+            if(isset($_COOKIE['tempPanier'])){
+                session_start();
+                $_SESSION['idClientTransiting'] = $statementBD['IDCLIENT'];
+                header('location:cookieCart_to_BDCart.php');
+            }
+            else{
+        		session_start(); // démarre la session
+        		$_SESSION['idClientIdentifie'] = $statementBD['IDCLIENT']; // on stocke l'id du client dans la session
+        		header('location:index.php'); // on redirige vers la page d'accueil
+            }
     	}
         else{
             header('location:formLogin.php?msgErreur=Mot de passe erroné');
