@@ -4,7 +4,7 @@ if(!isset($_POST['isSubbed'])){
 }
 else {
 	require_once("includes/connect.inc.php");
-
+    error_reporting(0);
 
 	$mdp_client_hashed = password_hash($_POST['mdpUtil'], PASSWORD_DEFAULT);
     $nomClient = $_POST['nomUtil'];
@@ -37,7 +37,15 @@ else {
 
 	$_SESSION['idClientIdentifie'] = $idC;
 
-	header('location:index.php');
+	
+    // si il était en train de faire sa commande, donc qu'il y avait un cart dans el paramètre de l'url, alors on le redigire vers le panier
+    if (isset($_GET['cartID'])) {
+        header('location:cart.php');
+    }
+    else {
+        header('location:index.php');
+    }
+    
 }
 
 ?>

@@ -62,6 +62,11 @@ session_start();
 							if(isset($_COOKIE['tempPanier'])){
 								$nbElementsPanier = $nbElementsPanier + count(json_decode($_COOKIE['tempPanier']));
 							}
+<<<<<<< Updated upstream
+=======
+							oci_free_statement($idPanierUtilisateur);
+							oci_free_statement($qttPanier)
+>>>>>>> Stashed changes
 						?>
 
 						<?php 

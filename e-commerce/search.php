@@ -157,7 +157,7 @@
                     echo '<div class="product-card">';
                         echo '<a href="product.php?idProduit='.$produit['IDPRODUIT'].'" style="text-decoration: none; color: inherit">';
                         echo '<div class="product-image">';
-                            echo '<img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">';
+                            echo '<img src="./assets/images/product-img/'.$produit['IDPRODUIT'].'" alt="" style="width: 100%; height: auto;"> ';
                                 echo '<div class="product-image-overlay">';
                             echo '</div>';
                         echo '</div>';

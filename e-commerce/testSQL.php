@@ -1,10 +1,10 @@
 <?php
-	// on inclut le fichier de connexion à la base Oracle
+	// on inclut le fichier de connexion ï¿½ la base Oracle
 	require_once("./includes/connect.inc.php");
 	error_reporting(0);
 	
-	// si la connexion a réussi...
-	// on crée une variable pour la définition de la requête : tous les joueurs français triés par nom, prenom
+	// si la connexion a rï¿½ussi...
+	// on crï¿½e une variable pour la dï¿½finition de la requï¿½te : tous les joueurs franï¿½ais triï¿½s par nom, prenom
 	$req1 = "SELECT * FROM Client";
 		
 	$lesClients = oci_parse($connect, $req1);
@@ -13,18 +13,18 @@
  	$result = oci_execute($lesClients);
 	// si erreur de requete alors affichage...
 	if (!$result) {
-		$e = oci_error($lesClients);  // on récupère l'exception liée au pb d'execution de la requete
+		$e = oci_error($lesClients);  // on rï¿½cupï¿½re l'exception liï¿½e au pb d'execution de la requete
 		print htmlentities($e['message'].' pour cette requete : '.$e['sqltext']);		
 	}
 
-	// si pas d'erreur alors on parcourt le curseur résultat pour affichage en PHP
+	// si pas d'erreur alors on parcourt le curseur rï¿½sultat pour affichage en PHP
 	echo "<H1> Les Clients</H1>";
 	while (($leClient = oci_fetch_assoc($lesClients)) != false) {
 		echo $leClient['IDCLIENT']." : ".$leClient['NOMC']." ".$leClient['PRENOMC']; 
 	    echo "<br/>";
 	}
 	
-	// Libère toutes les ressources réservées par un résultat Oracle
+	// Libï¿½re toutes les ressources rï¿½servï¿½es par un rï¿½sultat Oracle
 	oci_free_statement($lesClients);
  
  
@@ -42,7 +42,7 @@
   if($gotProduits){
     echo "<H1> Les Produits</H1>";
 	  while (($leProduit = oci_fetch_assoc($prepProduits)) != false) {
-  		echo $leProduit['IDPRODUIT']." : ".$leProduit['NOMP']." ".$leProduit['DESCRIPTION']; 
+  		echo $leProduit['IDPRODUIT']." : ".$leProduit['NOMP']." ".$leProduit['DESCRIPTION']." ".$leProduit['IDCATEGORIE'] ; 
       echo "<br/>";
   	}
   }
@@ -50,37 +50,37 @@
 
 /*
 /////////////////////////////////////////////////////////////////////////////////
-	// on va créer une requete paramétrée
+	// on va crï¿½er une requete paramï¿½trï¿½e
 	$req2 = "SELECT * FROM Joueur WHERE ne = 'FRA' and pst = :pPst ORDER BY NOMJ, PREJ";
-	// on prépare la requête
+	// on prï¿½pare la requï¿½te
     $lesPiliersFrancais = oci_parse($connect, $req2);
 		
 	// il faut passer par une variable pour contenir la valeur
 	$pst = "Pilier"; 
-	// on lie la valeur au paramètre de la requête
+	// on lie la valeur au paramï¿½tre de la requï¿½te
 	oci_bind_by_name($lesPiliersFrancais, ":pPst", $pst);
 	
 	// on execute la requete
  	$result = oci_execute($lesPiliersFrancais);
-	// pas d'erreur Oracle ici car un select qui ne ramene rien n'est pas une erreur, c'est un résultat...
+	// pas d'erreur Oracle ici car un select qui ne ramene rien n'est pas une erreur, c'est un rï¿½sultat...
 
-	//  on parcourt le curseur résultat pour affichage en PHP
-	echo "<H1> Les Piliers de l'équipe de France par ordre alphabétique</H1>";
+	//  on parcourt le curseur rï¿½sultat pour affichage en PHP
+	echo "<H1> Les Piliers de l'ï¿½quipe de France par ordre alphabï¿½tique</H1>";
 	while (($lePilierFr = oci_fetch_assoc($lesPiliersFrancais)) != false) {
-		echo $lePilierFr['PREJ']." ".$lePilierFr['NOMJ']." est un ".$lePilierFr['PST']." français"; 
+		echo $lePilierFr['PREJ']." ".$lePilierFr['NOMJ']." est un ".$lePilierFr['PST']." franï¿½ais"; 
 	    echo "<br/>";
 	}
-	// Libère toutes les ressources réservées par un résultat Oracle
+	// Libï¿½re toutes les ressources rï¿½servï¿½es par un rï¿½sultat Oracle
 	oci_free_statement($lesPiliersFrancais);
 
 /*
 
 	//////////////////////////////////////////////////////////////////////////////////
-	// on crée une autre variable pour la définition d'une requête paramétrée d'insertion
+	// on crï¿½e une autre variable pour la dï¿½finition d'une requï¿½te paramï¿½trï¿½e d'insertion
 	$req3 = "INSERT INTO Joueur (nj, prej, nomj, ne) VALUES(:pNj, :pPrej, :pNomJ, :pNe)";						 
-	// on prépare la requête paramétrée
+	// on prï¿½pare la requï¿½te paramï¿½trï¿½e
 	$insertJoueur = oci_parse($connect, $req3);
-	// on associe les valeurs aux paramètres de la requête via des variables (sinon ça marche pas !)
+	// on associe les valeurs aux paramï¿½tres de la requï¿½te via des variables (sinon ï¿½a marche pas !)
 	$nj = 300; 	$prej = "Patricia"; $nomj = "Stolf" ; $ne = "FRA";
 	oci_bind_by_name($insertJoueur, ":pNj", $nj);
 	oci_bind_by_name($insertJoueur, ":pPreJ", $prej);
@@ -90,55 +90,55 @@
 	$result = oci_execute($insertJoueur);
 	// si erreur de requete alors affichage...
 	if (!$result) {
-		$e = oci_error($insertJoueur);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
+		$e = oci_error($insertJoueur);  // on rï¿½cupï¿½re l'exception liï¿½e au pb d'execution de la requete (violation PK par exemple)
 		print htmlentities($e['message'].' pour cette requete : '.$e['sqltext']);		
 	}
-	// vérifiez l'insertion dans SQL developer avec cette requete : select * from joueur where nj > 299;
+	// vï¿½rifiez l'insertion dans SQL developer avec cette requete : select * from joueur where nj > 299;
 	// on commit les modifs faites
 	oci_commit($connect);
 	
-	// Libère toutes les ressources réservées par un résultat Oracle
+	// Libï¿½re toutes les ressources rï¿½servï¿½es par un rï¿½sultat Oracle
 	oci_free_statement($insertJoueur);
 */
 
 /*
-	// on supprime la ligne précédemment ajoutée (stolf...)
+	// on supprime la ligne prï¿½cï¿½demment ajoutï¿½e (stolf...)
 	$req4 = "DELETE FROM Joueur WHERE nj = 300";						 
-	// on prépare la requête paramétrée
+	// on prï¿½pare la requï¿½te paramï¿½trï¿½e
 	$deleteJoueur = oci_parse($connect, $req4);
 	// on execute la requete
 	$result = oci_execute($deleteJoueur);
 	// pas d'erreur Oracle ici car un delete qui ne fait rien n'est pas une erreur
 	// on commit les modifs faites
 	oci_commit($connect);
-	// Libère toutes les ressources réservées par un résultat Oracle
+	// Libï¿½re toutes les ressources rï¿½servï¿½es par un rï¿½sultat Oracle
 	oci_free_statement($deleteJoueur);
-	// vérifiez l'insertion dans SQL developer avec cette requete : select * from joueur where nj > 299;
+	// vï¿½rifiez l'insertion dans SQL developer avec cette requete : select * from joueur where nj > 299;
 */
 
 /*
 	//////////////////////////////////////////////////////////////////////////////////////////////
-	// on crée une autre variable pour l'appel d'une fonction stockée dans un package avec passage param et valeur retour
-	echo "<H1> Nb points marqués par une équipe </H1>";
+	// on crï¿½e une autre variable pour l'appel d'une fonction stockï¿½e dans un package avec passage param et valeur retour
+	echo "<H1> Nb points marquï¿½s par une ï¿½quipe </H1>";
 	$req = " begin :retour := Gestion_Rugby.retournePointsMarques(:pNe); end; ";
 	$appelFunctStock = oci_parse($connect, $req);
-	// on définit la valeur du paramètre en entrée de la fonction
+	// on dï¿½finit la valeur du paramï¿½tre en entrï¿½e de la fonction
 	$ne = "Irlande";
 	oci_bind_by_name($appelFunctStock, ':pNe', $ne);
 	
-	// on définit la variable qui va récupérer la valeur retournée par la fonction stockée
-	// le dernier paramètre definit la longueur maximale pour la variable récupérée
+	// on dï¿½finit la variable qui va rï¿½cupï¿½rer la valeur retournï¿½e par la fonction stockï¿½e
+	// le dernier paramï¿½tre definit la longueur maximale pour la variable rï¿½cupï¿½rï¿½e
 	oci_bind_by_name($appelFunctStock, ':retour', $retour, 40);
 	$result = oci_execute($appelFunctStock);
 	
 	if (!$result) {
-		// on récupère l'exception liée au pb d'execution de la fonction (no data found pour cette équipe)
+		// on rï¿½cupï¿½re l'exception liï¿½e au pb d'execution de la fonction (no data found pour cette ï¿½quipe)
 		$e = oci_error($appelFunctStock);  
 		print htmlentities($e['message'].' pour la fonction : '.$e['sqltext']);
 		echo "</BR></BR></BR></BR>";		
 	}
 	else {
-		echo "</BR></BR> Nb points marqués par les joueurs de l'Irlande : ".$retour."</BR>";   // Affiche 168 
+		echo "</BR></BR> Nb points marquï¿½s par les joueurs de l'Irlande : ".$retour."</BR>";   // Affiche 168 
 		echo "</BR></BR></BR></BR>";
 	}
 	oci_free_statement($appelFunctStock);

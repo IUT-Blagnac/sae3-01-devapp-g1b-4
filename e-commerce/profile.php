@@ -18,17 +18,42 @@
 
     <link rel="stylesheet" href="./assets/css/profile-page.css">
 
+    <link rel="shortcut icon" href="./assets/images/bluegym.ico" type="image/x-icon">
+
 </head>
 
 <body>
+    
     <?php include('includes/header.php'); ?>
+
+    <!-- Récupération du prénom de l'utilisateur -->
+    <?php 
+
+        require_once("./includes/connect.inc.php");
+        error_reporting(0);
+        // création de la requête
+        $req1 = "SELECT prenomc FROM Client WHERE IDCLIENT = :idClient";
+
+        $prenomUser = oci_parse($connect, $req1);
+
+        // remplacement des paramètres
+        oci_bind_by_name($prenomUser, ":idClient", $_SESSION['idClientIdentifie']);
+
+        // exécution commande
+        $result1 = oci_execute($prenomUser);
+
+        // récup du tableau de résultat
+        $prenom = oci_fetch_assoc($prenomUser);
+
+    ?>
+
 
     <div class="container p-5">
 
         <!-- Message d'accueil -->
         <div class="row">
             <div class="col-12 text-center">
-                <h1>Bonjour, Gabin</h1>
+                <h1>Bonjour, <?php echo ($prenom['PRENOMC']); ?></h1>
             </div>
         </div>
 
@@ -45,7 +70,7 @@
         <div class="row mt-3">
             <div class="profile-tabs">
                 <ul>
-                    <li><a href="">Se déconnecter</a></li>
+                    <li><a href="./deconnexion.php">Se déconnecter</a></li>
                     <li><a href="./profile.php?tab=orders" class="<?php if($_GET['tab'] == "orders"){ echo 'active'; }; ?>">Mes commandes</a></li>
                     <li><a href="./profile.php?tab=settings" class="<?php if($_GET['tab'] == "settings"){ echo 'active'; }; ?>">Paramètres</a></li>
                 </ul>

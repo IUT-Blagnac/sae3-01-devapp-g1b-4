@@ -11,10 +11,8 @@
 </head>
 
 <body>
+
     <?php include('includes/header.php'); ?>
-
-
-
 
     <div class="container mt-5">
         <div class="row d-flex justify-content-center">
@@ -27,23 +25,31 @@
                 <?php
                 // if GET msgErreur is set, display the error message
                 if (isset($_GET['msgErreur'])) {
-                    echo '
-                    <div class="alert alert-danger" role="alert">
-                        ' . $_GET['msgErreur'] . '
-                    </div>
-                ';
+                    if ($_GET['msgErreur'] == "Deconnexion effectuée !") {
+                        echo '
+                        <div class="alert alert-success" role="alert">
+                            ' . $_GET['msgErreur'] . '
+                        </div>
+                        ';
+                    } else {
+                        echo '
+                        <div class="alert alert-warning" role="alert">
+                            ' . $_GET['msgErreur'] . '
+                        </div>';
+                    }
                 }
+
                 ?>
 
 
                 <form method="POST" action="traitLogin.php">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Adresse mail</label>
-                        <input type="email" class="form-control" name="mailUtil">
+                        <input autocomplete="off" type="email" class="form-control" name="mailUtil" placeholder="client4@gmail.com">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label"> Mot de passe</label>
-                        <input type="password" class="form-control" name="mdpUtil">
+                        <input autocomplete="off" type="password" class="form-control" name="mdpUtil" placeholder="5Qxyh260">
                     </div>
 
                     <div class="row d-flex justify-content-center">
@@ -57,7 +63,16 @@
                     <div class="row mt-3">
                         <div class="col-12 text-center">
                             <p>Vous n'avez pas de compte ?</p>
-                            <a href="./formRegister.php"> Inscrivez-vous</a>
+
+                            <a href="
+                            <?php
+                            if (isset($_GET['cartID'])) {
+                                echo './formRegister.php?cartID=' . $_GET['cartID'];
+                            } else {
+                                echo './formRegister.php';
+                            }
+                            ?>
+                            "> Inscrivez-vous</a>
                         </div>
                     </div>
                 </form>

@@ -1,8 +1,11 @@
 <?php
+<<<<<<< Updated upstream
 if(empty($_GET)){
+=======
+if (!isset($_GET)) {
+>>>>>>> Stashed changes
     header('location:index.php');
-}
-else{
+} else {
     require('includes/connect.inc.php');
 
     $idProduit = $_GET['idProduit'];
@@ -18,13 +21,13 @@ else{
     // si la requete n'a pas pu être executée, on affiche l'erreur
     if (!$resultInfosProduit) {
         $e = oci_error($resultVerif);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
-        print htmlentities($e['message']. ' pour cette requete : ' .$e['sqltext']); 
+        print htmlentities($e['message'] . ' pour cette requete : ' . $e['sqltext']);
     } else {
         $statementBD = oci_fetch_assoc($produitInfos);
-        if(empty($statementBD)){
+        if (empty($statementBD)) {
             header('location:index.php?msgErreur=Produit existant mais aucune info trouvée');
         }
-        
+
         $reqCategorie = "SELECT nomcat FROM Categorie WHERE idcategorie = :pIDcat";
 
         $idCategorie = $statementBD['IDCATEGORIE'];
@@ -37,8 +40,8 @@ else{
         // si la requete n'a pas pu être executée, on affiche l'erreur
         if (!$resultInfosProduit) {
             $e = oci_error($resultVerif);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
-            print htmlentities($e['message']. ' pour cette requete : ' .$e['sqltext']); 
-        } else{
+            print htmlentities($e['message'] . ' pour cette requete : ' . $e['sqltext']);
+        } else {
             $statementBD_CAT = oci_fetch_assoc($categorieInfos);
         }
     }
@@ -58,6 +61,8 @@ else{
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/product-page.css">
 
+    <link rel="shortcut icon" href="./assets/images/bluegym.ico" type="image/x-icon">
+
 </head>
 
 <body>
@@ -71,15 +76,15 @@ else{
             <!-- Left side product image displayer -->
             <div class="col-6">
                 <div class="product-image-displayer">
-                    <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=800x800" alt="">
+                    <img src="./assets/images/product-img/<?php echo $_GET['idProduit']; ?>" alt="">
                 </div>
                 <div class="product-image-switcher">
                     <div class="button-group">
                         <button class="btn">
-                            <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=50x50" alt="">
+                            <img height="50px" src="./assets/images/product-img/<?php echo $_GET['idProduit']; ?>" alt="">
                         </button>
                         <button class="btn">
-                            <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=50x50" alt="">
+                            <img height="50px" src="./assets/images/product-img/<?php echo $_GET['idProduit']; ?>" alt="">
                         </button>
                     </div>
                 </div>
@@ -89,10 +94,10 @@ else{
                 <div class="row">
                     <div class="col-9">
                         <h1 class="product-title">
-                            <?php echo $statementBD['NOMP'];?>
+                            <?php echo $statementBD['NOMP']; ?>
                         </h1>
                         <h3>
-                            <?php echo $statementBD['PRIXPRODUIT']." €";?>
+                            <?php echo $statementBD['PRIXPRODUIT'] . " €"; ?>
                         </h3>
                     </div>
 
@@ -124,16 +129,41 @@ else{
                         <h5>Description rapide</h5>
                         <p class="product-description">
                             <?php
+<<<<<<< Updated upstream
                                 if (strlen($statementBD['DESCRIPTION'])>120) {
                                     echo substr($statementBD['DESCRIPTION'], 0, 120)."<a href=#description>...</a>";
                                 } else {
                                     echo $statementBD['DESCRIPTION'];
                                 }
+=======
+                            if (strlen($statementBD['DESCRIPTION']) > 150) {
+                                echo substr($statementBD['DESCRIPTION'], 0, 150) . "<a href=#description>...</a>";
+                            } else {
+                                echo $statementBD['DESCRIPTION'];
+                            }
+>>>>>>> Stashed changes
                             ?>
                         </p>
                     </div>
                 </div>
 
+<<<<<<< Updated upstream
+=======
+                <!-- Section Taille -->
+                <?php
+                if ($statementBD['TAILLE']) {
+                    echo '<div class="row mt-5">
+                        <div class="col-12">
+                            <h5>Taille</h5>
+                            <p class="product-description">
+                            ' . $statementBD['TAILLE'] . '
+                            </p>
+                        </div>
+                    </div>';
+                }
+                ?>
+
+>>>>>>> Stashed changes
                 <!-- Section actions sur le produit -->
                 <div class="row mt-5">
                     <div class="col-12">
@@ -149,23 +179,48 @@ else{
                             </ul>
                         </div>-->
                         <p>
-                            Composition : 
+                            Composition :
                             <span class="fw-bold">
-                                <?php echo $statementBD['COMPOSITION'];?>
+                                <?php echo $statementBD['COMPOSITION']; ?>
                             </span>
                         </p>
+
+                        <!-- message de confirmation -->
+                        <?php
+                        if (isset($_GET['msgConfirm'])) {
+                            echo '
+                                <div class="alert alert-success" role="alert">
+                                    ' . $_GET['msgConfirm'] . '
+                                </div>
+                                ';
+                        };
+                        ?>
                     </div>
+
                     <div class="col-12 d-flex justify-content-center mt-3">
                         <form id="formAjoutPanier" method="POST" action="addingToCart.php">
+<<<<<<< Updated upstream
                             <input type="number" name="quantiteSelectionne" min="1" max="10">
                             <button class="btn ajouter-panier" type="submit" name="sub" >
                                 Ajouter au panier
                             </button>
                             <input type="hidden" name="idProduit" value="<?php echo $idProduit; ?>">
+=======
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="number" class="form-control" name="quantiteSelectionne" min="1" max="10" value="1"><br>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-primary p-2" type="submit" name="sub" onclick="validateFormAddCart()">
+                                        Ajouter au panier
+                                    </button>
+                                    <input type="hidden" name="idProduit" value="<?php echo $idProduit; ?>">
+                                </div>
+                            </div>
+>>>>>>> Stashed changes
                         </form>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -174,21 +229,26 @@ else{
 
             <!-- Description produit -->
             <div class="col-12 mt-4" id='description'>
-                <h2>
-                    Description
-                </h2>
+                <h2> Description </h2>
                 <hr>
                 <p>
-                    <?php echo $statementBD['DESCRIPTION'];?>
+                    <?php echo $statementBD['DESCRIPTION']; ?>
                 </p>
             </div>
 
             <!-- Avantages produit -->
+<<<<<<< Updated upstream
             <div class="col-12 mt-4">
+=======
+            <?php
+            if ($statementBD['AVANTAGES']) {
+                echo '<div class="col-12 mt-4">
+>>>>>>> Stashed changes
                 <h2>
                     Avantages
                 </h2>
                 <hr>
+<<<<<<< Updated upstream
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. In maxime officiis voluptates beatae. Natus modi velit quam impedit quo eum ipsum debitis cumque odit accusantium! Atque, veritatis cumque! At, quasi.
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis non possimus cupiditate odio accusantium. Recusandae cupiditate odit itaque voluptates, sapiente quos nam aperiam debitis delectus soluta beatae voluptatibus iusto in?
@@ -196,6 +256,12 @@ else{
                 </p>
             </div>
 
+=======
+                <p>' . $statementBD["AVANTAGES"] . '</p>
+            </div>';
+            }
+            ?>
+>>>>>>> Stashed changes
             <!-- Avis produit -->
             <div class="col-12 mt-4">
                 <h2>
@@ -268,7 +334,6 @@ else{
                     </div>
                 </div>
             </div>
-
         </div>
 
         <!-- Suggestion autres produits -->
@@ -281,6 +346,7 @@ else{
             </div>
             <div class="col-12">
                 <div class="card-displayer-suggestion">
+<<<<<<< Updated upstream
                     <div class="product-card" style="transform: none;">
                         <div class="product-card-img">
                             <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
@@ -300,19 +366,67 @@ else{
                         </div>
                     </div>
 
+=======
+                    <?php
+                    // Suggère 4 produits ou moins similaires (la même catégorie)
+                    $reqOthers = 'SELECT * FROM (SELECT * FROM PRODUIT WHERE idCategorie = :pIdCat AND idProduit != :pIdProduit ORDER BY dbms_random.value) WHERE rownum <= 4';
+                    $cardsProductOthers = oci_parse($connect, $reqOthers);
+                    oci_bind_by_name($cardsProductOthers, ":pIdCat", $statementBD['IDCATEGORIE']);
+                    oci_bind_by_name($cardsProductOthers, ":pIdProduit", $idProduit);
+                    $resultOther = oci_execute($cardsProductOthers);
+                    while (($cardProductOther = oci_fetch_assoc($cardsProductOthers)) != false) {
+                        echo '
+                        <div class="product-card" style="transform: none;"><a href="product.php?idProduit=' . $cardProductOther["IDPRODUIT"] . '" style="color: inherit; text-decoration:none">
+                            <div class="product-card-img">
+                                <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
+                            </div>
+                            <div class="product-card-content">
+                                <h5 class="title">' . $cardProductOther['NOMP'] . '</h5>
+                                <h5 class="price">' . $cardProductOther['PRIXPRODUIT'] . ' €</h5>
+                            </div>
+                        </a></div>
+                            ';
+                    }
+                    oci_free_statement($categorieInfos);
+                    oci_free_statement($produitInfos);
+                    oci_free_statement($cardsProductOthers);
+                    ?>
+>>>>>>> Stashed changes
                 </div>
             </div>
         </div>
-
     </div>
 
-    <?php include('includes/footer.php'); ?>
 
     <!-- Javascript -->
+<<<<<<< Updated upstream
     <!-- <script src="includes/bootstrap/js/bootstrap.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="./assets/js/main.js"></script>
+=======
+    <script type="text/javascript">
+        /*
+            Cette fonction verifie que l'utilisateur n'a pas mis
+            une quantite valide en modifiant le code source
+            */
+        function validateFormAddCart() {
+            let qteProduitUser = document.querySelector('input[name="quantiteSelectionne"]').value;
+            let formAddCart = document.forms['formAddToCart'];
+            if ((qteProduitUser > 10) || (qteProduitUser < 1)) {
+                alert('Quantite incorrecte !');
+            } else {
+                formAddCart.submit();
+            }
+        }
+    </script>
+
+    <!-- <script src="includes/bootstrap/js/bootstrap.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <?php include('includes/footer.php'); ?>
+>>>>>>> Stashed changes
 
 </body>
 
