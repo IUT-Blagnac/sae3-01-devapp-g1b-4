@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="includes/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/main.css">
 
+    <link rel="shortcut icon" href="./assets/images/bluegym.ico" type="image/x-icon">
 
 </head>
 
@@ -57,7 +58,7 @@
             echo'
         <div class="product-card"><a href="product.php?idProduit='.$cardProduct["IDPRODUIT"].'" style="color: inherit; text-decoration:none">
             <div class="product-card-img">
-                <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
+                <img src="./assets/images/product-img/'.$cardProduct["IDPRODUIT"].'.png" alt="'.$cardProduct["NOMP"].'">
             </div>
             <div class="product-card-content">
                 <h5 class="title">'.$cardProduct["NOMP"].'</h5>
@@ -70,10 +71,7 @@
     ?>
     </div>
 
-
     <?php include('includes/footer.php'); ?>
-
-
 
 </body>
 

@@ -61,7 +61,7 @@ session_start();
 								$nbElementsPanier = $nbElementsPanier + count(json_decode($_COOKIE['tempPanier']));
 							}
 							oci_free_statement($idPanierUtilisateur);
-							oci_free_statement($qttPanier);
+							oci_free_statement($qttPanier)
 						?>
 
 						<?php 

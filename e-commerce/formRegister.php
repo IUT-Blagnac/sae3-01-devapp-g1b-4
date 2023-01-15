@@ -22,26 +22,34 @@
                 <p class="text-muted">Vous n'avez pas de compte ? Inscrivez-vous pour accéder à vos commandes, favoris et bien
                     d'autres fonctionnalités. </p>
 
-                <form name="formRegister" action="traitRegister.php" method="POST">
+                <form name="formRegister" action="
+                <?php
+                // si il y a un panier dans les paramètres d'URL, alors l'utilisateur était dans le processus de commande, on le redirigera dans le panier qu'il veut commander pour la suite
+                if (isset($_GET['cartID'])) {
+                    echo './traitRegister.php?cartID=' . $_GET['cartID'];
+                } else {
+                    echo './traitRegister.php';
+                }
+                ?>" method="POST">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Prénom</label>
-                        <input type="text" name="prenomUtil"class="form-control" >
+                        <input autocomplete="off" type="text" name="prenomUtil" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Nom</label>
-                        <input type="text" name="nomUtil"class="form-control" >
+                        <input autocomplete="off" type="text" name="nomUtil" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Adresse mail</label>
-                        <input type="email" name="mailUtil" class="form-control" required>
+                        <input autocomplete="off" type="email" name="mailUtil" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label"> Mot de passe</label>
-                        <input type="password" name="mdpUtil" id="mdpUtil" class="form-control" required>
+                        <input autocomplete="off" type="password" name="mdpUtil" id="mdpUtil" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Confirmez le mot de passe</label>
-                        <input type="password" name="mdpUtilAconfirmer" id="mdpUtilAconfirmer" class="form-control" required>
+                        <input autocomplete="off" type="password" name="mdpUtilAconfirmer" id="mdpUtilAconfirmer" class="form-control" required>
                     </div>
 
                     <div class="row d-flex justify-content-center">
