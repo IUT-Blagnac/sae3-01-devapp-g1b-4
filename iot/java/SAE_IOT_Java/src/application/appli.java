@@ -5,10 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import view.windowController;
 
 public class appli extends Application {
 
-	private Stage primaryStage;
+	private static Stage primaryStage;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -26,7 +27,17 @@ public class appli extends Application {
 		
 		primaryStage.setScene(sceneM);
 		primaryStage.setTitle("Visionnage des données");
-		primaryStage.show();
+		
+		windowController Wcontroll = loader.getController();
+		
+		int noCont = Wcontroll.WInitialisation(primaryStage);
+		
+		
+
+		if(noCont==1) {
+			Wcontroll.start(primaryStage);
+			primaryStage.show();
+		}
 		
 	}
 	
