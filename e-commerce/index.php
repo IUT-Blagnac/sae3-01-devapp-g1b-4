@@ -34,7 +34,7 @@
             <div class="container h-100">
                 <div class="row h-100 d-flex align-content-center">
                     <div class="col-7">
-                        <h1 class="text-white fw-bold main-title">Atteignez vos objectifs avec Bluegym</h1>
+                        <h1 class="text-white fw-bold main-title">Atteignez vos objectifs avec Bluegym </h1>
                         <h3 class="text-info">Découvrez nos nouveaux équipements de sport à prix réduit pour les fêtes. </h3>
                         <a href="" class="btn btn-white">Découvrir</a>
                     </div>
@@ -48,42 +48,27 @@
 
     <!-- Product card displayer section -->
     <div class="card-displayer">
-        <div class="product-card">
-            <div class="product-card-img">
-                <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
-            </div>
-            <div class="product-card-content">
-                <h4 class="title">Barre trop sexy</h4>
-                <h5 class="price">25.50 €</h5>
-            </div>
-        </div>
-        <div class="product-card">
-            <div class="product-card-img">
-                <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
-            </div>
-            <div class="product-card-content">
-                <h4 class="title">Barre trop sexy</h4>
-                <h5 class="price">25.50 €</h5>
-            </div>
-        </div>
-        <div class="product-card">
-            <div class="product-card-img">
-                <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
-            </div>
-            <div class="product-card-content">
-                <h4 class="title">Barre trop sexy</h4>
-                <h5 class="price">25.50 €</h5>
-            </div>
-        </div>
-        <div class="product-card">
+    <?php
+        require_once("./includes/connect.inc.php");
+        $reqCards = 'SELECT * FROM (SELECT * FROM PRODUIT ORDER BY dbms_random.value) WHERE rownum <= 4';
+        $cardsProduct = oci_parse($connect, $reqCards);
+        $result = oci_execute($cardsProduct);
+
+        while(($cardProduct = oci_fetch_assoc($cardsProduct)) != false){
+            echo'
+        <div class="product-card"><a href="product.php?idProduit='.$cardProduct["IDPRODUIT"].'" style="color: inherit; text-decoration:none">
             <div class="product-card-img">
                 <img src="./assets/images/product-img/'.$cardProduct["IDPRODUIT"].'.png" alt="'.$cardProduct["NOMP"].'">
             </div>
             <div class="product-card-content">
-                <h4 class="title">Barre trop sexy</h4>
-                <h5 class="price">25.50 €</h5>
-            </div>
+                <h5 class="title">'.$cardProduct["NOMP"].'</h5>
+                <h5 class="price">'.$cardProduct['PRIXPRODUIT'].' €</h5>
+            </div></a>
         </div>
+            ';
+        }
+        oci_free_statement($cardsProduct);
+    ?>
     </div>
 
     <?php include('includes/footer.php'); ?>

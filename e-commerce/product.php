@@ -1,13 +1,9 @@
 <?php
-<<<<<<< Updated upstream
-if(empty($_GET)){
-=======
 if (!isset($_GET)) {
->>>>>>> Stashed changes
     header('location:index.php');
 } else {
     require('includes/connect.inc.php');
-
+    error_reporting(0);
     $idProduit = $_GET['idProduit'];
 
     $reqProduit = "SELECT * FROM Produit WHERE IDPRODUIT = :pIDproduit";
@@ -129,44 +125,34 @@ if (!isset($_GET)) {
                         <h5>Description rapide</h5>
                         <p class="product-description">
                             <?php
-<<<<<<< Updated upstream
-                                if (strlen($statementBD['DESCRIPTION'])>120) {
-                                    echo substr($statementBD['DESCRIPTION'], 0, 120)."<a href=#description>...</a>";
-                                } else {
-                                    echo $statementBD['DESCRIPTION'];
-                                }
-=======
                             if (strlen($statementBD['DESCRIPTION']) > 150) {
                                 echo substr($statementBD['DESCRIPTION'], 0, 150) . "<a href=#description>...</a>";
                             } else {
                                 echo $statementBD['DESCRIPTION'];
                             }
->>>>>>> Stashed changes
                             ?>
                         </p>
                     </div>
                 </div>
-
-<<<<<<< Updated upstream
-=======
+                
                 <!-- Section Taille -->
                 <?php
-                if ($statementBD['TAILLE']) {
-                    echo '<div class="row mt-5">
+                    if($statementBD['TAILLE']){
+                    echo'<div class="row mt-5">
                         <div class="col-12">
                             <h5>Taille</h5>
                             <p class="product-description">
-                            ' . $statementBD['TAILLE'] . '
+                            '.$statementBD['TAILLE'].'
                             </p>
                         </div>
-                    </div>';
-                }
+                    </div>';   
+                    }
                 ?>
-
->>>>>>> Stashed changes
+                
                 <!-- Section actions sur le produit -->
                 <div class="row mt-5">
                     <div class="col-12">
+                        <!-- abandon de cette option pour l'instant -->
                         <!--<div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 Choix des matériaux
@@ -199,13 +185,6 @@ if (!isset($_GET)) {
 
                     <div class="col-12 d-flex justify-content-center mt-3">
                         <form id="formAjoutPanier" method="POST" action="addingToCart.php">
-<<<<<<< Updated upstream
-                            <input type="number" name="quantiteSelectionne" min="1" max="10">
-                            <button class="btn ajouter-panier" type="submit" name="sub" >
-                                Ajouter au panier
-                            </button>
-                            <input type="hidden" name="idProduit" value="<?php echo $idProduit; ?>">
-=======
                             <div class="row">
                                 <div class="col-6">
                                     <input type="number" class="form-control" name="quantiteSelectionne" min="1" max="10" value="1"><br>
@@ -217,7 +196,6 @@ if (!isset($_GET)) {
                                     <input type="hidden" name="idProduit" value="<?php echo $idProduit; ?>">
                                 </div>
                             </div>
->>>>>>> Stashed changes
                         </form>
                     </div>
                 </div>
@@ -237,31 +215,17 @@ if (!isset($_GET)) {
             </div>
 
             <!-- Avantages produit -->
-<<<<<<< Updated upstream
-            <div class="col-12 mt-4">
-=======
             <?php
             if ($statementBD['AVANTAGES']) {
                 echo '<div class="col-12 mt-4">
->>>>>>> Stashed changes
                 <h2>
                     Avantages
                 </h2>
                 <hr>
-<<<<<<< Updated upstream
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. In maxime officiis voluptates beatae. Natus modi velit quam impedit quo eum ipsum debitis cumque odit accusantium! Atque, veritatis cumque! At, quasi.
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis non possimus cupiditate odio accusantium. Recusandae cupiditate odit itaque voluptates, sapiente quos nam aperiam debitis delectus soluta beatae voluptatibus iusto in?
-                    Magni, omnis reprehenderit. Sunt officiis vero reprehenderit. Veniam iure, accusamus asperiores eligendi impedit possimus sint vero deserunt repellendus recusandae, velit culpa, ad porro voluptatibus labore doloremque provident. Inventore, iusto labore.
-                </p>
-            </div>
-
-=======
-                <p>' . $statementBD["AVANTAGES"] . '</p>
+                <p>'.$statementBD["AVANTAGES"].'</p>
             </div>';
             }
             ?>
->>>>>>> Stashed changes
             <!-- Avis produit -->
             <div class="col-12 mt-4">
                 <h2>
@@ -346,27 +310,6 @@ if (!isset($_GET)) {
             </div>
             <div class="col-12">
                 <div class="card-displayer-suggestion">
-<<<<<<< Updated upstream
-                    <div class="product-card" style="transform: none;">
-                        <div class="product-card-img">
-                            <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
-                        </div>
-                        <div class="product-card-content">
-                            <h4 class="title">Barre trop sexy</h4>
-                            <h5 class="price">25.50 €</h5>
-                        </div>
-                    </div>
-                    <div class="product-card" style="transform: none;">
-                        <div class="product-card-img">
-                            <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
-                        </div>
-                        <div class="product-card-content">
-                            <h4 class="title">Barre trop sexy</h4>
-                            <h5 class="price">25.50 €</h5>
-                        </div>
-                    </div>
-
-=======
                     <?php
                     // Suggère 4 produits ou moins similaires (la même catégorie)
                     $reqOthers = 'SELECT * FROM (SELECT * FROM PRODUIT WHERE idCategorie = :pIdCat AND idProduit != :pIdProduit ORDER BY dbms_random.value) WHERE rownum <= 4';
@@ -391,7 +334,6 @@ if (!isset($_GET)) {
                     oci_free_statement($produitInfos);
                     oci_free_statement($cardsProductOthers);
                     ?>
->>>>>>> Stashed changes
                 </div>
             </div>
         </div>
@@ -399,12 +341,6 @@ if (!isset($_GET)) {
 
 
     <!-- Javascript -->
-<<<<<<< Updated upstream
-    <!-- <script src="includes/bootstrap/js/bootstrap.min.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="./assets/js/main.js"></script>
-=======
     <script type="text/javascript">
         /*
             Cette fonction verifie que l'utilisateur n'a pas mis
@@ -426,7 +362,6 @@ if (!isset($_GET)) {
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
     <?php include('includes/footer.php'); ?>
->>>>>>> Stashed changes
 
 </body>
 

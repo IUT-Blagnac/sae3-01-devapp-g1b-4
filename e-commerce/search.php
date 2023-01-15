@@ -17,7 +17,9 @@
 </head>
 
 <body>
-    <?php include('includes/header.php'); ?>
+    <?php 
+    include('includes/header.php'); 
+    ?>
 
     <!-- Bannière de recherche -->
     <div class="search-wrap-wrap">
@@ -27,15 +29,16 @@
                 <div class="row h-100 d-flex align-content-center">
                     <?php
                     require_once("includes/connect.inc.php");
-
+                    error_reporting(0);
                     $nomCat = "";
                     $sousCat = FALSE;
 
 
                     if (isset($_GET['getIDCat'])) {
                         //récupère la catégorie de la page
-                        $reqCat = "SELECT * FROM CATEGORIE WHERE IDCATEGORIE =" . $_GET['getIDCat'];
+                        $reqCat = "SELECT * FROM CATEGORIE WHERE IDCATEGORIE = :pIdCat";
                         $prepCat = oci_parse($connect, $reqCat);
+                        oci_bind_by_name($prepCat, ":pIdCat", $_GET['getIDCat']);
                         $gotCat = oci_execute($prepCat);
 
                         $gotCatMere=FALSE;
@@ -46,8 +49,9 @@
                             //Si la catégorie récupérée est une sous catégorie, ce if permet de récupérer les données de la categorie mère
                             if($categorie['IDCATEGORIEMERE']!=""){
                                 $sousCat = TRUE;
-                                $reqCatMere = "SELECT * FROM CATEGORIE WHERE IDCATEGORIE =" . $categorie['IDCATEGORIEMERE'];
+                                $reqCatMere = "SELECT * FROM CATEGORIE WHERE IDCATEGORIE = :pIdCat";
                                 $prepCatMere = oci_parse($connect, $reqCatMere);
+                                oci_bind_by_name($prepCatMere, ":pIdCat", $categorie['IDCATEGORIEMERE']);
                                 $gotCatMere = oci_execute($prepCatMere);
                                 if($gotCatMere){
                                     $categorieCatMere=oci_fetch_assoc($prepCatMere);
@@ -59,7 +63,12 @@
                             header('location:search.php');
                         }
                     } else {
-                        $nomCat = "Tous les produits";
+                        if($_GET['rechercheUser']!= ""){
+                            $nomCat = $_GET['rechercheUser'];
+                        }
+                        else{
+                            $nomCat = "Tous les produits";
+                        }
                         
                     }
 
@@ -92,15 +101,16 @@
         <div class="items-section">
             <?php
             if($nomCat != "Tous les produits"){
+                $reqSousCat = "SELECT * FROM CATEGORIE WHERE IDCATEGORIEMERE = :pIdCat";
+                $prepSousCat = oci_parse($connect, $reqSousCat);
 
                 if($gotCatMere){
-                    $reqSousCat = "SELECT * FROM CATEGORIE WHERE IDCATEGORIEMERE =" . $categorieCatMere['IDCATEGORIE'];
+                    oci_bind_by_name($prepSousCat, ":pIdCat", $categorieCatMere['IDCATEGORIE']);;
                 }
                 else {
-                    $reqSousCat = "SELECT * FROM CATEGORIE WHERE IDCATEGORIEMERE =" . $categorie['IDCATEGORIE'];
-
+                    oci_bind_by_name($prepSousCat, ":pIdCat", $categorie['IDCATEGORIE']);;
                 }
-                $prepSousCat = oci_parse($connect, $reqSousCat);
+
                 $gotSousCat = oci_execute($prepSousCat);
 
                 if($gotSousCat){
@@ -110,7 +120,10 @@
                     }
                     echo '</ul>';
                 }
-                
+                oci_free_statement($prepSousCat);
+                oci_free_statement($prepCatMere);
+                oci_free_statement($prepCat);
+
             }
             
             ?>
@@ -120,16 +133,25 @@
     <!-- Trier -->
     <div class="short-items-row">
         <div class="dropdown-section">
-            <div class="filter-section">
-                <button href="" class="btn btn-primary">Filtrer les éléments</button>
-            </div>
             <div class="dropdown dropdown-button">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-secondary dropdown-toggle p-1" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Trier par
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Prix croissant</a></li>
-                    <li><a class="dropdown-item" href="#">Prix décroissant</a></li>
+                    <?php
+                    if(isset($_GET["rechercheUser"])){
+                        echo '<li><a class="dropdown-item" href="search.php?rechercheUser='.$_GET["rechercheUser"].'&sort=ASC">Prix croissant</a></li>';
+                        echo '<li><a class="dropdown-item" href="search.php?rechercheUser='.$_GET["rechercheUser"].'&sort=DESC">Prix décroissant</a></li>';
+                    }
+                    else if(isset($_GET["getIDCat"])){
+                        echo 'getIDCat='.$_GET["getIDCat"].'&sort=ASC">Prix croissant</a></li>';
+                        echo '<li><a class="dropdown-item" href="search.php?getIDCat='.$_GET["getIDCat"].'&sort=DESC">Prix décroissant</a></li>';
+                    }
+                    else{
+                        echo'<li><a class="dropdown-item" href="search.php?sort=ASC">Prix croissant</a></li>
+                        <li><a class="dropdown-item" href="search.php?sort=DESC">Prix décroissant</a></li>';
+                    }
+                    ?>    
                 </ul>
             </div>
         </div>
@@ -141,18 +163,37 @@
 
             <!-- Carte produit -->
             <?php
-            if (isset($_GET['getIDCat'])) {
-                $reqProducts = "SELECT * FROM PRODUIT WHERE IDCATEGORIE =" . $_GET['getIDCat'];
-            } else {
-                $reqProducts = "SELECT * FROM PRODUIT";
-            }
 
-            $prepProduits = oci_parse($connect, $reqProducts);
+            // Vérification si il y a triage ou non
+            if(isset($_GET['sort'])){
+                $sort = " PRIXPRODUIT ".$_GET['sort'].",";
+            }
+            else{
+                $sort ="";
+            }
+            // Cas selon la barre de recherche, mot clé du nom du produit, ou de la catégorie ou catégorie mère
+            if($_GET['rechercheUser']!= "" and isset($_GET['rechercheUser'])){
+                $reqProducts = "SELECT * FROM PRODUIT P, CATEGORIE C1, CATEGORIE C2 WHERE P.idCategorie = C1.idCategorie AND C1.idCategorieMere = C2.idCategorie AND (UPPER(P.nomP) LIKE :pRecherche OR LOWER(P.nomP) LIKE :pRecherche OR UPPER(C1.nomCat) LIKE :pRecherche OR LOWER(C1.nomCat) LIKE :pRecherche OR UPPER(C2.nomCat) LIKE :pRecherche OR LOWER(C2.nomCat) LIKE :pRecherche) ORDER BY".$sort." P.nomP";
+                $prepProduits = oci_parse($connect, $reqProducts);
+                $pRecherche = strtoupper('%' .$_GET['rechercheUser']. '%');
+                oci_bind_by_name($prepProduits, ":pRecherche", $pRecherche);
+            }  
+            // Cas selon la catégorie
+            else if (isset($_GET['getIDCat'])) {
+                $reqProducts = "SELECT * FROM PRODUIT WHERE IDCATEGORIE = :pIdCat OR IDCATEGORIE IN (SELECT IDCATEGORIE FROM CATEGORIE WHERE IDCATEGORIEMERE = :pIdCat) ORDER BY".$sort." nomP";
+                $prepProduits = oci_parse($connect, $reqProducts);
+                oci_bind_by_name($prepProduits, ":pIdCat", $_GET['getIDCat']);
+            } 
+            // Cas rien, donc tous les produits
+            else {
+                $reqProducts = "SELECT * FROM PRODUIT ORDER BY".$sort." nomP";
+                $prepProduits = oci_parse($connect, $reqProducts);
+            }
 
             $gotProduits = oci_execute($prepProduits);
 
-            if ($gotProduits) {
-
+            if (($produit = oci_fetch_assoc($prepProduits)) != false) {
+                $gotProduits = oci_execute($prepProduits);
                 while (($produit = oci_fetch_assoc($prepProduits)) != false) {
                     echo '<div class="product-card">';
                         echo '<a href="product.php?idProduit='.$produit['IDPRODUIT'].'" style="text-decoration: none; color: inherit">';
@@ -162,8 +203,8 @@
                             echo '</div>';
                         echo '</div>';
                         echo '<div class="product-infos">';
-                            echo '<h5 class="product-title">' . $produit['NOMP'] . '</h5>';
-                            echo '<h5 class="product-price">' . $produit['PRIXPRODUIT'] . ' €</h5>';
+                            echo '<h7 class="product-title">' . $produit['NOMP'] . '</h7>';
+                            echo '<h7 class="product-price">' . $produit['PRIXPRODUIT'] . ' €</h7>';
                         echo '</div>';
                         echo '</a>';
                     echo '</div>';
@@ -172,6 +213,7 @@
                 $error = oci_error($prepProduits);  // on récupère l'exception liée au pb d'execution de la requete
                 echo "Aucun résultat trouvé.";
             }
+            oci_free_statement($prepProduits);
             ?>
 
         </div>

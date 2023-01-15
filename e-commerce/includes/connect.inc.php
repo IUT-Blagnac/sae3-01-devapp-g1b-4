@@ -11,7 +11,7 @@ $pass = "1g0rtapis";
 			  (SID = db11g)
 			)
 		  )" ;
-	$connect = oci_connect($user, $pass, $db);
+	$connect = oci_connect($user, $pass, $db, 'AL32UTF8');
 	
 	// si la connexion a échoué, on affiche le message d'erreur
 	if (!$connect) {
