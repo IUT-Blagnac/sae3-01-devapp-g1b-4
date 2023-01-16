@@ -47,4 +47,35 @@ image::https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documenta
 
 === Panier et Achats
 
+==== [.underline]#Ajout dans le panier#
+
+Si il est interessé dans l'achat d'un produit, l'utilisateur peut ajouter ce produit dans son panier. +
+Pour cela, sur la page du produit, l'utilisateur peut indiquer le nombre de produits à ajouter au panier, et cliquer sur le bouton "Ajouter au panier".
+
+==== [.underline]#Consultation du panier#
+
+L'utilisateur peut accéder à son panier en cliquant sur l'icone en forme de cadis, en haut de la page. +
+Si l'utilisateur à des produits dans le panier, un petit badge avec le nombre d'articles sera présent à côté de l'icone du panier.
+
+Une fois l'icone cliquée, l'utilisateur sera redirigé vers une page présentant les différents articles du panier, ainsi que leur quantité, et le prix total du panier. +
+L'utilisateur peut donc décider de supprimer des éléments du panier, ou de confirmer la commande.
+
+==== [.underline]#Suppression d'un élément du panier#
+
+Sur la page du panier, l'utilisateur retirer un produit du panier. +
+Pour cela, il peut appuiyer sur les boutons : 
+
+- "Supprimer 1", afin de supprimer 1 exemplaire du produit
+- "Supprimer tout", afin de supprimer completement le produit du panier
+
+==== [.underline]#Confirmation de la commande#
+
+Afin de confirmer sa commande, l'utilisateur doit cliquer sur le bouton "passer commande". Si l'utilisateur n'est pas connecté, alors il sera renvoyé sur la page de connexion (cf. <<#_inscription_et_connexion,Inscription et Connexion>>). +
+Après s'être connecté, l'utilisateur devra choisir si il décide de garder son panier d'avant être connecté, ou si il décide de garder le panier affilié à son utilisateur.
+
+Enfin, l'utilisateur doit indiquer ses coordonées bancaires, afin de payer la commande.
+
+
+
 == IOT
+
