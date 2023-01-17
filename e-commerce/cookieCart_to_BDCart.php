@@ -1,17 +1,22 @@
 <?php
 	error_reporting(0);
 	session_start();
+	/*
+	si cette variable session est définie cela veut dire que l'utilisateur
+	est en état de "transit" ou l'on va choisir de garder son panier deconnecte ou son panier
+	enregistre dans la BD
+	*/
 	if (isset($_SESSION['idClientTransiting'])) {
 		require('includes/connect.inc.php');
 		$arrayTempPanier = json_decode($_COOKIE['tempPanier'], true);
 
 
-		$reqSelPanier = "SELECT idproduit, NBPRODUIT, PRIXQTEPRODUIT FROM QUANTITEPANIER INNER JOIN PANIER ON QUANTITEPANIER.IDPANIER=PANIER.IDPANIER WHERE PANIER.IDCLIENT = :pIDclient AND PANIER.ENCOURS IS NULL";
+		$reqSelPanier = "SELECT idproduit, NBPRODUIT, PRIXQTEPRODUIT FROM QUANTITEPANIER INNER JOIN PANIER ON QUANTITEPANIER.IDPANIER=PANIER.IDPANIER WHERE PANIER.IDCLIENT = :pIDclient AND PANIER.ENCOURS IS NULL AND PANIER.PRIXPANIER>0";
 		$sel_panier = oci_parse($connect, $reqSelPanier);
 		oci_bind_by_name($sel_panier, ":pIDclient", $_SESSION['idClientTransiting']);
 		$resultSelPanier = oci_execute($sel_panier);
 		if(!$resultSelPanier){
-			$e = oci_error($resultSelPanier);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
+			$e = oci_error($sel_panier);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
 			print htmlentities($e['message']. ' pour cette requete : ' .$e['sqltext']);
 		} else{
 			//contient la premiere ligne du resultat de la requete
@@ -27,7 +32,7 @@
 				oci_bind_by_name($insertPanier, ":IDPANIER_RETURNED", $idpanier_returned);
 				$resultInsertPanier = oci_execute($insertPanier);
 				if (!$resultInsertPanier) {
-					$e = oci_error($result_insert_panier);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
+					$e = oci_error($insertPanier);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
 					print htmlentities($e['message']. ' pour cette requete : ' .$e['sqltext']);
 				}
 				oci_commit($connect);
@@ -47,7 +52,7 @@
 
 					$result_insertProduit = oci_execute($insert_produit);
 					if (!$result_insertProduit) {
-						$e = oci_error($result_insert_panier);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
+						$e = oci_error($insert_produit);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
 						print htmlentities($e['message']. ' pour cette requete : ' .$e['sqltext']);
 					} else{
 						oci_commit($connect);
@@ -56,8 +61,6 @@
 				}
 			}
 			else{
-		}
-
 ?>
 				<!DOCTYPE html>
 				<html lang="fr">
@@ -199,14 +202,18 @@
 
 				    <?php include('includes/footer.php'); ?>
 
-
 				</body>
 
 				</html>
 <?php
+/*
+	cette partie du code peut etre un peu confuse mais si on
+	wrap le html c'est un peu plus comprehensible
+*/
 			}
 		}
-		else{
-			header('location:index.php');
+	}
+	else{
+		header('location:index.php');
 	}
 ?>
