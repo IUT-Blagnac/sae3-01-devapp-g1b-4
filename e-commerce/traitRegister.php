@@ -35,17 +35,22 @@ else {
 
 	session_start();
 
-	$_SESSION['idClientIdentifie'] = $idC;
-
-	
-    // si il était en train de faire sa commande, donc qu'il y avait un cart dans el paramètre de l'url, alors on le redigire vers le panier
-    if (isset($_GET['cartID'])) {
-        header('location:cart.php');
+    //s'il avait un panier
+	if(isset($_COOKIE['tempPanier'])){
+        session_start();
+        $_SESSION['idClientTransiting'] = $idC;
+        // s'il était en train de faire sa commande, donc qu'il y avait un cart dans el paramètre de l'url, alors on le redirigera vers le panier
+        $wasOrdering="";
+        if (isset($_GET['cartID'])) {
+            $wasOrdering = "?cartID=$_GET['cartId']";
+        }
+        header('location:cookieCart_to_BDCart.php'.$wasOrdering);
     }
-    else {
-        header('location:index.php');
+    else{
+        session_start(); // démarre la session
+        $_SESSION['idClientIdentifie'] = $idC; // on stocke l'id du client dans la session
+        header('location:index.php'); // on redirige vers la page d'accueil
     }
-    
 }
 
 ?>

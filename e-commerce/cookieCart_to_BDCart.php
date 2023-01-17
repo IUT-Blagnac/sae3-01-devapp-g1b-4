@@ -57,6 +57,14 @@
 					} else{
 						oci_commit($connect);
 						oci_free_statement($insert_produit);
+						$_SESSION['idClientIdentifie'] = $_SESSION['idClientTransiting'];
+						unset($_SESSION['idClientTransiting']);
+						if (isset($_GET['cartID'])) {
+							header('location:cart.php');
+						}
+						else{
+							header('location:index.php')
+						}
 					}
 				}
 			}
