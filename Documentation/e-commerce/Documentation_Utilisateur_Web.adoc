@@ -78,7 +78,7 @@ Pour cela, il peut appuyer sur les boutons :
 
 === [.underline]#Confirmation de la commande#
 
-Afin de confirmer sa commande, l'utilisateur doit cliquer sur le bouton "passer commande". Si l'utilisateur n'est pas connecté, alors il sera renvoyé sur la page de connexion (cf. <<#inscription_et_connexion,Inscription et Connexion>>). +
+Afin de confirmer sa commande, l'utilisateur doit cliquer sur le bouton "passer commande". Si l'utilisateur n'est pas connecté, alors il sera renvoyé sur la page de connexion (cf. <<#inscription-et-connexion,Inscription et Connexion>>). +
 Après s'être connecté, l'utilisateur devra choisir s'il décide de garder son panier d'avant être connecté, ou s'il décide de garder le panier affilié à son utilisateur.
 
 Enfin, l'utilisateur doit indiquer ses coordonnées bancaires, afin de payer la commande.
