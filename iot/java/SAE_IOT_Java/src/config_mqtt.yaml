@@ -1,6 +1,6 @@
 servers: chirpstack.iut-blagnac.fr
 port: 1883
-name: dq
+name: BlueGym
 seuils: {activity: 1.0}
-frequency: 1020
+frequency: 540
 object: {activity: true}
