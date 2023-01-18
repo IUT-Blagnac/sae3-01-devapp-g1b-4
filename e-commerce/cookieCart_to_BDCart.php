@@ -11,7 +11,7 @@
 		$arrayTempPanier = json_decode($_COOKIE['tempPanier'], true);
 
 
-		$reqSelPanier = "SELECT idproduit, NBPRODUIT, PRIXQTEPRODUIT FROM QUANTITEPANIER INNER JOIN PANIER ON QUANTITEPANIER.IDPANIER=PANIER.IDPANIER WHERE PANIER.IDCLIENT = :pIDclient AND PANIER.ENCOURS IS NULL AND PANIER.PRIXPANIER>0";
+		$reqSelPanier = "SELECT idproduit, NBPRODUIT, PRIXQTEPRODUIT FROM QUANTITEPANIER INNER JOIN PANIER ON QUANTITEPANIER.IDPANIER=PANIER.IDPANIER WHERE PANIER.IDCLIENT = :pIDclient AND PANIER.ENCOURS IS NULL";
 		$sel_panier = oci_parse($connect, $reqSelPanier);
 		oci_bind_by_name($sel_panier, ":pIDclient", $_SESSION['idClientTransiting']);
 		$resultSelPanier = oci_execute($sel_panier);
@@ -29,7 +29,7 @@
 				$reqInsertPanier = "INSERT INTO PANIER(IDPANIER, IDCLIENT, PRIXPANIER) VALUES(SEQIDPANIER.nextval, :pID_CLIENT, 0) RETURNING IDPANIER INTO :IDPANIER_RETURNED";
 				$insertPanier = oci_parse($connect, $reqInsertPanier);
 				oci_bind_by_name($insertPanier, ":pID_CLIENT", $_SESSION['idClientTransiting']);
-				oci_bind_by_name($insertPanier, ":IDPANIER_RETURNED", $idpanier_returned);
+				oci_bind_by_name($insertPanier, ":IDPANIER_RETURNED", $idpanier_returned, 999);
 				$resultInsertPanier = oci_execute($insertPanier);
 				if (!$resultInsertPanier) {
 					$e = oci_error($insertPanier);  // on récupère l'exception liée au pb d'execution de la requete (violation PK par exemple)
@@ -45,7 +45,15 @@
 				
 				oci_bind_by_name($insert_produit, ":pID_PANIER", $idpanier_returned);
 
+				/* debugging
+					echo "ID Panier : ".$idpanier_returned."<br>";
+				*/
 				foreach ($arrayTempPanier as $value) {
+					/* debugging
+						echo "ID Produit : ".$value['idProduit']."<br>";
+						echo "NB Produit : ".$value['qteProduit']."<br>";
+						echo "prixQte Produit : ".$value['qtePrixProduit']."<br>";
+					*/
 					oci_bind_by_name($insert_produit, ":pID_PRODUIT", $value['idProduit']);
 					oci_bind_by_name($insert_produit, ":pNB_PRODUIT", $value['qteProduit']);
 					oci_bind_by_name($insert_produit, ":pPRIX_QTEPRODUIT", $value['qtePrixProduit']);
@@ -56,16 +64,17 @@
 						print htmlentities($e['message']. ' pour cette requete : ' .$e['sqltext']);
 					} else{
 						oci_commit($connect);
-						oci_free_statement($insert_produit);
-						$_SESSION['idClientIdentifie'] = $_SESSION['idClientTransiting'];
-						unset($_SESSION['idClientTransiting']);
-						if (isset($_GET['cartID'])) {
-							header('location:cart.php');
-						}
-						else{
-							header('location:index.php')
-						}
 					}
+				}
+				oci_free_statement($insert_produit);
+				$_SESSION['idClientIdentifie'] = $_SESSION['idClientTransiting'];
+				unset($_SESSION['idClientTransiting']);
+				setcookie('tempPanier',"",time()-3600);
+				if (isset($_GET['cartID'])) {
+					header('location:cart.php');
+				}
+				else{
+					header('location:index.php');
 				}
 			}
 			else{
