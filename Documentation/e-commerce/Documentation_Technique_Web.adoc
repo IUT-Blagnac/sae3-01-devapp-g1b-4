@@ -17,7 +17,8 @@ Pour permettre à BlueGym de se développer à un niveau national et de profiter
 Le site que nous produisons doit respecter une arborescence précise : +
 Depuis la page d'accueil, l'utilisateur doit pouvoir accéder aux pages des différentes catégories, puis aller sur la page de l'article qui l'interesse. +
 
-Le site est composé de cette façon : +
+Le site est composé de cette façon : 
+
 image::https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/e-commerce/images/SAES3_G14_SEP.drawio.png[diagramme_site]
 
 Le site est composé de plusieurs pages php, certaines étant uniquement des pages de traitement, d'autres sont des parties du site.
