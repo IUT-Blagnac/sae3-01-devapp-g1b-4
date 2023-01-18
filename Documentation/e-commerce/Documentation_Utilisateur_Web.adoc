@@ -51,7 +51,7 @@ Si certaines informations sont invalides, le site le précisera une fois que l'u
 .Formulaire d'inscription
 image::https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/e-commerce/images/DU_inscri.png[page d'inscription]
 .Formulaire de connexion
-image::https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/e-commerce/images/yDU_connex.png[page de connexion]
+image::https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/e-commerce/images/DU_connex.png[page de connexion]
 
 == Panier et Achats
 
