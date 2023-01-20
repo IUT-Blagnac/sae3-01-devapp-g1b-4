@@ -7,7 +7,7 @@
 === Présentation 
 
 L'entreprise BlueGym souhaite avoir une visibilité au niveau national. Pour cela, BlueGym a besoin de migrer de son site vitrine vers un site personnel. +
-Nous sommes donc en train de faire un site pour eux. 
+On nous a donc donné pour mission de leur élaborer un site web d'e-commerce. 
 
 === Architecture
 
@@ -22,21 +22,22 @@ Le site est composé de ces pages :
 .Pages de base 
 |=== 
 |*Page* | *Rôle*
-|index.php | accueil
-|product.php | page d'un produit
-|search.php | page de recherche
-|formLogin.php / formRegister.php | page de connexion / incription
+|index.php | accueil du site permettant d'accéder aux catégories, faire une recherche ou se connecter à son compte
+|product.php | page d'un produit avec ses détails, ajout du produit dans le panier
+|search.php | page de résultats de recherche, affichage en mosaique des produits
+|formLogin.php / formRegister.php | formulaire  de connexion / inscription
 |traitLogin.php / traitRegister.php | traitement de la connexion / inscription
 |deconnexion.php | traitement de la déconnexion de l'utilisateur
-|profile.php | profile de l'utilisateur
+|profile.php | profil de l'utilisateur, récap des commandes, déconnexion, parametres du compte
 |cart.php | panier de l'utilisateur
-|payement.php | page où l'utilisateur peut payer la commande
+|payment.php | page où l'utilisateur peut payer la commande
 |... |...
 |===
 
 .Pages dans "includes/"
 |=== 
 |*Page* | *Rôle*
+|connect.inc.php |connexion du php à la base de données
 |... |...
 |===
 
@@ -53,5 +54,3 @@ Le site est composé de ces pages :
 |product_page.css | style des pages de produit
 |search.css | style de la page de recherche
 |===
-
-== IOT
