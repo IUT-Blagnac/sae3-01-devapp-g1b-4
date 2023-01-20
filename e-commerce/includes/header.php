@@ -87,7 +87,15 @@ session_start();
 									echo '<li><a class="dropdown-item" href="./formLogin.php"> Connexion</a></li>';
 									echo '<li><a class="dropdown-item text-primary fw-bold" href="./formRegister.php"> Inscription</a></li>';
 								} else {
+									$reqAdm = "SELECT * FROM CLIENT WHERE IDCLIENT= :pIdClie AND admin <> 'null'";
+									$prepAdm = oci_parse($connect, $reqAdm);
+									oci_bind_by_name($prepAdm, ":pIdClie", $_SESSION['idClientIdentifie']);
+									$gotAdmin = oci_execute($prepAdm);
+									
 									echo '<li><a class="dropdown-item" href="./profile.php"> Mon profil</a></li>';
+									if($gotAdmin){
+										echo '<li><a class="dropdown-item" href="./administration/admin.php"> Actions administrateur </a></li>';
+									}
 									echo '<li><a class="dropdown-item text-danger fw-bold" href="./deconnexion.php"> Déconnexion</a></li>';
 								}
 								?>

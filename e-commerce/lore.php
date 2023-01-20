@@ -6,17 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BlueGym - dev</title>
-    <link rel="stylesheet" href="includes/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="../includes/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
 
 </head>
 
 <body>
-    <?php include('includes/header.php'); ?>
+    <?php include('../includes/header.php'); ?>
 
 
 
-    <?php include('includes/footer.php'); ?>
+    <?php include('../includes/footer.php'); ?>
 </body>
 
 </html>
