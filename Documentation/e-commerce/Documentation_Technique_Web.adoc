@@ -60,6 +60,9 @@ Ces premières pages sont les pages qui ne se trouvent dans aucun repertoire sp�
 |shipping-process | Permet de récupérer les données de livraison, pour les utiliser lors des informations de paiement
 |payement.php | Page où l'utilisateur peut payer la commande
 |purchaseOrder.php | Passe la commande, et l'envoie dans la base de données
+|contact.php | Page contenant les moyens de contact de l'entreprise
+|cUtil.php| Page listant les conditions d'utilisation
+|lore.php| Page avec l'histoire de l'entreprise
 |=== 
 
 Ce deuxième groupe de pages se trouve dans un dossier "includes/". Ces pages sont récupérées par les pages de base, et sont parfois inclues dans l'affichage.
@@ -74,14 +77,16 @@ Se connecte à la base de données (via connect.inc.php) pour afficher les caté
 |footer.php | Se trouve en bas de la page, contient les liens pour les réseaux sociaux, l'adresse et les contacts de l'entreprise.
 |=== 
 
-Ce troisième groupe de pages se trouve dans le dossier "pages/", et sont principalement des liens se trouvant dans le footer, mais qui ne redirigent pas vers un site externe. Ces pages sont par exemple les liens "Notre histoire", "Nous contacter", ...
+Ce troisième groupe de fichiers se trouve dans le dossier "administration/", et sont principalement des pages auquel seul les administrateurs du site ont accès.
 
-.Pages dans "pages/"
+.Pages dans "administration/"
 |=== 
 |*Fichier* | *Rôle*
-|contact.php | Page contenant les moyens de contact de l'entreprise
-|cUtil.php| Page listant les conditions d'utilisation
-|lore.php| Page avec l'histoire de l'entreprise
+|admin.php | menu principal pour les actions administratives
+|formAjoutAdmin.php | Permet à un administrateur de donner à un client le titre d'administrateur
+|formAjoutProduit.php | Permet à un administrateur d'ajouter un produit de la base de données
+|formRetireProduit.php | Permet à un administrateur de retirer un produit de la base de données
+|formModifProduit.php | Permet à un administrateur de modifier les informations d'un produit
 |===
 
 Les fichiers CSS, qui se trouve dans le dossier "assets/css/" permettent de mettre un certain style à une page.
