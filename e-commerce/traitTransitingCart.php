@@ -2,17 +2,19 @@
 	if(isset($_POST['sub'])){
 		if ($_POST['selectedCart']=="cookie") {
 			/*
-				suppression de l'ancien panier dans la bd
-				recuperation du cookie en decodant vers tableau
-				insertion nouveau panier
-				insertion produits du tableau dans panier
-				(l.7 et l.8 sont les memes que dans addingToCart.php)
-				affectation session idClientIdentifie
-				suppression session idClientTransiting
-				redirection vers accueil
+				s'il a choisi de garder le panier cookie :
+					suppression de l'ancien panier dans la bd
+					recuperation du cookie en decodant vers tableau
+					insertion nouveau panier
+					insertion produits du tableau dans panier
+					(l.7 et l.8 sont les memes que dans addingToCart.php)
+					affectation session idClientIdentifie
+					suppression session idClientTransiting
+					redirection vers accueil
 			*/
 			require('includes/connect.inc.php');
 			session_start();
+			//suppression de l'ancien panier dans la bd
 			$reqDelOldProducts = "DELETE FROM QUANTITEPANIER INNER JOIN PANIER ON QUANTITEPANIER.IDPANIER=PANIER.IDPANIER WHERE PANIER.IDCLIENT = :pIDclient AND PANIER.ENCOURS IS NULL";
 			$delOldProducts = oci_parse($connect, $reqDelOldProducts);
 			oci_bind_by_name($delOldProducts, ":pIDclient", $_SESSION['idClientTransiting']);
@@ -37,9 +39,12 @@
 
 					oci_free_statement($delOldCart);
 
+					//recuperation du cookie en decodant vers tableau
 					$arrayCookieCart = json_decode($_COOKIE['tempPanier']);
+
 					$idPanier_returned = 0;
 
+					//insertion nouveau panier
 					$reqInsertPanier = "INSERT INTO PANIER(IDPANIER, IDCLIENT, PRIXPANIER) VALUES(SEQIDPANIER.nextval, :pID_CLIENT, 0) RETURNING IDPANIER INTO :IDPANIER_RETURNED";
 
 					$insert_panier = oci_parse($connect, $reqInsertPanier);
@@ -57,6 +62,7 @@
 
 						oci_free_statement($insert_panier);
 
+						//insertion produits du tableau dans panier
 						$reqInsertQuantitePanier = "INSERT INTO QUANTITEPANIER(IDPANIER, IDPRODUIT, NBPRODUIT, PRIXQTEPRODUIT) VALUES(:pID_PANIER, :pID_PRODUIT, :pNB_PRODUIT, :pPRIX_QTEPRODUIT)";
 
 						$ins_new_qte_panier = oci_parse($connect, $reqInsertQuantitePanier);
@@ -78,8 +84,11 @@
 								oci_free_statement($insert_produit);
 							}
 						}
+						//affectation session idClientIdentifie
 						$_SESSION['idClientIdentifie'] = $_SESSION['idClientTransiting'];
+						//suppression session idClientTransiting
 						unset($_SESSION['idClientTransiting']);
+						//redirection vers accuei
 						header('location:index.php');
 					}
 				}
@@ -93,7 +102,9 @@
 					redirection vers accueil
 				*/
 				setcookie("tempPanier", "", time()-3600);
+				//affectation session idClientIdentifie
 				$_SESSION['idClientIdentifie'] = $_SESSION['idClientTransiting'];
+				//suppression session idClientTransiting
 				unset($_SESSION['idClientTransiting']);
 				header('location:index.php');
 			}

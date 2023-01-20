@@ -125,6 +125,10 @@ if (!isset($_GET)) {
                         <h5>Description rapide</h5>
                         <p class="product-description">
                             <?php
+                            /*
+                                la description rapide est constitue
+                                des 150 premiers caracteres
+                            */
                             if (strlen($statementBD['DESCRIPTION']) > 150) {
                                 echo substr($statementBD['DESCRIPTION'], 0, 150) . "<a href=#description>...</a>";
                             } else {

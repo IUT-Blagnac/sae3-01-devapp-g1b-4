@@ -46,6 +46,12 @@ else {
             */
             if(isset($_COOKIE['tempPanier'])){
                 session_start();
+                /*
+                    cette variable session empechera l'utilisateur d'aller
+                    ou bon lui semble tant qu'il n'aura pas choisi
+                    s'il veut garder le panier cookie ou le panier
+                    existant dans la BD
+                */
                 $_SESSION['idClientTransiting'] = $statementBD['IDCLIENT'];
                 header('location:cookieCart_to_BDCart.php');
             }
