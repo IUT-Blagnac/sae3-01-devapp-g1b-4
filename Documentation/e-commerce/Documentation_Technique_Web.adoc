@@ -27,7 +27,7 @@ Cela a causé une augmentation dans le commerce en ligne, ainsi qu'une baisse de
 BlueGym est une entreprise de vente de matériel de musculation, fondée en 2008 par deux personnes, et compte aujourd'hui 2 employés en plus des co-créateurs. +
 Leur magasin est basé à Toulouse, et jusqu'à récemment, possédait un site vitrine.
 
-Pour permettre à BlueGym de se développer à un niveau national et de profiter de cette augmentation de ventes en ligne, nous avons développé un site d'e-commerce pour l'entreprise.
+Pour leur permettre de se développer à un niveau national et de profiter de cette augmentation de ventes en ligne, BlueGym nous a donc donné pour mission de leur élaborer un site web d'e-commerce.
 
 == Architecture
 
@@ -45,20 +45,20 @@ Ces premières pages sont les pages qui ne se trouvent dans aucun repertoire sp�
 .Pages de base
 |=== 
 |*Fichier* | *Rôle*
-|index.php | Page d'accueil
-|product.php | Page d'un produit
+|index.php | Accueil du site permettant d'accéder aux catégories, faire une recherche ou se connecter à son compte
+|product.php | Page d'un produit avec ses détails, ajout du produit dans le panier
 |search.php | Affichage des produits correspondant à une recherche
-|formLogin.php / formRegister.php | Page de connexion / incription
+|formLogin.php / formRegister.php | Formulaire  de connexion / inscription
 |traitLogin.php / traitRegister.php | Traitement de la connexion / inscription
 |deconnexion.php | Traitement de la déconnexion de l'utilisateur
-|profile.php | Profil de l'utilisateur
+|profile.php | Profil de l'utilisateur, récap des commandes, déconnexion, parametres du compte
 |favorite.php | Affichage des produits favoris de l'utilisateur
 |cart.php | Panier de l'utilisateur
 |addingToCart.php / deleteFromCart.php | Traitement de l'ajout ou de la suppression d'un produit dans le panier
 |cookieCart_to_BDCart.php | Demande à l'utilisateur si il veut garder le panier stocké dans ses cookies ou celui stocké dans la base de données
 |traitTransitingCart | Envoi du panier stocké dans les cookies vers la base de données
 |shipping-process | Permet de récupérer les données de livraison, pour les utiliser lors des informations de paiement
-|payement.php | Page où l'utilisateur peut payer la commande
+|payment.php | Page où l'utilisateur peut payer la commande
 |purchaseOrder.php | Passe la commande, et l'envoie dans la base de données
 |contact.php | Page contenant les moyens de contact de l'entreprise
 |cUtil.php| Page listant les conditions d'utilisation
