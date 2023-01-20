@@ -37,9 +37,23 @@
 </head>
 
 <body>
+
+    <div class="header bg-dark text-white">
+        </br>
+        </br>
+        </br>
+        <div style="text-align:center">
+            <h1> Menu Administrateur</h1>
+        </div>
+        </br>
+        </br>
+        </br>
+    </div>
+
     </br>
     </br>
-    <p style="text-align:center">
+    </br>
+    <p style="text-align:center; font-size: 20px;">
         <a href="../index.php">Retour à l'accueil</a></br></br>
         <a href="./formAjoutProduit.php">Ajouter un produit</a></br></br>
         <a href="./formModifProduit.php">Modifier un produit</a></br></br>
