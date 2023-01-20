@@ -1,8 +1,25 @@
 = SAÉ 3.01 2022-2023 : Documentation technique Web
+:incremental:
+:numbered:
 :TOC:
 :TOC-title: Sommaire
 
-== Contexte
+== Présentation du projet
+
+=== Equipe
+
+
+Ce Projet à été est réalisé par::
+
+- https://github.com/Munozmu[Gabin Munoz] 
+- https://github.com/AurelienSP[Aurelien Sanchez-Porro]
+- https://github.com/Hugo-Vacquier[Hugo Vacquier]
+- https://github.com/andrew-phakeovilay[Andrew Phakeovilay]
+- https://github.com/quentin-beaufort[Quentin Beaufort]
+
+Tuteur/tutrice enseignant(e) de l'équipe:: mailto:jean-michel.bruel@univ-tlse2.fr[JMB]
+
+=== Contexte
 
 Dû au Covid-19, la population française a été confinée chez eux. +
 Cela a causé une augmentation dans le commerce en ligne, ainsi qu'une baisse de vente en magasin.
