@@ -84,7 +84,7 @@ Une fois les données collectées, nous stockons les valeurs dans des fichiers d
 
 . Afin de pouvoir exécuter le code Python, nous devons installer Python et PIP, il est recommandé d'installer Python 3.4+, car PIP est inclus par défaut.
 
-. Une fois installé, nous devons télécharger des librairie, ppyaml pour pourvoir lire un fichier .YAML et paho.mqtt pour pouvoir se connecter au capteur.
+. Une fois installé, nous devons télécharger des librairie, pyyaml pour pourvoir lire un fichier .YAML et paho.mqtt pour pouvoir se connecter au capteur.
 
 TIP: Dans un terminal, exécutez `pip install pyyaml` et `pip install paho.mqtt`
 
