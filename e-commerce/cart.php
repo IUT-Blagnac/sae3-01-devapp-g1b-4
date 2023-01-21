@@ -47,6 +47,31 @@
         if (($leProduitPanier = oci_fetch_assoc($produitsPanier)) == false) {
             echo '<h3> Votre panier est vide !</h3><br>
                                 <span class="fs-5"><a href="./index.php">Continuez vos achats</a></span><br><br>';
+            
+                echo '</div>
+                </div>
+            </div>
+                            <div class="container-fluid"><br>
+                                <div class="product-grid">';
+            $reqCards = 'SELECT * FROM (SELECT * FROM PRODUIT ORDER BY dbms_random.value) WHERE rownum <= 4';
+            $cardsProduct = oci_parse($connect, $reqCards);
+            $result2 = oci_execute($cardsProduct);
+    
+            while (($cardProduct = oci_fetch_assoc($cardsProduct)) != false) {
+                echo '<div class="product-card"><a href="product.php?idProduit=' . $cardProduct["IDPRODUIT"] . '" style="color: inherit; text-decoration:none">
+                                        <div class="product-image">
+                                            <img src="./assets/images/product-img/'.$cardProduct['IDPRODUIT'].'" alt="">
+                                        </div>
+                                        <div class="product-infos">
+                                            <h7 class="product-title">' . $cardProduct["NOMP"] . '</h7>
+                                            <h7 class="product-price"> ' . $cardProduct["PRIXPRODUIT"] . ' €</h7>
+                                        </div>
+                                    </a></div>';
+            }
+            oci_free_statement($cardsProduct);
+    
+            echo '</div>
+                            </div>';
 
             // si produits dans panier
         } else {
@@ -61,7 +86,7 @@
                                               <div class="card mb-3">
                                                  <div class="row g-0">
                                                     <div class="col-md-3">
-                                                        <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto" class="img-fluid rounded-start" alt="...">
+                                                        <img src="./assets/images/product-img/'.$leProduitPanier['IDPRODUIT'].'" class="img-fluid rounded-start" alt="...">
                                                     </div>
                                                 <div class="col-md-9 pl-3">
                                                         <div class="card-body text-start">
@@ -136,7 +161,7 @@
                                         <div class="card mb-3">
                                             <div class="row g-0">
                                                 <div class="col-md-3">
-                                                    <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto" class="img-fluid rounded-start" alt="...">
+                                                    <img src="./assets/images/product-img/'.$articleCookie['idProduit'].'" class="img-fluid rounded-start" alt="...">
                                                 </div>
                                                 <div class="col-md-9 pl-3">
                                                     <div class="card-body text-start">
@@ -211,7 +236,7 @@
         while (($cardProduct = oci_fetch_assoc($cardsProduct)) != false) {
             echo '<div class="product-card"><a href="product.php?idProduit=' . $cardProduct["IDPRODUIT"] . '" style="color: inherit; text-decoration:none">
                                     <div class="product-image">
-                                        <img src="https://contents.mediadecathlon.com/p2097113/k$6aec1f7948846ee1fd98ae4a58dd1fb0/sq/barre-de-traction-murale-compacte.jpg?format=auto&f=646x646" alt="">
+                                        <img src="./assets/images/product-img/'.$cardProduct['IDPRODUIT'].'" alt="">
                                     </div>
                                     <div class="product-infos">
                                         <h7 class="product-title">' . $cardProduct["NOMP"] . '</h7>
