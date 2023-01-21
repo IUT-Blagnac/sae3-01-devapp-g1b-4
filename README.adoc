@@ -128,7 +128,7 @@ Vous pourrez aussi trouver la https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-
 
 //De plus ce fichier `README.adoc` devra être à jour des informations suivantes :
 
-- Version courante : https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/releases/tag/1.4[v1.4]
+- Version courante : https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/releases/tag/1.5[v1.5]
 //- Lien vers les docs technique
 - https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/e-commerce/Documentation_Technique_Web.adoc[Documentation technique web]
 //- Lien vers la doc utilisateur
