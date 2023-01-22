@@ -4,18 +4,18 @@ import javafx.application.Platform;
 
 // Code d'un thread qui met à jour le fichier de configuration
 
-public class RunBackground implements Runnable {
+public class RunBackGroundData implements Runnable {
 
 	// Contrôle de l'exécution du thread : isRun == true => s'exécute
 	private boolean isRun;
 
 	// Controller pour la mise à jour du fichier de configuration
-	private FileEditorPaneController fepc;
+	private DataViewerPaneController dvpc;
 	
 	// Constructeur 
 	// _fepc : le controller contenant la configuration du fichier
-	public RunBackground(FileEditorPaneController _fepc) {
-		this.fepc = _fepc;
+	public RunBackGroundData(DataViewerPaneController _dvpc) {
+		this.dvpc = _dvpc;
 		this.isRun = true;
 	}
 
@@ -31,7 +31,7 @@ public class RunBackground implements Runnable {
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
-					RunBackground.this.fepc.validateComponentState();
+					RunBackGroundData.this.dvpc.updatingGraphs();;
 				}
 			});
 
@@ -39,7 +39,7 @@ public class RunBackground implements Runnable {
 			// If you need to update a GUI component from a non-GUI thread, you can use that to put your update in a queue and it will be handled by the GUI thread as soon as possible.
 
 			try {
-				Thread.sleep(200L);
+				Thread.sleep(10000L);
 			} catch (InterruptedException e) {
 			}
 		}

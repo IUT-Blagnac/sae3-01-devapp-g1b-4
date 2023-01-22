@@ -56,6 +56,12 @@ public class FileEditorPane extends Application {
 	 */
 	public void afficheGraphique() 
 	{
-		System.out.println("à faire");
+		DataViewerPane dvp = new DataViewerPane();
+		try {
+			dvp.start(primaryStage);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
