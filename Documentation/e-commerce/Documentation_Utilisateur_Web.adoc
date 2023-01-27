@@ -99,3 +99,44 @@ Afin de confirmer sa commande, l'utilisateur doit cliquer sur le bouton "passer 
 Après s'être connecté, l'utilisateur devra choisir s'il décide de garder son panier d'avant être connecté, ou s'il décide de garder le panier affilié à son utilisateur.
 
 Enfin, l'utilisateur doit indiquer ses coordonnées bancaires, afin de payer la commande.
+
+
+== Administration
+
+Si un utilisateur est administrateur, il peut accéder à un menu administrateur en cliquant sur l'icône d'utilisateur, et en allant sur "Actions Administrateur".
+
+.Actions possibles pour un administrateur
+image::https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/e-commerce/images/DU_act_Adm.png[menu utilisateur pour administrateur]
+
+Depuis ce menu, il aura accès à plusieurs actions, étant :
+
+- Ajouter un produit, afin d'ajouter un produit sur le catalogue du site
+- Modifier un produit, pour modifier un produit du catalogue
+- Supprimer un produit, qui permet de retirer un produit du catalogue
+- Gestion des stocks des produits, afin de mofifier le nombre de produits disponible
+- Ajouter un administrateur, qui permet de promouvoir un utilisateur au rang d'administrateur
+
+.Menu administrateur
+image::https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/e-commerce/images/DU_menu_adm.png[menu administrateur]
+
+Ce menu, ainsi que ces actions, ne seront accessible uniquement par un administrateur. Si un utilisateur essaie d'y accéder, il sera envoyé sur le menu principal du site.
+
+=== Ajout d'un produit
+
+Un administrateur peut ajouter un produit dans le catalogue. +
+Pour cela, il doit aller sur le lien "Ajouter un produit". +
+Il est ensuite amené à remplir un formulaire, qui reprends les différents éléments du produit (son nom, son prix, ...). +
+
+.Formulaire d'ajout de produit rempli
+image::https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/e-commerce/images/DU_ajout_prod.png[formulaire produit]
+
+Le formulaire peut être soumis sans entrer aucune information. Un produit sera créé avec uniquement l'identifiant. L'administrateur pourra ensuite le modifier dans la section "Modifier un produit".
+
+=== Ajout d'un administrateur
+
+Un administrateur peut promouvoir un utilisateur au rang "d'administrateur du site". +
+Après avoir cliqué sur le lien "Ajouter un administrateur", il aura accès à une liste de tous les comptes utilisateurs du site. +
+Il suffit à l'administrateur de trouver l'utilisateur à qui il souhaite donner le role d'admin, et de cliquer sur le bouton "Promouvoir au rang d'administrateur". 
+
+.Liste des utilisateurs pouvant devenir administrateur
+image::https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/e-commerce/images/DU_ajout_adm.png[liste utilisateurs]
