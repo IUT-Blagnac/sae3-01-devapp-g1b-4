@@ -110,8 +110,8 @@ Dans ce répository git, vous pourrez trouver :
 //TIP: Mettez ici toutes les informations nécessaire à l'utilisation de votre dépôt (comment on installe votre application, où sont les docs, etc.)
 Vous pourrez retrouver la documentation dans le dossier https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/tree/master/Documentation[documentation]
 
+- https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/e-commerce/Documentation_Utilisateur_Web.adoc[Documentation utilisateur web finale]
 - https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/e-commerce/Documentation_Technique_Web.adoc[Documentation technique web]
-- https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/e-commerce/Documentation_Utilisateur_Web.adoc[Documentation utilisateur web]
 - https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/e-commerce/Tests/[Documentation de test pour le site web]
 
 Vous pourrez aussi trouver la https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/iot/python/README.adoc[documentation de la partie Python] dans le dossier https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/tree/master/iot/python[iot/python]
@@ -129,10 +129,11 @@ Vous pourrez aussi trouver la https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-
 //De plus ce fichier `README.adoc` devra être à jour des informations suivantes :
 
 - Version courante : https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/releases/tag/1.5[v1.5]
+//- Lien vers la doc utilisateur
+- https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/e-commerce/Documentation_Utilisateur_Web.adoc[Documentation utilisateur web finale]
 //- Lien vers les docs technique
 - https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/e-commerce/Documentation_Technique_Web.adoc[Documentation technique web]
-//- Lien vers la doc utilisateur
-- https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/e-commerce/Documentation_Utilisateur_Web.adoc[Documentation utilisateur web]
+// lien vers la doc test
 - https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/blob/master/Documentation/e-commerce/Tests/[Documentation de test web]
 
 - https://github.com/IUT-Blagnac/sae3-01-devapp-g1b-4/issues?q=is%3Aopen+is%3Aissue+label%3A%22User+story%22[Liste des User Stories]
