@@ -8,19 +8,41 @@
     error_reporting(0);
     
     if (isset($_SESSION['idClientIdentifie'])) {
-        $reqAdm = "SELECT * FROM CLIENT WHERE IDCLIENT = :pIdClie AND admin <> null";
+        $reqAdm = "SELECT * FROM CLIENT WHERE IDCLIENT= :pIdClie";
         $prepAdm = oci_parse($connect, $reqAdm);
         oci_bind_by_name($prepAdm, ":pIdClie", $_SESSION['idClientIdentifie']);
         $gotAdmin = oci_execute($prepAdm);
 
-        if(!$gotAdmin){
+        while (($getInfos = oci_fetch_assoc($prepAdm)) != false) {
+            $adm=$getInfos["ADMIN"];
+        }
+
+        if($adm == null){
             header('location:../index.php');
         }
     } 
     else {
         header('location:../index.php');
     }
-    
+
+?>
+
+<?php
+    if(isset($_POST["ajouter"])) {
+        
+        $reqAdm = "UPDATE CLIENT SET admin='administrateur' WHERE IDCLIENT= :idCl";
+        $prepAdm = oci_parse($connect, $reqAdm);
+        oci_bind_by_name($prepAdm, ":idCl", $_POST['idclient']);
+        $sendAdm = oci_execute($prepAdm);
+
+        oci_commit($connect);
+
+        if(!$sendAdm){
+            header("location:./formAjoutAdmin.php?Erreur=Erreur lors de la mise à jour de l'utilisateur");
+        } else {
+            header("location:./formAjoutAdmin.php?Succes=L'utilisateur est maintenant un administrateur ! ");
+        }
+    }
 ?>
 
 <head>
@@ -36,15 +58,70 @@
 
 </head>
 
+
 <body>
-    <?php 
-        include('includes/header.php'); 
-    ?>
+    <div class="header bg-dark text-white">
+        </br>
+        <div style="margin: 50px">
+            <h1> Promouvoir un utilisateur au rang d'administrateur</h1>
+        </div>
+        </br>
+    </div>
+
+    <div style="margin: 50px">
+
+        <?php
+            if(isset($_GET["Erreur"])){
+                echo '<div class="alert alert-warning" role="alert">';
+                    echo $_GET['Erreur'];
+                echo '</div>';
+            }
+            if(isset($_GET["Succes"])){
+                echo '<div class="alert alert-success" role="alert">';
+                    echo $_GET['Succes'];
+                echo '</div>';
+            }
+        ?>
+
+        <a href="./admin.php">Retour aux actions administrateur</a></br>
+
+        </br>
+        </br>
+        
+        <?php
+            $reqCli = "SELECT * FROM CLIENT WHERE admin IS null ORDER BY IDCLIENT ASC";
+            $prepCli = oci_parse($connect, $reqCli);
+            $sendCli = oci_execute($prepCli);
+            while (($nomC = oci_fetch_assoc($prepCli)) != false) {
+
+                echo '<div class="col-12">
+                    <div class="card mb-3">
+                        <div class="row g-0">
+                            <div class="col-md-9 pl-3">
+                                <div class="card-body text-start">
+                                    <p style="color: inherit; text-decoration:none"><h4 class="card-title fw-bold">' . $nomC["NOMC"] .' '. $nomC["PRENOMC"]. '</h4></p>
+                                    <p class="card-text">Identifiant : ' . $nomC["IDCLIENT"] . '</p>
+                                    <form method="POST">
+                                        <button class="btn btn-success" type="submit" name="ajouter" >
+                                            Promouvoir au rang d\'administrateur
+                                        </button>
+                                        <input type="hidden" name="idclient" value="' . $nomC['IDCLIENT'] . '">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>';
+            }
+            
+        ?>
 
 
+    </div>
+         
+    
+    
 
-
-    <?php include('includes/footer.php'); ?>
 
 </body>
 </html>

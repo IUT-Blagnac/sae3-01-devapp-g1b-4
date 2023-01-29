@@ -8,12 +8,16 @@
     error_reporting(0);
     
     if (isset($_SESSION['idClientIdentifie'])) {
-        $reqAdm = "SELECT * FROM CLIENT WHERE IDCLIENT = :pIdClie AND admin <> null";
+        $reqAdm = "SELECT * FROM CLIENT WHERE IDCLIENT= :pIdClie";
         $prepAdm = oci_parse($connect, $reqAdm);
         oci_bind_by_name($prepAdm, ":pIdClie", $_SESSION['idClientIdentifie']);
         $gotAdmin = oci_execute($prepAdm);
 
-        if(!$gotAdmin){
+        while (($getInfos = oci_fetch_assoc($prepAdm)) != false) {
+            $adm=$getInfos["ADMIN"];
+        }
+
+        if($adm == null){
             header('location:../index.php');
         }
     } 
@@ -103,6 +107,7 @@
             
             if(!$sendProd){
                 header("location:./formAjoutProduit.php?Erreur=Erreur lors de l'ajout à la base de données");
+                exit();
             }
 
             header("location:./formAjoutProduit.php?Succes=Produit ajouté à la base de données");

@@ -8,12 +8,16 @@
     error_reporting(0);
     
     if (isset($_SESSION['idClientIdentifie'])) {
-        $reqAdm = "SELECT * FROM CLIENT WHERE IDCLIENT = :pIdClie AND admin <> null";
+        $reqAdm = "SELECT * FROM CLIENT WHERE IDCLIENT= :pIdClie";
         $prepAdm = oci_parse($connect, $reqAdm);
         oci_bind_by_name($prepAdm, ":pIdClie", $_SESSION['idClientIdentifie']);
         $gotAdmin = oci_execute($prepAdm);
 
-        if(!$gotAdmin){
+        while (($getInfos = oci_fetch_assoc($prepAdm)) != false) {
+            $adm=$getInfos["ADMIN"];
+        }
+
+        if($adm == null){
             header('location:../index.php');
         }
     } 
@@ -58,6 +62,7 @@
         <a href="./formAjoutProduit.php">Ajouter un produit</a></br></br>
         <a href="./formModifProduit.php">Modifier un produit</a></br></br>
         <a href="./formRetireProduit.php">Supprimer un produit</a></br></br>
+		<a href="./formGestionStockProduit.php">Gestion des stocks des produits</a></br></br>
         <a href="./formAjoutAdmin.php">Ajouter un administrateur</a></br></br>
     </p>
     </br></br>

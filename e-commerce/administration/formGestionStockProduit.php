@@ -20,8 +20,6 @@
         if($adm == null){
             header('location:../index.php');
         }
-
-        oci_free_statement($prepAdm);
     } 
     else {
         header('location:../index.php');
@@ -46,7 +44,7 @@
     <div class="header bg-dark text-white">
         </br>
         <div style="margin: 50px">
-            <h1> Suppression des produits</h1>
+            <h1> Gestion des stockes et des produits</h1>
         </div>
         </br>
     </div>
@@ -76,30 +74,34 @@
         </br>
         <form method='post'>
 				idproduit : <input type="text" name="identifiantproduit" /><br><br>
-				<input type="submit" name="supprimer" value="Supprimer" />
+                quantité à recharger : <input type="text" name="nomProd" /><br><br>
+				<input type="submit" name="rajouter" value="Rajouter" />
 				</fieldset>
         </form><BR><BR>
     </div>
 	
 	<?php
-        if(isset($_POST['supprimer'])){
-            $idproduit = $_POST['identifiantproduit'];
-            $rqid = "DELETE FROM PRODUIT WHERE IDPRODUIT = :idproduit"; 
-            $stid = oci_parse($connect, $rqid);
-            oci_bind_by_name($stid, ":idproduit", $idproduit);
+    if(isset($_POST['rajouter'])){
+        $idproduit = $_POST['idproduit'];
+        $produit_rajouter = $_POST['produit_rajouter'];
 
-            $sendProd = oci_execute($stid);
+        $stid = oci_parse($conn, "EXEC ajoutproduitstock(:idproduit,:produit_rajouter);");
+        oci_bind_by_name($stid, ":idproduit", $idproduit);
+        oci_bind_by_name($stid, ":produit_rajouter", $produit_rajouter);
 
-            oci_commit($connect);
-            oci_free_statement($stid);
-            
-            if(!$sendProd){
-                    header("location:./formRetireProduit.php?Erreur=Erreur lors de la suppression du produit dans la base de données");
-                }
+        $sendProd = oci_execute($stid);
 
-                header("location:./formRetireProduit.php?Succes=Produit supprimé de la base de données");
-        }
-    ?>
+        oci_free_statement($stid);
+		
+		if(!$sendProd){
+                header("location:./formGestionStockProduit.php?Erreur=Erreur lors du rechargement du produit dans la base de données");
+            }
 
-</body>
-</html>
+            header("location:./formGestionStockProduit.php?Succes=Produit recharger dans la base de données");
+    }
+?>
+
+	
+	
+	
+	
