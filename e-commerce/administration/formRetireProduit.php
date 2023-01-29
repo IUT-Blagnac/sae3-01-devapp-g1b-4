@@ -8,12 +8,16 @@
     error_reporting(0);
     
     if (isset($_SESSION['idClientIdentifie'])) {
-        $reqAdm = "SELECT * FROM CLIENT WHERE IDCLIENT = :pIdClie AND admin <> null";
+        $reqAdm = "SELECT * FROM CLIENT WHERE IDCLIENT= :pIdClie";
         $prepAdm = oci_parse($connect, $reqAdm);
         oci_bind_by_name($prepAdm, ":pIdClie", $_SESSION['idClientIdentifie']);
         $gotAdmin = oci_execute($prepAdm);
 
-        if(!$gotAdmin){
+        while (($getInfos = oci_fetch_assoc($prepAdm)) != false) {
+            $adm=$getInfos["ADMIN"];
+        }
+
+        if($adm == null){
             header('location:../index.php');
         }
     } 
@@ -37,14 +41,66 @@
 </head>
 
 <body>
-    <?php 
+    <div class="header bg-dark text-white">
+        </br>
+        <div style="margin: 50px">
+            <h1> Suppression des produits</h1>
+        </div>
+        </br>
+    </div>
+	
+	<?php 
         include('includes/header.php'); 
     ?>
+	
+	<div style="margin: 50px">
 
+        <?php
+            if(isset($_GET["Erreur"])){
+                echo '<div class="alert alert-warning" role="alert">';
+                    echo $_GET['Erreur'];
+                echo '</div>';
+            }
+            if(isset($_GET["Succes"])){
+                echo '<div class="alert alert-success" role="alert">';
+                    echo $_GET['Succes'];
+                echo '</div>';
+            }
+        ?>
 
+        <a href="./admin.php">Retour aux actions administrateur</a></br>
+		
+		</br>
+        </br>
+        <form method='post'>
+				idproduit : <input type="text" name="identifiantproduit" /><br><br>
+				<input type="submit" name="supprimer" value="Supprimer" />
+				</fieldset>
+        </form><BR><BR>
+    </div>
+	
+	<?php
+    if(isset($_POST['supprimer'])){
+        $idproduit = $_POST['identifiantproduit'];
 
+        $stid = oci_parse($conn, "DELETE FROM quantitepanier WHERE IDPRODUIT = :idproduit; DELETE FROM PRODUIT WHERE IDPRODUIT = :idproduit; commit;");
+        oci_bind_by_name($stid, ":idproduit", $idproduit);
 
-    <?php include('includes/footer.php'); ?>
+        $sendProd = oci_execute($stid);
 
-</body>
-</html>
+        oci_commit($stid);
+
+        oci_free_statement($stid);
+		
+		if(!$sendProd){
+                header("location:./formRetireProduit.php?Erreur=Erreur lors de la suppression du produit dans la base de données");
+            }
+
+            header("location:./formRetireProduit.php?Succes=Produit supprimé de la base de données");
+    }
+?>
+
+	
+	
+	
+	
